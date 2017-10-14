@@ -46,8 +46,6 @@
 
 ## Highlights
 
-----
-
  * Initially, our group was considering an alternative to help restaurants prevent food waste, as it is commonplace for many restaurants to throw out any remaining food at the end of the day to ensure 
   their food is always fresh. However, given the scope of our project, we concluded that it would not be feasible due to the large number of issues and complications that arise when dealing with established 
   restaurants. These include: 
