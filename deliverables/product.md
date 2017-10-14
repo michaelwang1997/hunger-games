@@ -44,7 +44,7 @@
   their event, and the associated food that is leftover. Furthermore, the students are not required to subscribe to any particular organization or individual to receive news from them since they can 
   simply browse events in their nearby proximity and chose to attend any one of their liking.
 
-#### Highlights
+## Highlights
 
 ----
 
