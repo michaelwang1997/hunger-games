@@ -1,4 +1,4 @@
-# TEAM 22/HungerWasteGames
+# TEAM 22/HungerGames
 
  
 ## Iteration 01 - Review & Retrospect

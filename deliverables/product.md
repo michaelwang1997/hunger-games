@@ -1,6 +1,6 @@
-# TEAM 22/HungerWasteGames
+# TEAM 22/HungerGames
 
-#### Q1: What are you planning to build?
+#### What are you planning to build?
 
  * The mobile application being developed by our group allows users to upload images and descriptions of leftover food, with the   objective of notifying other users 
  within a predetermined radius about the type (eg. pizza or doughnuts) and proximity of the food (eg. showing users where the event is posted from on a map). 
@@ -19,7 +19,7 @@
 
 
 
-#### Q2: Who are your target users?
+#### Who are your target users?
 
  * The primary users for this application are event organizers on campuses that have leftover food from events, in addition to students in close proximity to these events that are 
   in search of a meal. We chose this target user because a technology that is tailored towards notifying post-secondary school students does not currently exist. An example of the 
@@ -30,7 +30,7 @@
 
 
 
-#### Q3: Why would your users choose your product? What are they using today to solve their problem/need?
+#### Why would your users choose your product? What are they using today to solve their problem/need?
 
  * Users will choose our product as it provides a free and convenient alternative to purchasing expensive meals. Moreover, event organizers using our application will be able to make their 
   events more eco-friendly, as food waste will be largely prevented. Currently, the most common way of notifying students about leftover food is through social media. However, this information 
