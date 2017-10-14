@@ -14,9 +14,8 @@
  it will feed (eg. 5-10 or 10-15) from various ranges using a drop-down menu. They will have the ability to permit the followers of the post to end the event, or chose to do it 
  themselves. When the event has ended, other users who expressed interest in the food will promptly receive a notification that it is no longer available. Finally, a rating system 
  will be in place to ensure the posters are trustworthy. 
- 
- * Please look at the link below for an artifact (mockup) of our app 
- * https://docs.google.com/document/d/1YO2UcxCAGwa0AVPcHdbxEhagg1DDZIRN3d6zzIvPdP8/edit?usp=sharing
+   * Please look at the link below for an artifact (mockup) of our app 
+   * https://docs.google.com/document/d/1YO2UcxCAGwa0AVPcHdbxEhagg1DDZIRN3d6zzIvPdP8/edit?usp=sharing
 
 
 
@@ -25,9 +24,9 @@
  * The primary users for this application are event organizers on campuses that have leftover food from events, in addition to students in close proximity to these events that are 
   in search of a meal. We chose this target user because a technology that is tailored towards notifying post-secondary school students does not currently exist. An example of the 
   target users could be the following:
-  * 1. A club president or event organizer on campus who expects a certain number of people to attend their event hoping that the food they bought would be sufficient. However, they 
+   * 1. A club president or event organizer on campus who expects a certain number of people to attend their event hoping that the food they bought would be sufficient. However, they 
       are left with a surplus of food after the event as their estimation was inaccurate, not knowing what to do with the food in the middle of the night or during a busy school day. 
-  * 2. The students who are near the location of the event but are unaware that such an event was hosted, yet would love to have some free food. 
+   * 2. The students who are near the location of the event but are unaware that such an event was hosted, yet would love to have some free food. 
 
 
 
