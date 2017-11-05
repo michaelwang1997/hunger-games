@@ -8,26 +8,20 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
-
+Install Android Studio 3.0
 ```
 Give examples
 ```
 
 ### Installing
 
-A step by step series of examples that tell you have to get a development env running
-
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
+Import the AndroidApp Project and not the project-team-22 in Android Studio
+Let Gradle build the dependencies
+Resolve any build conflicts
+Ensure the build is successful before making any modifications
 
 ```
-until finished
+Example
 ```
 
 End with an example of getting some data out of the system or using it for a little demo
