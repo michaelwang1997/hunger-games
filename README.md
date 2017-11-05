@@ -15,10 +15,10 @@ Give examples
 
 ### Installing
 
-Import the AndroidApp Project and not the project-team-22 in Android Studio
-Let Gradle build the dependencies
-Resolve any build conflicts
-Ensure the build is successful before making any modifications
+- Import the AndroidApp Project and not the project-team-22 in Android Studio
+- Let Gradle build the dependencies
+- Resolve any build conflicts
+- Ensure the build is successful before making any modifications
 
 ```
 Example
