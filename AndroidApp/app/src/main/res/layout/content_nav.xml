@@ -8,5 +8,11 @@
     tools:context="com.example.tom_h.hungergames.NavActivity"
     tools:showIn="@layout/app_bar_nav"
     android:id="@+id/nav">
+    <fragment
+        android:id="@+id/map"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        class="com.google.android.gms.maps.SupportMapFragment"/>
 
 </android.support.constraint.ConstraintLayout>
