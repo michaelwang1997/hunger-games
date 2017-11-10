@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/picture"
+        android:layout_marginTop="25dp"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/logo"
+        android:contentDescription="Picture of the food"/>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_below="@+id/picture"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="25dp"
+        android:id="@+id/event_name">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:hint="Event Name" />
+    </android.support.design.widget.TextInputLayout>
+
+    <Spinner
+        android:id="@+id/quantity"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/location"
+        android:layout_alignEnd="@+id/picture"
+        android:layout_alignRight="@+id/picture"
+        android:layout_marginBottom="13dp"
+        android:entries="@array/quantity"
+        android:prompt="@string/quantity_prompt" />
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_below="@+id/event_name"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="5dp"
+        android:id="@+id/location">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Unit/Room"
+            android:inputType="textEmailAddress" />
+    </android.support.design.widget.TextInputLayout>
+    
+    <RadioGroup
+        android:id="@+id/radio_close"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/quantity"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="185dp">
+
+        <RadioButton
+            android:textSize="10sp"
+            android:id="@+id/close_y"
+            android:text="@string/close_y"
+            android:layout_width="75dp"
+            android:layout_height="match_parent" />
+        <RadioButton
+            android:id="@+id/close_n"
+            android:text="@string/close_n"
+            android:layout_width="50dp"
+            android:layout_height="match_parent" />
+        
+    </RadioGroup>
+
+    <Spinner
+        android:id="@+id/category"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/quantity"
+        android:layout_alignRight="@+id/quantity"
+        android:layout_below="@+id/location"
+        android:layout_marginTop="16dp"
+        android:entries="@array/category"
+        android:prompt="@string/category_prompt" />
+
+
+
+</RelativeLayout>
