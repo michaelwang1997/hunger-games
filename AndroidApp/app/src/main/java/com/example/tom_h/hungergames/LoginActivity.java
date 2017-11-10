@@ -106,7 +106,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void onLoginSuccess() {
         _loginButton.setEnabled(true);
-        Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
+        Intent intent = new Intent(getApplicationContext(), NavActivity.class);
         startActivityForResult(intent, REQUEST_SIGNUP);
     }
 

@@ -84,7 +84,10 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            // Insert code
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.nav, new CreateEvent());
+            fragmentTransaction.commit();
         } else if (id == R.id.nav_share) {
             // Insert code
         } else if (id == R.id.nav_gallery) {
