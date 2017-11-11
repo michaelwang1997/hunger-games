@@ -1,29 +1,23 @@
 package com.example.tom_h.hungergames;
 
-import android.app.Activity;
 import android.os.Bundle;
-
-import butterknife.ButterKnife;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 /**
  * Created by Usama on 11/9/2017.
  */
 
-public class CreateEvent extends Activity {
+public class CreateEvent extends Fragment {
 
     /*@Bind(R.id.picture)
     ImageView _createPicture;*/
 
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.create_event);
-        ButterKnife.bind(this);
-
-    }
-
     @Override
-    public void onBackPressed() {
-        // disable going back to the MainActivity
-        moveTaskToBack(true);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.create_event, container, false);
+        return view;
     }
 }
