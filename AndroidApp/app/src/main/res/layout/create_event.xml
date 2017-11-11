@@ -54,7 +54,7 @@
             android:hint="Unit/Room"
             android:inputType="textEmailAddress" />
     </android.support.design.widget.TextInputLayout>
-    
+
     <RadioGroup
         android:id="@+id/radio_close"
         android:layout_width="150dp"
