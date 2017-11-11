@@ -4,115 +4,127 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark">
 
-    <ImageView
-        android:id="@+id/picture"
-        android:layout_marginTop="25dp"
+    <RelativeLayout
         android:layout_width="300dp"
-        android:layout_height="100dp"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/logo"
-        android:contentDescription="Picture of the food"/>
+        android:layout_height="match_parent"
+        android:layout_marginLeft="50dp"
+        android:layout_marginStart="50dp">
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_height="wrap_content"
-        android:layout_width="150dp"
-        android:layout_below="@+id/picture"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="25dp"
-        android:id="@+id/event_name">
-        <EditText
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/picture"
+            android:layout_marginTop="25dp"
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/logo"
+            android:contentDescription="@string/content_description"/>
+
+        <android.support.design.widget.TextInputLayout
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:hint="Event Name" />
-    </android.support.design.widget.TextInputLayout>
+            android:layout_width="150dp"
+            android:layout_below="@+id/picture"
+            android:layout_marginTop="25dp"
+            android:id="@+id/event_name">
 
-    <Spinner
-        android:id="@+id/quantity"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/location"
-        android:layout_alignEnd="@+id/picture"
-        android:layout_alignRight="@+id/picture"
-        android:layout_marginBottom="13dp"
-        android:entries="@array/quantity"
-        android:prompt="@string/quantity_prompt" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:hint="@string/event_name" />
+        </android.support.design.widget.TextInputLayout>
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_height="wrap_content"
-        android:layout_width="100dp"
-        android:layout_below="@+id/event_name"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="5dp"
-        android:id="@+id/location">
-
-        <EditText
-            android:layout_width="match_parent"
+        <Spinner
+            android:id="@+id/quantity"
+            android:layout_width="135dp"
             android:layout_height="wrap_content"
-            android:hint="Unit/Room"
-            android:inputType="textEmailAddress" />
-    </android.support.design.widget.TextInputLayout>
+            android:layout_above="@+id/location"
+            android:layout_alignEnd="@+id/picture"
+            android:layout_alignRight="@+id/picture"
+            android:layout_marginBottom="13dp"
+            android:entries="@array/quantity"
+            android:prompt="@string/quantity_prompt"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"/>
 
-    <RadioGroup
-        android:id="@+id/radio_close"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/quantity"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="185dp">
-
-        <RadioButton
-            android:id="@+id/close_y"
-            android:layout_width="75dp"
-            android:layout_height="match_parent"
-            android:text="@string/close_y"
-            android:textSize="10sp" />
-
-        <RadioButton
-            android:id="@+id/close_n"
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:text="@string/close_n" />
-
-    </RadioGroup>
-
-    <Spinner
-        android:id="@+id/category"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/quantity"
-        android:layout_alignRight="@+id/quantity"
-        android:layout_below="@+id/location"
-        android:layout_marginTop="16dp"
-        android:entries="@array/category"
-        android:prompt="@string/category_prompt" />
-
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/description"
-        android:layout_width="300dp"
-        android:layout_height="175dp"
-        android:layout_below="@+id/category"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="40dp" >
-
-        <EditText
-            android:layout_width="match_parent"
+        <android.support.design.widget.TextInputLayout
             android:layout_height="wrap_content"
-            android:hint="Description"/>
+            android:layout_width="150dp"
+            android:layout_below="@+id/event_name"
+            android:layout_marginTop="5dp"
+            android:id="@+id/location"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true">
 
-    </android.support.design.widget.TextInputLayout>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/room"
+                android:inputType="textEmailAddress" />
+        </android.support.design.widget.TextInputLayout>
 
-    <Button
-        android:id="@+id/submit_button"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/description"
-        android:layout_marginLeft="40dp"
-        android:text="Submit"
-        android:background="@color/colorPrimary"/>
+        <ImageView
+            android:contentDescription="@string/question_desc"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/question_icon"
+            android:layout_below="@+id/event_name"
+            android:layout_alignRight="@+id/radio_close"
+            android:layout_alignEnd="@+id/radio_close"
+            android:layout_marginTop="15dp"/>
 
+        <RadioGroup
+            android:id="@+id/radio_close"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/quantity"
+            android:layout_marginTop="10dp" >
+
+            <RadioButton
+                android:id="@+id/close_y"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:text="@string/close_y"
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/close_n"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:text="@string/close_n" />
+
+        </RadioGroup>
+
+        <Spinner
+            android:id="@+id/category"
+            android:layout_width="175dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/radio_close"
+            android:entries="@array/category"
+            android:prompt="@string/category_prompt"
+            android:layout_marginTop="15dp"/>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/description"
+            android:layout_width="300dp"
+            android:layout_height="165dp"
+            android:layout_below="@+id/category"
+            android:layout_marginTop="10dp" >
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/description"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/submit_button"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/description"
+            android:text="@string/submit"
+            android:background="@color/colorPrimary"/>
+    </RelativeLayout>
 
 
 </RelativeLayout>

@@ -10,21 +10,34 @@
 
     <string name="action_settings">Settings</string>
 
-    <string name="close_y">Yes</string>
-    <string name="close_n">No</string>
-
-    <string name="category_prompt">Choose a category</string>
-    <string-array name="category">
-        <item>Pizza</item>
-        <item>Burgers</item>
-        <item>Other</item>
-    </string-array>
+    <!-- Strings and arrays for create_event.xml -->
 
     <string name="quantity_prompt">Choose a quantity</string>
     <string-array name="quantity">
+        <item>Quantity</item>
         <item>1-4</item>
         <item>5-10</item>
         <item>11-20</item>
         <item>20+</item>
     </string-array>
+
+    <string name="close_y">Yes</string>
+    <string name="close_n">No</string>
+
+    <string name="category_prompt">Choose a category</string>
+    <string-array name="category">
+        <item>Category</item>
+        <item>Pizza</item>
+        <item>Burgers</item>
+        <item>Other</item>
+    </string-array>
+
+    <string name="content_description">Picture of the food</string>
+    <string name="event_name">Event Name</string>
+    <string name="room">Unit/Room</string>
+    <string name="description">Description</string>
+    <string name="submit">Submit</string>
+    <string name="question_desc">Information about close event option</string>
+
+
 </resources>
