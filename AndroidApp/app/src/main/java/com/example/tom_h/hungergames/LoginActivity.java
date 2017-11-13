@@ -45,13 +45,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.splash_screen_login);
         ButterKnife.bind(this);
 
-//        _loginButton.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//                login();
-//            }
-//        });
+        _loginButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                login();
+            }
+        });
 //
 //        _signupLink.setOnClickListener(new View.OnClickListener() {
 //
@@ -97,15 +97,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
-<<<<<<< HEAD
-            @Override
-            public void onClick(View v) {
-                // Start the Signup activity
-                Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
-                startActivityForResult(intent, 1);
-            }
-        });
-=======
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -130,7 +121,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
             //updateUI(null);
         }
->>>>>>> master
     }
 
     public void login() {
