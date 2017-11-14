@@ -2,19 +2,15 @@ package com.example.tom_h.hungergames;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
-
-import java.io.IOException;
 
 import butterknife.Bind;
 
@@ -27,7 +23,12 @@ public class CreateEvent extends Fragment {
 
     private int PICK_IMAGE = 100;
 
+    MapsActivity mapFragment;
+    CreateEvent createEvent;
+
     ImageView image;
+
+    Button submit;
 
     @Bind(R.id.picture)
     ImageView _createPicture;
@@ -37,7 +38,7 @@ public class CreateEvent extends Fragment {
         View view = inflater.inflate(R.layout.create_event, container, false);
 
         image = view.findViewById(R.id.picture);
-
+        submit = view.findViewById(R.id.submit_button);
         image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,6 +46,14 @@ public class CreateEvent extends Fragment {
                         new Intent(Intent.ACTION_PICK,
                                 android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI);
                 startActivityForResult(gallery, PICK_IMAGE);
+            }
+        });
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "Event Submitted!", Toast.LENGTH_LONG).show();
+
             }
         });
 

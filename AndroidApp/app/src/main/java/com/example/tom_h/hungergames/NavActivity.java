@@ -14,6 +14,9 @@ import android.view.MenuItem;
 
 public class NavActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    MapsActivity mapFragment;
+    CreateEvent createEvent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,7 +25,8 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
         setSupportActionBar(toolbar);
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.nav, new MapsActivity());
+        mapFragment = new MapsActivity();
+        fragmentTransaction.replace(R.id.nav, mapFragment);
         fragmentTransaction.commit();
 
 
@@ -44,6 +48,17 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        if (requestCode == MapsActivity.MY_PERMISSIONS_REQUEST_LOCATION) {
+            mapFragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        } else {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
+
 
     @Override
     public void onBackPressed() {
@@ -83,18 +98,22 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.create_event) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.nav, new CreateEvent());
-            fragmentTransaction.commit();
+            createEvent = new CreateEvent();
+            fragmentTransaction.replace(R.id.nav, createEvent);
+            fragmentTransaction.remove(mapFragment).commit();
+        } else if (id == R.id.Map) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            mapFragment = new MapsActivity();
+            fragmentTransaction.replace(R.id.nav, mapFragment);
+            fragmentTransaction.remove(createEvent).commit();
         } else if (id == R.id.nav_share) {
             // Insert code
         } else if (id == R.id.nav_gallery) {
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.nav, new MapsActivity());
-            fragmentTransaction.commit();
+            //Insert Code
         } else if (id == R.id.nav_manage) {
             // Insert code
         }
