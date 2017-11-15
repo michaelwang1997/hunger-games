@@ -12,7 +12,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class NavActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+import com.example.tom_h.hungergames.dummy.DummyContent;
+
+public class NavActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
+        AllEventListActivity.OnListFragmentInteractionListener {
 
     MapsActivity mapFragment;
     CreateEvent createEvent;
@@ -103,18 +106,29 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             createEvent = new CreateEvent();
             fragmentTransaction.replace(R.id.nav, createEvent);
-            fragmentTransaction.remove(mapFragment).commit();
+            if(!mapFragment.isVisible()) {
+                fragmentTransaction.remove(mapFragment).commit();
+            } else {
+                fragmentTransaction.commit();
+            }
         } else if (id == R.id.Map) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             mapFragment = new MapsActivity();
             fragmentTransaction.replace(R.id.nav, mapFragment);
-            fragmentTransaction.remove(createEvent).commit();
-        } else if (id == R.id.nav_share) {
+            fragmentTransaction.commit();
+        } else if (id == R.id.my_events) {
             // Insert code
-        } else if (id == R.id.nav_gallery) {
-            //Insert Code
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.all_events) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.nav, new AllEventListActivity());
+            if(!mapFragment.isVisible()) {
+                fragmentTransaction.remove(mapFragment).commit();
+            } else {
+                fragmentTransaction.commit();
+            }
+        } else if (id == R.id.settings) {
             // Insert code
         }
 
@@ -123,4 +137,8 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
         return true;
     }
 
+    @Override
+    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+
+    }
 }

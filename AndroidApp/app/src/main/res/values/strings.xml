@@ -38,6 +38,7 @@
     <string name="description">Description</string>
     <string name="submit">Submit</string>
     <string name="question_desc">Information about close event option</string>
+    <string name="str_rb_normal">Normal</string>
 
 
 </resources>
