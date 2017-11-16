@@ -23,6 +23,7 @@
 
     <string name="close_y">Yes</string>
     <string name="close_n">No</string>
+    <string name="close_text">Event closing option</string>
 
     <string name="category_prompt">Choose a category</string>
     <string-array name="category">
