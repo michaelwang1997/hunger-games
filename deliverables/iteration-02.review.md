@@ -12,7 +12,8 @@
  
  * The decision to create a video mock-up prior to development turned out to be successful as the front-end team frequently referred back to it whilst designing the layout of the pages. Furthermore, the presentation proved to be valuable for reinforcing our primary objective throughout the development phase. Next, the decision to hold group meetings with all members of the team on a weekly basis allowed us to make sure everyone was always on the same page, aware of the current progress and the next steps. Finally, dividing the work into front-end and back-end tasks resulted in increased efficiency, as both teams were able to focus on meeting distinct criteria, prior to combining our efforts at recurring intervals. 
  
- [Video Mock-up](https://streamable.com/4q7hq) | 
+ [Video Mock-up](https://streamable.com/4q7hq)
+ 
  [Presentation](https://www.scribd.com/document/364547757/Hunger-Games-Presentation?secret_password=ettcw3JDUYFokb2kcBQH)
 
 #### Decisions that did not turn out as well as we hoped
