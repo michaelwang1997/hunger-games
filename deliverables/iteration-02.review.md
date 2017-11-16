@@ -12,12 +12,10 @@
  
  * The decision to create a video mock-up prior to development turned out to be successful as the front-end team frequently referred back to it whilst designing the layout of the pages. Furthermore, the presentation proved to be valuable for reinforcing our primary objective throughout the development phase. Next, the decision to hold group meetings with all members of the team on a weekly basis allowed us to make sure everyone was always on the same page, aware of the current progress and the next steps. Finally, dividing the work into front-end and back-end tasks resulted in increased efficiency, as both teams were able to focus on meeting distinct criteria, prior to combining our efforts at recurring intervals. 
  
- [Video Mock-up](https://streamable.com/4q7hq)
+ [Video Mock-up](https://streamable.com/4q7hq) | 
  [Presentation](https://www.scribd.com/document/364547757/Hunger-Games-Presentation?secret_password=ettcw3JDUYFokb2kcBQH)
 
 #### Decisions that did not turn out as well as we hoped
-
-List process-related (i.e. team organization) decisions that, in retrospect, were not as successful as you thought they would be.
 
  * The decision to use multiple branches had its advantages, but was not as effective as we had initially hoped. This was due to the fact that on occasion, a particular branch would exceed another by a significant number of commits. As a result, when a merge was attempted, we were required to resolve numerous conflicts. The next decision which proved to be rather ineffective was developing the application until the day of the deadline. Ideally, we would have liked to suspend development a day or two in advance in order to ensure we have ample time to polish our application for the second deliverable. However, the busy workloads of our team members prevented us from doing so. 
 

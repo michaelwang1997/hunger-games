@@ -10,21 +10,27 @@
 
 #### Roles & responsibilities
 
-Describe the different roles on the team and the responsibilities associated with each role.
  * Product Owner: Pratiman Shahi
+ 
    Responsibilities include assigning the tickets to the appropriate members of the team and deciding on the time required for tickets to be closed. Ensure tasks are being completed in a timely manner. Organize team meetings and appointments. Assist the back-end team with implementing core functionality; namely the ability to store and retrieve information from the database.
  * Lead Developer: Daniel Thomas Horga
+ 
    Responsibilities include back-end and front-end development, as well as offering assistance to all members of the team. Set up a Firebase realtime database for Android. Implement the proximity-based push notification feature and sign-in functionality.
  * UI/UX Developer: Usama Zaki
+ 
    Responsibilities include creating the workflow of the application, in addition to mockups of the features and application in general. Assist the front-end team with designing the layout and implementing the logic for the "Create Event" and "Login" pages. 
  * QA Developer: Awsaf Sakif Arefin
+ 
    Responsibilities include implementing rigorous test cases and ensuring that the specifications set by the product owner are being met.  Assist the back-end team with resolving issues related to the database.
  * Front-End Developer: Michael Wang
-    Responsible for designing and implementing the logic for the "Login" and "Settings" page, as well as the navigation drawer. Resolve issues related to "All Events" page, as well as the map. 
+   
+   Responsible for designing and implementing the logic for the "Login" and "Settings" page, as well as the navigation drawer. Resolve issues related to "All Events" page, as well as the map. 
  * Front-End Developer: Farzan Haq
-    Responsible for designing and implementing the logic for the "All Events" and "Settings" page, as well as the map. Resolves issues related to "Login" page, as well as the navigation drawer. 
+   
+   Responsible for designing and implementing the logic for the "All Events" and "Settings" page, as well as the map. Resolves issues related to "Login" page, as well as the navigation drawer. 
  * Back-End Developer: Calvin Sanghera
-   Responsible for coordinating the communication between the database and the application. Store and retrieve users and events seamlessly.
+ 
+   Responsible for coordinating the communication between the database and the application. Seamlessly store and retrieve users and events.
 
 #### Events
 
