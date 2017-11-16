@@ -2,6 +2,7 @@ package com.example.tom_h.hungergames;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -12,7 +13,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class NavActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+import com.example.tom_h.hungergames.dummy.DummyItem;
+
+
+public class NavActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
+        AllEventListActivity.OnListFragmentInteractionListener {
+
+    MapsActivity mapFragment;
+    CreateEvent createEvent;
+    Fragment allEventListActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +31,8 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
         setSupportActionBar(toolbar);
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.nav, new MapsActivity());
+        mapFragment = new MapsActivity();
+        fragmentTransaction.replace(R.id.nav, mapFragment);
         fragmentTransaction.commit();
 
 
@@ -44,6 +54,17 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        if (requestCode == MapsActivity.MY_PERMISSIONS_REQUEST_LOCATION) {
+            mapFragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        } else {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
+
 
     @Override
     public void onBackPressed() {
@@ -83,20 +104,46 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.create_event) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.nav, new CreateEvent());
-            fragmentTransaction.commit();
-        } else if (id == R.id.nav_share) {
-            // Insert code
-        } else if (id == R.id.nav_gallery) {
+            createEvent = new CreateEvent();
+            fragmentTransaction.replace(R.id.nav, createEvent);
+            if(!mapFragment.isVisible()) {
+                fragmentTransaction.remove(mapFragment).commit();
+            } else {
+                fragmentTransaction.commit();
+            }
+        } else if (id == R.id.Map) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.nav, new MapsActivity());
+            mapFragment = new MapsActivity();
+            fragmentTransaction.replace(R.id.nav, mapFragment);
             fragmentTransaction.commit();
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.my_events) {
             // Insert code
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            allEventListActivity = AllEventListActivity.newInstance(1, true);
+            fragmentTransaction.replace(R.id.nav, allEventListActivity);
+            if(!mapFragment.isVisible()) {
+                fragmentTransaction.remove(mapFragment).commit();
+            } else {
+                fragmentTransaction.commit();
+            }
+        } else if (id == R.id.all_events) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            allEventListActivity = AllEventListActivity.newInstance(1, false);
+            fragmentTransaction.replace(R.id.nav, allEventListActivity);
+            if(!mapFragment.isVisible()) {
+                fragmentTransaction.remove(mapFragment).commit();
+            } else {
+                fragmentTransaction.commit();
+            }
+        } else if (id == R.id.settings) {
+            // Insert code
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -104,4 +151,8 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
         return true;
     }
 
+    @Override
+    public void onListFragmentInteraction(DummyItem item) {
+
+    }
 }

@@ -23,6 +23,7 @@
 
     <string name="close_y">Yes</string>
     <string name="close_n">No</string>
+    <string name="close_text">Event closing option</string>
 
     <string name="category_prompt">Choose a category</string>
     <string-array name="category">
@@ -38,6 +39,7 @@
     <string name="description">Description</string>
     <string name="submit">Submit</string>
     <string name="question_desc">Information about close event option</string>
+    <string name="str_rb_normal">Normal</string>
 
 
 </resources>

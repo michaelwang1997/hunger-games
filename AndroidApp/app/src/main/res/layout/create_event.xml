@@ -7,8 +7,9 @@
     <RelativeLayout
         android:layout_width="300dp"
         android:layout_height="match_parent"
-        android:layout_marginLeft="50dp"
-        android:layout_marginStart="50dp">
+        android:layout_centerHorizontal="true">
+        <!--android:layout_marginLeft="50dp"
+        android:layout_marginStart="50dp"-->
 
         <ImageView
             android:id="@+id/picture"
@@ -46,6 +47,14 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/event_name"
+            android:text="@string/close_text"
+            android:layout_marginLeft="3dp"
+            android:layout_marginStart="3dp"/>
+
         <android.support.design.widget.TextInputLayout
             android:layout_height="wrap_content"
             android:layout_width="150dp"
@@ -64,24 +73,25 @@
 
         <ImageView
             android:contentDescription="@string/question_desc"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:src="@drawable/question_icon"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:src="@mipmap/ic_info_black_36dp"
             android:layout_below="@+id/event_name"
             android:layout_alignRight="@+id/radio_close"
             android:layout_alignEnd="@+id/radio_close"
-            android:layout_marginTop="15dp"/>
+            android:layout_marginTop="23dp"
+            />
 
         <RadioGroup
             android:id="@+id/radio_close"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/quantity"
-            android:layout_marginTop="10dp" >
+            android:layout_marginTop="20dp" >
 
             <RadioButton
                 android:id="@+id/close_y"
-                android:layout_width="75dp"
+                android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:text="@string/close_y"
                 android:textSize="12sp" />

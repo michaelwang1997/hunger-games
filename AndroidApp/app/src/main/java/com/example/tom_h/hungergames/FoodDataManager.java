@@ -11,9 +11,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-/**
- * Created by Tom-H on 11/12/2017.
- */
 
 public class FoodDataManager extends AppCompatActivity {
 

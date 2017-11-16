@@ -54,3 +54,8 @@ google-services.json
 freeline.py
 freeline/
 freeline_project_description.json
+*.bin
+*.bin
+*.lock
+AndroidApp/app/app.iml
+AndroidApp/local.properties
