@@ -11,7 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tom_h.hungergames.AllEventListActivity.OnListFragmentInteractionListener;
-import com.example.tom_h.hungergames.dummy.DummyContent.DummyItem;
+import com.example.tom_h.hungergames.dummy.DummyItem;
 
 import java.util.List;
 
@@ -24,11 +24,13 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
     private final Context cntx;
     private final List<DummyItem> mValues;
     private final OnListFragmentInteractionListener mListener;
+    private boolean isMyEventsBool;
 
-    public MyItemRecyclerViewAdapter(Context context, List<DummyItem> items, OnListFragmentInteractionListener listener) {
+    public MyItemRecyclerViewAdapter(Context context, List<DummyItem> items, OnListFragmentInteractionListener listener, boolean isMyEvents) {
         cntx = context;
         mValues = items;
         mListener = listener;
+        isMyEventsBool = isMyEvents;
     }
 
     @Override
@@ -56,8 +58,30 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
                     mListener.onListFragmentInteraction(holder.mItem);
-                    Toast.makeText(v.getContext(), "This is an item", Toast.LENGTH_SHORT).show();
+                    if(isMyEventsBool) { //My events page
+                        Toast.makeText(v.getContext(), "Take me to a page of the event", Toast.LENGTH_SHORT).show();
+                    }
+                    else { //All Events page
+                        Toast.makeText(v.getContext(), "Take me to the event on the map", Toast.LENGTH_SHORT).show();
+                    }                }
+            }
+        });
+
+        holder.mView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if (null != mListener) {
+                    // Notify the active callbacks interface (the activity, if the
+                    // fragment is attached to one) that an item has been selected.
+                    mListener.onListFragmentInteraction(holder.mItem);
+                    if(isMyEventsBool) { //My events page
+                        Toast.makeText(v.getContext(), "Let me edit my event", Toast.LENGTH_SHORT).show();
+                    }
+                    else { //All Events page
+                        Toast.makeText(v.getContext(), "Let me favourite this event to get notifications", Toast.LENGTH_SHORT).show();
+                    }
                 }
+                return true;
             }
         });
     }

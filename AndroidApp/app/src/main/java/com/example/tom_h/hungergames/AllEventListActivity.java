@@ -6,12 +6,14 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.tom_h.hungergames.dummy.DummyContent;
-import com.example.tom_h.hungergames.dummy.DummyContent.DummyItem;
+import com.example.tom_h.hungergames.dummy.DummyContentAllEvents;
+import com.example.tom_h.hungergames.dummy.DummyItem;
+import com.example.tom_h.hungergames.dummy.DummyContentMyEvents;
 
 /**
  * A fragment representing a list of Items.
@@ -20,11 +22,14 @@ import com.example.tom_h.hungergames.dummy.DummyContent.DummyItem;
  * interface.
  */
 public class AllEventListActivity extends Fragment {
-
+    private static final String TAG = "AllEventListActivity";
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
+    private static final String ARG_BOOL_EVENT_PAGE = "bool-event-page";
     // TODO: Customize parameters
     private int mColumnCount = 1;
+    public boolean isMyEvents;
+    public Context cntx = this.getContext();
     private OnListFragmentInteractionListener mListener;
 
     /**
@@ -36,10 +41,12 @@ public class AllEventListActivity extends Fragment {
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static AllEventListActivity newInstance(int columnCount) {
+    public static AllEventListActivity newInstance(int columnCount, boolean isMyEvents) {
+        Log.d(TAG, "AllEventListActivity successful");
         AllEventListActivity fragment = new AllEventListActivity();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
+        args.putBoolean(ARG_BOOL_EVENT_PAGE, isMyEvents);
         fragment.setArguments(args);
         return fragment;
     }
@@ -59,15 +66,24 @@ public class AllEventListActivity extends Fragment {
         View view = inflater.inflate(R.layout.fragment_item_list, container, false);
 
         // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
+        if (getArguments() != null) {
+            isMyEvents = getArguments().getBoolean(ARG_BOOL_EVENT_PAGE);
+            if (view instanceof RecyclerView) {
+                Context context = view.getContext();
+                RecyclerView recyclerView = (RecyclerView) view;
+                if (mColumnCount <= 1) {
+                    recyclerView.setLayoutManager(new LinearLayoutManager(context));
+                } else {
+                    recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
+                }
+                // TODO: This is where you feed in data, and provide differences between my events and all events pages
+                if (!isMyEvents) {
+                    recyclerView.setAdapter(new MyItemRecyclerViewAdapter(this.getContext(), DummyContentAllEvents.AllEvents, mListener, isMyEvents));
+                }
+                else{
+                    recyclerView.setAdapter(new MyItemRecyclerViewAdapter(this.getContext(), DummyContentMyEvents.MyEvents, mListener, isMyEvents));
+                }
             }
-            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(this.getContext(), DummyContent.ITEMS, mListener));
         }
         return view;
     }
