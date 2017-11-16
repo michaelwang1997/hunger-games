@@ -36,7 +36,5 @@
  * A goal which we have yet to meet is to ensure notifications are only sent out to users who declare interest and are within a certain proximity of the event. We decided to prioritize other tasks ahead of this, since this feature relies on the other components of our application. Due to time constraints, we were not able to get to this, however we are now in a position to begin implementing this feature.
 
 ## Meeting Highlights
-
-Going into the next iteration, our main insights are:
  
  * Going into the next iteration, one of our main goals is to incorporate targeted notifications, which will only be sent out to users who meet the criteria. We will also need to design and develop additional intermediary pages for certain actions that a user may take. The map should populate in real time when a user creates an event, and the event should be visible in the my events and/or all events page. A user should be able to declare their interest in an event, and be notified about its status. Last but not least, we intend to have our minimum viable product that tackles a real world problem completed and ready to be published.
