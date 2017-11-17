@@ -30,6 +30,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Random;
+
 public class MapsActivity extends SupportMapFragment
         implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
@@ -247,8 +249,9 @@ public class MapsActivity extends SupportMapFragment
             String room = i.room;
             String category = i.category;
             String quantity = i.quantity;
-            map.addMarker(new MarkerOptions()
-
+            LatLng latLng = new LatLng(i.latitude, i.longitude);
+            Marker newMarker = map.addMarker(new MarkerOptions()
+                    .position(latLng)
                     .title(title)
                     .snippet("description: " + description +
                             "\nroom: " + room +
@@ -256,7 +259,7 @@ public class MapsActivity extends SupportMapFragment
                             "\nquantity: " + quantity)
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
 
-
+            i.setMarker(newMarker);
 
 
 

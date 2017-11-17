@@ -2,6 +2,7 @@ package com.example.tom_h.hungergames;
 
 import android.location.Location;
 
+import com.google.android.gms.maps.model.Marker;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.IgnoreExtraProperties;
 
@@ -23,6 +24,16 @@ public class Event {
     public String userID;
 
     public Date createTime;
+
+    public double latitude;
+    public double longitude;
+
+    private Marker marker = null;
+
+
+    public void setMarker (Marker marker){
+        this.marker = marker;
+    }
 
     //public FirebaseUser owner;
 
@@ -56,6 +67,8 @@ public class Event {
         this.quantity = quantity;
         //this.owner = LoginActivity.firebaseUser;
         this.userID = userID;
+        longitude = location.getLongitude();
+        latitude = location.getLatitude();
     }
 
     //push event to servert
