@@ -26,6 +26,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -48,6 +50,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public static FirebaseUser firebaseUser;
     private String username;
     private String email;
+    public FirebaseDatabase database;
+    public DatabaseReference mDatabase;
 
     @Bind(R.id.input_email)
     EditText _emailText;
@@ -61,6 +65,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private static final int RC_SIGN_IN = 6009;
 
     public LoginActivity(String username, String email) {
+        database = FirebaseDatabase.getInstance();
+        mDatabase = database.getReference();
         this.username = username;
         this.email = email;
     }
