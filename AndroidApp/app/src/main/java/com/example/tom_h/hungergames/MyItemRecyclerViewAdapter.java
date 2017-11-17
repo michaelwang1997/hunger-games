@@ -44,7 +44,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.mItem = mValues.get(position);
         int id = cntx.getResources().getIdentifier("@drawable/fastfood", null, cntx.getPackageName());
         Drawable res = cntx.getResources().getDrawable(id);
@@ -68,10 +68,10 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
                     // fragment is attached to one) that an item has been selected.
                     mListener.onListFragmentInteraction(holder.mItem);
                     if(isMyEventsBool) { //My events page
-                        Toast.makeText(v.getContext(), "Take me to a page of the event", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(v.getContext(), "Take me to a page of the event " + position, Toast.LENGTH_SHORT).show();
                     }
                     else { //All Events page
-                        Toast.makeText(v.getContext(), "Take me to the event on the map", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(v.getContext(), "Take me to the event on the map " + position, Toast.LENGTH_SHORT).show();
                     }                }
             }
         });

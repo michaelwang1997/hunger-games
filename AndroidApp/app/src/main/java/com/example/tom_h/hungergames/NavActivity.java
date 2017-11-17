@@ -13,8 +13,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.tom_h.hungergames.dummy.DummyItem;
-
 
 public class NavActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
         AllEventListActivity.OnListFragmentInteractionListener {
@@ -55,7 +53,6 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        getActionBar().setDisplayShowTitleEnabled(false);
     }
 
     @Override
