@@ -63,33 +63,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.splash_screen_login);
         ButterKnife.bind(this);
 
-//        // Views
-//        mStatusTextView = findViewById(R.id.status);
-//        mDetailTextView = findViewById(R.id.detail);
-//
-//        // Button listeners
-//        findViewById(R.id.sign_in_button).setOnClickListener(this);
-//        findViewById(R.id.sign_out_button).setOnClickListener(this);
-//        findViewById(R.id.disconnect_button).setOnClickListener(this);
-
-//        _loginButton.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//                login();
-//            }
-//        });
-//
-//        _signupLink.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//                // Start the Signup activity
-//                Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
-//                startActivityForResult(intent, REQUEST_SIGNUP);
-//            }
-//        });
-
         //FOr more info on google sign in: https://developers.google.com/identity/sign-in/android/sign-in
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
@@ -115,10 +88,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         int i = v.getId();
         if (i == R.id.sign_in_button) {
             signIn();
-//        } else if (i == R.id.sign_out_button) {
-//            signOut();
-//        } else if (i == R.id.disconnect_button) {
-//            revokeAccess();
         }
     }
 
@@ -214,8 +183,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         progressDialog.setMessage("Authenticating...");
         progressDialog.show();
 
-        String email = _emailText.getText().toString();
-        String password = _passwordText.getText().toString();
 
         // TODO: Implement your own authentication logic here.
 
@@ -230,18 +197,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }, 3000);
     }
 
-//
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        if (requestCode == REQUEST_SIGNUP) {
-//            if (resultCode == RESULT_OK) {
-//
-//                // TODO: Implement successful signup logic here
-//                // By default we just finish the Activity and log them in automatically
-//                this.finish();
-//            }
-//        }
-//    }
 
     // [START on_start_check_user]
     @Override
@@ -306,22 +261,5 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     }
                 });
     }
-
-//    private void updateUI(FirebaseUser user) {
-//        //hideProgressDialog();
-//        if (user != null) {     //the user has not yet signed in to the app with Google.
-//           // mStatusTextView.setText(getString(R.string.google_status_fmt, user.getEmail()));
-//            //mDetailTextView.setText(getString(R.string.firebase_status_fmt, user.getUid()));
-//
-//            //findViewById(R.id.sign_in_button).setVisibility(View.GONE);
-//            //findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
-//        } else {    //the user has already signed in to the app with Google
-//            //mStatusTextView.setText(R.string.signed_out);
-//            //mDetailTextView.setText(null);
-//
-//            //findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
-//            //findViewById(R.id.sign_out_and_disconnect).setVisibility(View.GONE);
-//        }
-//    }
 
 }
