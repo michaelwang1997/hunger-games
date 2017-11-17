@@ -1,27 +1,45 @@
 package com.example.tom_h.hungergames;
 
+import android.location.Location;
+
 import java.sql.Time;
+import java.util.Date;
 
 public class Event {
 
 
-    private double lat; //latitude
-    private double longi; //longitude
+    private Location location;
 
     private String title;
     private String description;
+    private String room;
+    private String category;
+    private String quantity;
 
-    private Time createTime;
+    private Date createTime;
 
     //private UNKNOWNTYPE owner;
 
-    public Event(double lat, double longi, String title, String description,Time createTime){
+    /*
 
-        lat = this.lat;
-        longi = this.longi;
-        title = this.title;
-        description = this.description;
-        createTime = this.createTime;
+                String title = _eventName.getText().toString();
+            String description = _description.getText().toString();
+            String room = _room.getText().toString();
+            String category = _category.toString();
+            String quantity = _quantity.toString();
+
+            Location eventLocation = new Location(MapsActivity.mLastLocation);
+     */
+
+    public Event(Location location,String category,String quantity ,String title, String description,String room, Date createTime){
+
+        this.location = location;
+        this.title = title;
+        this.description = description;
+        this.room = room;
+        this.category = category;
+        this.createTime = createTime;
+        this.quantity = quantity;
 
 
     }

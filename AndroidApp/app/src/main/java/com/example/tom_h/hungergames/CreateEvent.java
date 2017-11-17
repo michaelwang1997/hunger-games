@@ -2,6 +2,8 @@ package com.example.tom_h.hungergames;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,6 +16,10 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.sql.Time;
+import java.util.Calendar;
+import java.util.Date;
 
 import butterknife.Bind;
 
@@ -49,7 +55,7 @@ public class CreateEvent extends Fragment implements View.OnClickListener{
     EditText _room;
 
     @Bind(R.id.category)
-    Spinner _passwordText;
+    Spinner _category;
 
     @Bind(R.id.quantity)
     Spinner _quantity;
@@ -96,15 +102,47 @@ public class CreateEvent extends Fragment implements View.OnClickListener{
     }
 
     public void submit(){
-        String title = findViewById(R.id.yourId);;
+        String title = _eventName.getText().toString();
+        String description = _description.getText().toString();
+        String room = _room.getText().toString();
+        String category = _category.toString();
+        String quantity = _quantity.toString();
 
-        //Event event = new Event()
+        Location eventLocation = new Location(MapsActivity.mLastLocation);
+
+        Date time  = Calendar.getInstance().getTime();
+        Event event = new Event(eventLocation,category,quantity,title,description,room,time);
     }
+    /*
+
+        @Bind(R.id.event_name)
+    EditText _eventName;
+
+    @Bind(R.id.event_description)
+    EditText _description;
+
+    @Bind(R.id.location)
+    EditText _room;
+
+    @Bind(R.id.category)
+    Spinner _passwordText;
+
+    @Bind(R.id.quantity)
+    Spinner _quantity;
+
+import java.util.Calendar
+
+Date currentTime = Calendar.getInstance().getTime();
+
+    @Bind(R.id.category)
+    Spinner _category;
+     */
 
     @Override
     public void onClick(View v) {
         int i = v.getId();
         if (i == R.id.submit_button) {
+
             submit();
             //Submit the event
         }
