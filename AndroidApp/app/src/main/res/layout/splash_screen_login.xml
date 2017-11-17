@@ -16,7 +16,7 @@
         <ImageView android:src="@drawable/logo"
             android:contentDescription="@string/logo_desc"
             android:layout_width="wrap_content"
-            android:layout_height="150dp"
+            android:layout_height="200dp"
             android:layout_marginBottom="24dp"
             android:layout_gravity="center_horizontal" />
 
@@ -51,8 +51,9 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="38dp"
             android:padding="12dp"
+            android:background="@color/submit"
             android:text="@string/login" />
 
         <com.google.android.gms.common.SignInButton
@@ -61,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="-25dp"
-            android:layout_marginBottom="15dp"/>
+            android:layout_marginBottom="30dp"/>
 
         <TextView android:id="@+id/link_signup"
             android:layout_width="fill_parent"

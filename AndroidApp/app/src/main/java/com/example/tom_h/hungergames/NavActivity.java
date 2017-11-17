@@ -54,6 +54,8 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        getActionBar().setDisplayShowTitleEnabled(false);
     }
 
     @Override
