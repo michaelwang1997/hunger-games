@@ -35,7 +35,7 @@ public class FoodDataManager extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         database = FirebaseDatabase.getInstance();
         mDatabase = database.getReference();
-        writeNewUser();
+        //writeNewUser();
         //write to database
 //        mDatabase.child("events").child("EventID").setValue(CHILDEVENT);
 //        //YOu update event in the following mannor:
