@@ -10,6 +10,13 @@
 
     <string name="action_settings">Settings</string>
 
+    <!-- Strings for login page -->
+    <string name="logo_desc">The apps logo</string>
+    <string name="email_hint">Email</string>
+    <string name="pass_hint">Password</string>
+    <string name="login">Login</string>
+    <string name="create_account">No account yet? Create one</string>
+
     <!-- Strings and arrays for create_event.xml -->
 
     <string name="quantity_prompt">Choose a quantity</string>
