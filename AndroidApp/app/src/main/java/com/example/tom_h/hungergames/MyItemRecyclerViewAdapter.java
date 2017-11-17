@@ -2,6 +2,8 @@ package com.example.tom_h.hungergames;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.location.Address;
+import android.location.Geocoder;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 import com.example.tom_h.hungergames.AllEventListActivity.OnListFragmentInteractionListener;
 import com.example.tom_h.hungergames.dummy.DummyItem;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -22,11 +25,11 @@ import java.util.List;
  */
 public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder> {
     private final Context cntx;
-    private final List<DummyItem> mValues;
+    private final List<Event> mValues;
     private final OnListFragmentInteractionListener mListener;
     private boolean isMyEventsBool;
 
-    public MyItemRecyclerViewAdapter(Context context, List<DummyItem> items, OnListFragmentInteractionListener listener, boolean isMyEvents) {
+    public MyItemRecyclerViewAdapter(Context context, List<Event> items, OnListFragmentInteractionListener listener, boolean isMyEvents) {
         cntx = context;
         mValues = items;
         mListener = listener;
@@ -43,14 +46,20 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        int id = cntx.getResources().getIdentifier(mValues.get(position).picture, null, cntx.getPackageName());
+        int id = cntx.getResources().getIdentifier("@drawable/fastfood", null, cntx.getPackageName());
         Drawable res = cntx.getResources().getDrawable(id);
         holder.mPictureView.setImageDrawable(res);
-        holder.mEventNameView.setText(mValues.get(position).name);
-        holder.mFoodAmountView.setText(mValues.get(position).amount);
-        holder.mEventLocationView.setText(mValues.get(position).location);
+        holder.mEventNameView.setText(mValues.get(position).title);
+        holder.mFoodAmountView.setText(mValues.get(position).quantity);
+        Geocoder geocoder = new Geocoder(cntx);
+        try {
+            List<Address> address = geocoder.getFromLocation(mValues.get(position).latitude, mValues.get(position).longitude, 1);
+            holder.mEventLocationView.setText(address.get(0).getAddressLine(0));
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
         holder.mEventDescriptionView.setText(mValues.get(position).description);
-
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,7 +108,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
         public final TextView mEventLocationView;
         public final TextView mEventDescriptionView;
 
-        public DummyItem mItem;
+        public Event mItem;
 
         public ViewHolder(View view) {
             super(view);

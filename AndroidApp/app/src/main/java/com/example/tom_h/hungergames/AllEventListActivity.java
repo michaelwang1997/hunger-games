@@ -1,5 +1,6 @@
 package com.example.tom_h.hungergames;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -12,11 +13,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-import android.app.AlertDialog;
 
-import com.example.tom_h.hungergames.dummy.DummyContentAllEvents;
 import com.example.tom_h.hungergames.dummy.DummyContentMyEvents;
-import com.example.tom_h.hungergames.dummy.DummyItem;
+import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A fragment representing a list of Items.
@@ -80,10 +82,11 @@ public class AllEventListActivity extends Fragment {
 
                 // TODO: This is where you feed in data, and provide differences between my events and all events pages
                 if (!isMyEvents) {
-                    adapter = new MyItemRecyclerViewAdapter(this.getContext(), DummyContentAllEvents.AllEvents, mListener, isMyEvents);
+                    adapter = new MyItemRecyclerViewAdapter(this.getContext(), FoodDataManager.events, mListener, isMyEvents);
                     recyclerView.setAdapter(adapter);
                 } else {
-                    adapter = new MyItemRecyclerViewAdapter(this.getContext(), DummyContentMyEvents.MyEvents, mListener, isMyEvents);
+                    List<Event> myEvents = getMyEvents();
+                    adapter = new MyItemRecyclerViewAdapter(this.getContext(), getMyEvents(), mListener, isMyEvents);
                     recyclerView.setAdapter(adapter);
                     ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
                         @Override
@@ -146,6 +149,19 @@ public class AllEventListActivity extends Fragment {
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+        void onListFragmentInteraction(Event event);
+    }
+
+    public List<Event> getMyEvents(){
+        List<Event> events = new ArrayList<>();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        String userID = mAuth.getCurrentUser().getUid().toString();
+        for(Event event: FoodDataManager.events){
+
+            if( event.userID.equals(userID)){
+                events.add(event);
+            }
+        }
+        return events;
     }
 }

@@ -155,7 +155,7 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
     }
 
     @Override
-    public void onListFragmentInteraction(DummyItem item) {
+    public void onListFragmentInteraction(Event item) {
 
     }
 }
