@@ -46,6 +46,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private TextView mStatusTextView;
     private TextView mDetailTextView;
     public static FirebaseUser firebaseUser;
+    private String username;
+    private String email;
 
     @Bind(R.id.input_email)
     EditText _emailText;
@@ -57,6 +59,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     TextView _signupLink;
 
     private static final int RC_SIGN_IN = 6009;
+
+    public LoginActivity(String username, String email) {
+        this.username = username;
+        this.email = email;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -95,6 +102,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
+        writeNewUser();
     }
 
     private void signOut() {
@@ -261,6 +269,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //                        updateUI(null);
                     }
                 });
+    }
+
+    public void writeNewUser() {
+        FirebaseAuth auth;
+        auth = FirebaseAuth.getInstance();
+        LoginActivity user = new LoginActivity(auth.getCurrentUser().getDisplayName(), auth.getCurrentUser().getEmail());
+
+        mDatabase.child("users").child(auth.getCurrentUser().getUid()).setValue(user);
     }
 
 }
