@@ -12,9 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.example.tom_h.hungergames.dummy.DummyContentMyEvents;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
@@ -34,6 +32,8 @@ public class AllEventListActivity extends Fragment {
     // TODO: Customize parameters
     private int mColumnCount = 1;
     public boolean isMyEvents;
+    public List<Event> myEvents;
+    public boolean deleteConfirm;
     public Context cntx = this.getContext();
     private OnListFragmentInteractionListener mListener;
     private MyItemRecyclerViewAdapter adapter;
@@ -70,8 +70,8 @@ public class AllEventListActivity extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_item_list, container, false);
-
+        final View view = inflater.inflate(R.layout.fragment_item_list, container, false);
+        myEvents = getMyEvents();
         // Set the adapter
         if (getArguments() != null) {
             isMyEvents = getArguments().getBoolean(ARG_BOOL_EVENT_PAGE);
@@ -85,10 +85,9 @@ public class AllEventListActivity extends Fragment {
                     adapter = new MyItemRecyclerViewAdapter(this.getContext(), FoodDataManager.events, mListener, isMyEvents);
                     recyclerView.setAdapter(adapter);
                 } else {
-                    List<Event> myEvents = getMyEvents();
-                    adapter = new MyItemRecyclerViewAdapter(this.getContext(), getMyEvents(), mListener, isMyEvents);
+                    adapter = new MyItemRecyclerViewAdapter(this.getContext(), myEvents, mListener, isMyEvents);
                     recyclerView.setAdapter(adapter);
-                    ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+                    ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
                         @Override
                         public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
                             return false;
@@ -96,18 +95,24 @@ public class AllEventListActivity extends Fragment {
                         @Override
                         public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
                             // Remove item from backing list here
-                            final RecyclerView.ViewHolder v = viewHolder;
+                            RecyclerView.ViewHolder v = viewHolder;
                             new AlertDialog.Builder(getContext())
                                     .setTitle("Close your event?")
                                     .setMessage("Do you really want to close this event? You cannot undo this action.")
                                     .setIcon(android.R.drawable.ic_dialog_alert)
                                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int whichButton) {
-                                            Toast.makeText(getContext(), "Closing Event " +  v.getAdapterPosition(), Toast.LENGTH_SHORT).show();
-                                            DummyContentMyEvents.MyEvents.remove(v.getAdapterPosition());
-                                            adapter.notifyDataSetChanged();
+//                                            deleteConfirm = true;
                                         }})
                                     .setNegativeButton(android.R.string.no, null).show();
+//                            if(deleteConfirm){
+//                                Log.d(TAG, "Closing Event " +  v.getLayoutPosition());
+//                                Toast.makeText(getContext(), "Closing Event " +  v.getLayoutPosition(), Toast.LENGTH_SHORT).show();
+//                                myEvents.remove(v.getLayoutPosition());
+//                                adapter.notifyDataSetChanged();
+//                            }
+                            Log.d(TAG, "Closing Event " +  v.getAdapterPosition());
+                            myEvents.remove(v.getAdapterPosition());
                             adapter.notifyDataSetChanged();
                         }
 
@@ -157,11 +162,11 @@ public class AllEventListActivity extends Fragment {
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         String userID = mAuth.getCurrentUser().getUid().toString();
         for(Event event: FoodDataManager.events){
-
             if( event.userID.equals(userID)){
                 events.add(event);
             }
         }
+        Log.d(TAG, "Size: " + events.size() );
         return events;
     }
 }
