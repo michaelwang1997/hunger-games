@@ -85,6 +85,7 @@ public class AllEventListActivity extends Fragment {
                     adapter = new MyItemRecyclerViewAdapter(this.getContext(), FoodDataManager.events, mListener, isMyEvents);
                     recyclerView.setAdapter(adapter);
                 } else {
+                    List<Event> myEvents = getMyEvents();
                     adapter = new MyItemRecyclerViewAdapter(this.getContext(), getMyEvents(), mListener, isMyEvents);
                     recyclerView.setAdapter(adapter);
                     ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {

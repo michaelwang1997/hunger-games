@@ -183,8 +183,9 @@ public class FoodDataManager extends AppCompatActivity {
 ////        });
 //    }
 
-
-
-
+    public void deleteEvent(String eventID) {
+        DatabaseReference db_node = FirebaseDatabase.getInstance().getReference().getRoot().child("events");
+        db_node.child(eventID).setValue(null);
+    }
 
 }
