@@ -38,11 +38,11 @@ public class FoodDataManager extends AppCompatActivity {
     }
 
     public void writeNewUser() {
-        private FirebaseAuth auth;
+        FirebaseAuth auth;
         auth = FirebaseAuth.getInstance();
         FoodDataManager user = new FoodDataManager(auth.getCurrentUser().getDisplayName(), auth.getCurrentUser().getEmail());
 
-        mDatabase.child("users").child(userId).setValue(user);
+        mDatabase.child("users").child(auth.getCurrentUser().getUid()).setValue(user);
     }
 
 
