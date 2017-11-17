@@ -1,4 +1,4 @@
-package com.example.tom_h.hungergames.dummy;
+package com.example.tom_h.hungergames;
 
 /**
  * Created by spratiman on 17-Nov-17.
