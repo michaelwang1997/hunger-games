@@ -18,8 +18,6 @@ public class FoodDataManager extends AppCompatActivity {
     public FirebaseDatabase database;
     public DatabaseReference mDatabase;
     public DatabaseReference eventsRef;
-    private String username;
-    private String email;
     public FoodDataManager(){
 
     }
@@ -31,21 +29,6 @@ public class FoodDataManager extends AppCompatActivity {
         mDatabase = database.getReference();
         mDatabase.child("events").child(Integer.toString(event.ID)).setValue(event);
     }
-
-    public FoodDataManager(String username, String email) {
-        this.username = username;
-        this.email = email;
-    }
-
-    public void writeNewUser() {
-        FirebaseAuth auth;
-        auth = FirebaseAuth.getInstance();
-        FoodDataManager user = new FoodDataManager(auth.getCurrentUser().getDisplayName(), auth.getCurrentUser().getEmail());
-
-        mDatabase.child("users").child(auth.getCurrentUser().getUid()).setValue(user);
-    }
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState){
