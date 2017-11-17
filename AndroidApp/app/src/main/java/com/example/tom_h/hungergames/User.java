@@ -31,13 +31,25 @@ public class User {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference mDatabase = database.getReference();
         mAuth = FirebaseAuth.getInstance();
-        //mDatabase.child("users").child("Test").setValue("ASDASD");
         User user = new User(mAuth.getCurrentUser().getDisplayName(), mAuth.getCurrentUser().getEmail());
 
         mDatabase.child("users").child(mAuth.getCurrentUser().getUid().toString()).setValue(user);
+    }
 
+    // Call this function to update User details in Preference page
+    public static void updateUser(String name, String email) {
 
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference mDatabase = database.getReference();
+        mAuth = FirebaseAuth.getInstance();
 
-
+        if((name != null && !name.trim().isEmpty()) && (email != null && !email.trim().isEmpty())) {
+            mDatabase.child("users").child(mAuth.getCurrentUser().getUid().toString()).child("username").setValue(name);
+            mDatabase.child("users").child(mAuth.getCurrentUser().getUid().toString()).child("email").setValue(email);
+        } else if ((name != null && !name.trim().isEmpty()) && (email == null && email.isEmpty())) {
+            mDatabase.child("users").child(mAuth.getCurrentUser().getUid().toString()).child("username").setValue(name);
+        } else {
+            mDatabase.child("users").child(mAuth.getCurrentUser().getUid().toString()).child("email").setValue(email);
+        }
     }
 }

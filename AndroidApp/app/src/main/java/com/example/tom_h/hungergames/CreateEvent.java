@@ -18,6 +18,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.sql.Time;
 import java.util.Calendar;
 import java.util.Date;
@@ -128,7 +130,9 @@ public class CreateEvent extends Fragment implements View.OnClickListener{
 
 
         Date time  = Calendar.getInstance().getTime();
-        Event event = new Event(eventLocation,category,quantity,title,description,room,time);
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        String userID = mAuth.getCurrentUser().getUid().toString();
+        Event event = new Event(eventLocation,category,quantity,title,description,room,time,userID);
 
         NavActivity.foodDataManager.createEvent(event);
     }
