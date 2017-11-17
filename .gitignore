@@ -59,4 +59,3 @@ freeline_project_description.json
 *.lock
 AndroidApp/app/app.iml
 AndroidApp/local.properties
-AndroidApp/local.properties
