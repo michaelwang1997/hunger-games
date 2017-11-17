@@ -27,6 +27,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -152,6 +154,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("FB AUTH", "signInWithCredential:success");
+//                            FirebaseDatabase database = FirebaseDatabase.getInstance();
+//                            DatabaseReference mDatabase = database.getReference();
+//
+//                            mDatabase.child("users").child("Asd").setValue("TTT");
+                            User.writeNewUser();
                             firebaseUser = mAuth.getCurrentUser();
 
                             Intent i = new Intent(getApplicationContext(), NavActivity.class);
@@ -219,7 +226,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     public void onLoginSuccess() {
         _loginButton.setEnabled(true);
-        User.writeNewUser();
+
+        //User.writeNewUser();
         finish();
     }
 

@@ -14,8 +14,12 @@ public class User {
 
     private static FirebaseAuth mAuth;
 
-    private static String username;
-    private static String email;
+    public String username;
+    public String email;
+
+    public User(){
+        //empty for Firebase
+    }
 
     public User(String username, String email) {
         this.username = username;
@@ -23,11 +27,17 @@ public class User {
     }
 
     public static void writeNewUser() {
-        database = FirebaseDatabase.getInstance();
-        mDatabase = database.getReference();
 
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference mDatabase = database.getReference();
+        mAuth = FirebaseAuth.getInstance();
+        //mDatabase.child("users").child("Test").setValue("ASDASD");
         User user = new User(mAuth.getCurrentUser().getDisplayName(), mAuth.getCurrentUser().getEmail());
 
-        mDatabase.child("users").child(mAuth.getCurrentUser().getUid()).setValue(user);
+        mDatabase.child("users").child(mAuth.getCurrentUser().getUid().toString()).setValue(user);
+
+
+
+
     }
 }

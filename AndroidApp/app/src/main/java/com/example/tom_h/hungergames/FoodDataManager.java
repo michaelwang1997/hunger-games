@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.example.tom_h.hungergames.dummy.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -29,6 +30,7 @@ public class FoodDataManager extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         mDatabase = database.getReference();
         mDatabase.child("events").child(Integer.toString(event.ID)).setValue(event);
+
     }
 
 
