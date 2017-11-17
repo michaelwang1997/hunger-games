@@ -30,8 +30,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.Random;
-
 public class MapsActivity extends SupportMapFragment
         implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
@@ -109,8 +107,8 @@ public class MapsActivity extends SupportMapFragment
     @Override
     public void onConnected(Bundle bundle) {
         mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(1000);
-        mLocationRequest.setFastestInterval(1000);
+        mLocationRequest.setInterval(10000);
+        mLocationRequest.setFastestInterval(10000);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
         if (ContextCompat.checkSelfPermission(getActivity(),
                 Manifest.permission.ACCESS_FINE_LOCATION)
@@ -143,7 +141,8 @@ public class MapsActivity extends SupportMapFragment
         mCurrLocationMarker = mGoogleMap.addMarker(markerOptions);
 
         //move map camera
-        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,17));
+        mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
+                new LatLng(location.getLatitude(), location.getLongitude()), 17.0f));
 
         //get current user location
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
