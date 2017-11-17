@@ -19,7 +19,7 @@
  * UI/UX Developer: Usama Zaki
  
    Responsibilities include creating the workflow of the application, in addition to mockups of the features and application in general. Assist the front-end team with designing the layout and implementing the logic for the "Create Event" and "Login" pages. 
- * QA Developer: Awsaf Sakif Arefin
+ * QA Developer: Awsaf Arefin Sakif
  
    Responsibilities include implementing rigorous test cases and ensuring that the specifications set by the product owner are being met.  Assist the back-end team with resolving issues related to the database.
  * Front-End Developer: Michael Wang

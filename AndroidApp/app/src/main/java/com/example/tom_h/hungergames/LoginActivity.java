@@ -172,7 +172,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
-                Log.w(TAG, "Google sign in failed", e);
+                Log.w("FB AUTH", "Google sign in failed", e);
                 // [START_EXCLUDE]
 //                updateUI(null);
                 // [END_EXCLUDE]
@@ -215,7 +215,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     // [START auth_with_google]
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
-        Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
+        Log.d("FB AUTH", "firebaseAuthWithGoogle:" + acct.getId());
         // [START_EXCLUDE silent]
 //        showProgressDialog();
         // [END_EXCLUDE]
@@ -227,12 +227,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithCredential:success");
+                            Log.d("FB AUTH", "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-//                            updateUI(user);
+//                            updateUI(user); // Successful login
                         } else {
                             // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInWithCredential:failure", task.getException());
+                            Log.w("FB AUTH", "signInWithCredential:failure", task.getException());
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
 //                            updateUI(null);
@@ -247,7 +247,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     // [END auth_with_google]
 
     public void login() {
-        Log.d(TAG, "Login");
+        Log.d("FB AUTH", "Login");
 
         if (!validate()) {
             onLoginFailed();
