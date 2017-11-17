@@ -156,7 +156,8 @@ public class AllEventListActivity extends Fragment {
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         String userID = mAuth.getCurrentUser().getUid().toString();
         for(Event event: FoodDataManager.events){
-            if(event.userID == userID){
+
+            if( event.userID.equals(userID)){
                 events.add(event);
             }
         }
