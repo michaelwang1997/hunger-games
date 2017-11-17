@@ -1,19 +1,22 @@
 package com.example.tom_h.hungergames;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+import android.app.AlertDialog;
 
 import com.example.tom_h.hungergames.dummy.DummyContentAllEvents;
-import com.example.tom_h.hungergames.dummy.DummyItem;
 import com.example.tom_h.hungergames.dummy.DummyContentMyEvents;
+import com.example.tom_h.hungergames.dummy.DummyItem;
 
 /**
  * A fragment representing a list of Items.
@@ -31,6 +34,8 @@ public class AllEventListActivity extends Fragment {
     public boolean isMyEvents;
     public Context cntx = this.getContext();
     private OnListFragmentInteractionListener mListener;
+    private MyItemRecyclerViewAdapter adapter;
+
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -71,17 +76,40 @@ public class AllEventListActivity extends Fragment {
             if (view instanceof RecyclerView) {
                 Context context = view.getContext();
                 RecyclerView recyclerView = (RecyclerView) view;
-                if (mColumnCount <= 1) {
-                    recyclerView.setLayoutManager(new LinearLayoutManager(context));
-                } else {
-                    recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-                }
+                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
+
                 // TODO: This is where you feed in data, and provide differences between my events and all events pages
                 if (!isMyEvents) {
-                    recyclerView.setAdapter(new MyItemRecyclerViewAdapter(this.getContext(), DummyContentAllEvents.AllEvents, mListener, isMyEvents));
-                }
-                else{
-                    recyclerView.setAdapter(new MyItemRecyclerViewAdapter(this.getContext(), DummyContentMyEvents.MyEvents, mListener, isMyEvents));
+                    adapter = new MyItemRecyclerViewAdapter(this.getContext(), DummyContentAllEvents.AllEvents, mListener, isMyEvents);
+                    recyclerView.setAdapter(adapter);
+                } else {
+                    adapter = new MyItemRecyclerViewAdapter(this.getContext(), DummyContentMyEvents.MyEvents, mListener, isMyEvents);
+                    recyclerView.setAdapter(adapter);
+                    ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+                        @Override
+                        public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                            return false;
+                        }
+                        @Override
+                        public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
+                            // Remove item from backing list here
+                            final RecyclerView.ViewHolder v = viewHolder;
+                            new AlertDialog.Builder(getContext())
+                                    .setTitle("Close your event?")
+                                    .setMessage("Do you really want to close this event? You cannot undo this action.")
+                                    .setIcon(android.R.drawable.ic_dialog_alert)
+                                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int whichButton) {
+                                            Toast.makeText(getContext(), "Closing Event " +  v.getAdapterPosition(), Toast.LENGTH_SHORT).show();
+                                            DummyContentMyEvents.MyEvents.remove(v.getAdapterPosition());
+                                            adapter.notifyDataSetChanged();
+                                        }})
+                                    .setNegativeButton(android.R.string.no, null).show();
+                            adapter.notifyDataSetChanged();
+                        }
+
+                    });
+                    itemTouchHelper.attachToRecyclerView(recyclerView);
                 }
             }
         }

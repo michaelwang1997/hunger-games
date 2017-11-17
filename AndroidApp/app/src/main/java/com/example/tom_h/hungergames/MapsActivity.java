@@ -11,6 +11,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.widget.Toast;
 
+import com.firebase.geofire.GeoFire;
+import com.firebase.geofire.GeoLocation;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -24,6 +26,9 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MapsActivity extends SupportMapFragment
         implements OnMapReadyCallback,
@@ -34,7 +39,7 @@ public class MapsActivity extends SupportMapFragment
     GoogleMap mGoogleMap;
     LocationRequest mLocationRequest;
     GoogleApiClient mGoogleApiClient;
-    public static Location mLastLocation;
+    Location mLastLocation;
     Marker mCurrLocationMarker;
 
     @Override
@@ -131,6 +136,17 @@ public class MapsActivity extends SupportMapFragment
         //move map camera
         mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,17));
 
+        //get current user location
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("eventsAvailable");
+
+        GeoFire geoFire = new GeoFire(ref);
+        geoFire.setLocation(userId, new GeoLocation(location.getLatitude(), location.getLongitude()));
+
+
+
+
+
     }
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
@@ -204,5 +220,18 @@ public class MapsActivity extends SupportMapFragment
             // permissions this app might request
         }
     }
+
+    @Override
+    public void onStop(){
+        super.onStop();
+        //get current user location
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("eventsAvailable");
+
+        GeoFire geoFire = new GeoFire(ref);
+        geoFire.removeLocation(userId);
+
+    }
+
 
 }
