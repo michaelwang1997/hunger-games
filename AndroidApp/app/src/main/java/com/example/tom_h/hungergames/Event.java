@@ -2,21 +2,30 @@ package com.example.tom_h.hungergames;
 
 import android.location.Location;
 
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.IgnoreExtraProperties;
+
 import java.sql.Time;
 import java.util.Date;
+import java.util.Random;
 
+@IgnoreExtraProperties
 public class Event {
 
 
-    private Location location;
+    //public Location location;
 
-    private String title;
-    private String description;
-    private String room;
-    private String category;
-    private String quantity;
+    public String title;
+    public String description;
+    public String room;
+    public String category;
+    public String quantity;
 
-    private Date createTime;
+    //public Date createTime;
+
+    //public FirebaseUser owner;
+
+    public final int ID = new Random().nextInt(900000)+100000;
 
     //private UNKNOWNTYPE owner;
 
@@ -31,16 +40,20 @@ public class Event {
             Location eventLocation = new Location(MapsActivity.mLastLocation);
      */
 
+    public Event(){
+        //firebase needs an empty constructor
+    }
+
     public Event(Location location,String category,String quantity ,String title, String description,String room, Date createTime){
 
-        this.location = location;
+        //this.location = location;
         this.title = title;
         this.description = description;
         this.room = room;
         this.category = category;
-        this.createTime = createTime;
+        //this.createTime = createTime;
         this.quantity = quantity;
-
+        //this.owner = LoginActivity.firebaseUser;
 
     }
 

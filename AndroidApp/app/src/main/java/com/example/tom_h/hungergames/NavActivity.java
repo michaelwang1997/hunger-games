@@ -22,7 +22,7 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
     MapsActivity mapFragment;
     CreateEvent createEvent;
     Fragment allEventListActivity;
-
+    public static FoodDataManager foodDataManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +34,7 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
         mapFragment = new MapsActivity();
         fragmentTransaction.replace(R.id.nav, mapFragment);
         fragmentTransaction.commit();
+        foodDataManager = new FoodDataManager();
 
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);

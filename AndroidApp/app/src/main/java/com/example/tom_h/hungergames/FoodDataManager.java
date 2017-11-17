@@ -11,22 +11,31 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-//
-//public class FoodDataManager extends AppCompatActivity {
-//
-//    private FirebaseDatabase database;
-//    private DatabaseReference mDatabase;
-//    private DatabaseReference eventsRef;
-//    public FoodDataManager(){
-//
-//    }
-//
-//    @Override
-//    public void onCreate(Bundle savedInstanceState){
-//        super.onCreate(savedInstanceState);
-//        database = FirebaseDatabase.getInstance();
-//        mDatabase = database.getReference();
-//        //write to database
+
+public class FoodDataManager extends AppCompatActivity {
+
+    public FirebaseDatabase database;
+    public DatabaseReference mDatabase;
+    public DatabaseReference eventsRef;
+    public FoodDataManager(){
+
+    }
+
+
+    public void createEvent(Event event){
+        Log.d("create Event", "Creating an Event");
+        Log.d("create Event", "what is " + event.title);
+        database = FirebaseDatabase.getInstance();
+        mDatabase = database.getReference();
+        mDatabase.child("events").child(Integer.toString(event.ID)).setValue(event);
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        database = FirebaseDatabase.getInstance();
+        mDatabase = database.getReference();
+        //write to database
 //        mDatabase.child("events").child("EventID").setValue(CHILDEVENT);
 //        //YOu update event in the following mannor:
 //        //mDatabase.child("users").child(userId).child("username").setValue(name);
@@ -36,7 +45,7 @@ import com.google.firebase.database.ValueEventListener;
 //        ChildEventListener childEventListener = new ChildEventListener() {
 //            @Override
 //            public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
-//                Log.d(TAG, "onChildAdded:" + dataSnapshot.getKey());
+//                Log.d("DATABASE", "onChildAdded:" + dataSnapshot.getKey());
 //
 //                // A new comment has been added, add it to the displayed list
 //                //Comment comment = dataSnapshot.getValue(Comment.class);
@@ -46,7 +55,7 @@ import com.google.firebase.database.ValueEventListener;
 //
 //            @Override
 //            public void onChildChanged(DataSnapshot dataSnapshot, String previousChildName) {
-//                Log.d(TAG, "onChildChanged:" + dataSnapshot.getKey());
+//                Log.d("DATABASE", "onChildChanged:" + dataSnapshot.getKey());
 //
 //                // A comment has changed, use the key to determine if we are displaying this
 //                // comment and if so displayed the changed comment.
@@ -58,7 +67,7 @@ import com.google.firebase.database.ValueEventListener;
 //
 //            @Override
 //            public void onChildRemoved(DataSnapshot dataSnapshot) {
-//                Log.d(TAG, "onChildRemoved:" + dataSnapshot.getKey());
+//                Log.d("DATABASE", "onChildRemoved:" + dataSnapshot.getKey());
 //
 //                // A comment has changed, use the key to determine if we are displaying this
 //                // comment and if so remove it.
@@ -67,26 +76,26 @@ import com.google.firebase.database.ValueEventListener;
 //                // ...
 //            }
 //        };
+
+//        mDatabase.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                // This method is called once with the initial value and again
+//                // whenever data at this location is updated.
+//                String value = dataSnapshot.getValue(String.class);
+//                Log.d("TAG", "Value is: " + value);
+//            }
 //
-////        mDatabase.addValueEventListener(new ValueEventListener() {
-////            @Override
-////            public void onDataChange(DataSnapshot dataSnapshot) {
-////                // This method is called once with the initial value and again
-////                // whenever data at this location is updated.
-////                String value = dataSnapshot.getValue(String.class);
-////                Log.d("TAG", "Value is: " + value);
-////            }
-////
-////            @Override
-////            public void onCancelled(DatabaseError error) {
-////                // Failed to read value
-////                Log.w("TAG", "Failed to read value.", error.toException());
-////            }
-////        });
-////    }
-//
-//
-//
-//
-//
-//}
+//            @Override
+//            public void onCancelled(DatabaseError error) {
+//                // Failed to read value
+//                Log.w("TAG", "Failed to read value.", error.toException());
+//            }
+//        });
+    }
+
+
+
+
+
+}
