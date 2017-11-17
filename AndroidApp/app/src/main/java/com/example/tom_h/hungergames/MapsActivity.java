@@ -30,6 +30,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class MapsActivity extends SupportMapFragment
@@ -43,6 +45,8 @@ public class MapsActivity extends SupportMapFragment
     GoogleApiClient mGoogleApiClient;
     public static Location mLastLocation;
     Marker mCurrLocationMarker;
+
+    private List<Marker> markers = new ArrayList();
 
     @Override
     public void onResume() {
@@ -250,16 +254,17 @@ public class MapsActivity extends SupportMapFragment
             String category = i.category;
             String quantity = i.quantity;
             LatLng latLng = new LatLng(i.latitude, i.longitude);
-            Marker newMarker = map.addMarker(new MarkerOptions()
+
+            i.setMarker(map.addMarker(new MarkerOptions()
                     .position(latLng)
                     .title(title)
                     .snippet("description: " + description +
                             "\nroom: " + room +
                             "\ncategory: " + category+
                             "\nquantity: " + quantity)
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))));
 
-            i.setMarker(newMarker);
+
 
 
 
