@@ -38,7 +38,7 @@
  
 #### Artifacts    
    
- * The primary artifact we have produced in order to organize our team is Github Projects, which is Github's integrated version of Trello boards. Team members will be assigned the appropriate tasks by the product manager on an ongoing basis, meaning the front-end and back-end team will have seperate responsibilities.  In order to keep track of what has been completed, the tasks will be closed upon completion. The prioritization of the tasks is determined by the individual teams within our group, depending on several factors such as the time remaining, the other teams progress, as well as dependencies.  
+ * The primary artifact we have produced in order to organize our team is Github Projects, which is Github's integrated version of Trello boards. Team members will be assigned the appropriate tasks by the product manager on an ongoing basis, meaning the front-end and back-end team will have seperate responsibilities.  In order to keep track of what has been completed, the tasks will be closed upon completion. The prioritization of the tasks is determined by the individual teams within our group, depending on several factors such as the time remaining, the progress of other teams, as well as dependencies.  
 
 #### Git / GitHub workflow
  
@@ -49,7 +49,7 @@
 
 #### Goals and tasks
  
- * The goal for this iteration is to have a functional user interface, as well as interactivity between our application and an external database. We aim to complete the core components of the application by the deadline, which consist of a navigation drawer, map, login page, create event page, my events page, all events page and settings page. The user should be able to enter data, have it stored in a database, populate the map, and view the entered data on the my events and all events pages. The user should also be able to declare their interest in events within their proximity. In order to achieve these goals, the front-end and back-end teams will work towards a common objective, yet take on distinct roles and coordinate at frequent intervals to ensure the components are compatible. By partitioning the workload this way, we will be able to make steady progress leading up to the deadline. 
+ * The goal for this iteration is to have a functional user interface, as well as interactivity between our application and an external database. We aim to complete the core components of the application by the deadline, which consist of a navigation drawer, map, "Login" page, "Create Event" page, "My Events" page, and "All Events" page. The user should be able to enter data, have it stored in a database, populate the map, and view the entered data on the my events and all events pages. The user should also be able to declare their interest in events within their proximity. In order to achieve these goals, the front-end and back-end teams will work towards a common objective, yet take on distinct roles and coordinate at frequent intervals to ensure the components are compatible. By partitioning the workload this way, we will be able to make steady progress leading up to the deadline. 
  
 #### Artifacts
    
