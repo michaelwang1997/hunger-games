@@ -35,6 +35,13 @@ public class Event {
         this.marker = marker;
     }
 
+    public void removeMarker(){
+            marker.remove();
+
+
+
+    }
+
     //public FirebaseUser owner;
 
     public final int ID = new Random().nextInt(900000)+100000;

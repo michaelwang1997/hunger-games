@@ -79,6 +79,13 @@ public class FoodDataManager extends AppCompatActivity {
                 // A comment has changed, use the key to determine if we are displaying this
                 // comment and if so remove it.
                 //String commentKey = dataSnapshot.getKey();
+                Event event = dataSnapshot.getValue(Event.class);
+                for (Event i: events){
+                    if(i.ID == event.ID){
+                        i.removeMarker();
+                    }
+
+                }
                 events.remove(dataSnapshot.getValue(Event.class));
                 // ...
             }
