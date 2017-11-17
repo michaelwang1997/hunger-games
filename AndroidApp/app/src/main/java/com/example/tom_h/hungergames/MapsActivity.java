@@ -130,6 +130,7 @@ public class MapsActivity extends SupportMapFragment
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
         markerOptions.title("Current Position");
+        markerOptions.snippet("Hi");
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
         mCurrLocationMarker = mGoogleMap.addMarker(markerOptions);
 

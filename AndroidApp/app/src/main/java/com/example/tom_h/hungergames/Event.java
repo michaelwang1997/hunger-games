@@ -13,7 +13,7 @@ import java.util.Random;
 public class Event {
 
 
-    public Location location;
+    //public Location location;
 
     public String title;
     public String description;
@@ -46,7 +46,7 @@ public class Event {
 
     public Event(Location location,String category,String quantity ,String title, String description,String room, Date createTime){
 
-        this.location = location;
+       // this.location = location;
         this.title = title;
         this.description = description;
         this.room = room;

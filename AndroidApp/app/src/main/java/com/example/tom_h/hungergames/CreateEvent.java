@@ -102,13 +102,30 @@ public class CreateEvent extends Fragment implements View.OnClickListener{
     }
 
     public void submit(){
+
+        if(_eventName.getText() == null || _description.getText() == null
+                    || _room.getText() == null || _category.getSelectedItem() == null
+                || _quantity.getSelectedItem() == null
+                )
+        {
+            //tell the user they forgot to fill in info.
+            //for now we just return nothing
+
+
+            return;
+        }
         String title = _eventName.getText().toString();
         String description = _description.getText().toString();
         String room = _room.getText().toString();
         String category = _category.getSelectedItem().toString();
         String quantity = _quantity.getSelectedItem().toString();
+//        Intent i = new Intent(this, NavActivity.class);
+//        startActivity(i);
+        Location eventLocation = null;
+        if(MapsActivity.mLastLocation != null){
+            eventLocation = new Location(MapsActivity.mLastLocation);
+        }
 
-        Location eventLocation = new Location(MapsActivity.mLastLocation);
 
         Date time  = Calendar.getInstance().getTime();
         Event event = new Event(eventLocation,category,quantity,title,description,room,time);
