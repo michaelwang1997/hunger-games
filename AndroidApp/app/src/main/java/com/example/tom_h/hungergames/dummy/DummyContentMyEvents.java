@@ -21,6 +21,12 @@ public class DummyContentMyEvents {
                 "40 St George St",
                 "There are lots of cheeseburgers at 2270! Come get them before they run out!");
 
+        DummyItem burger1 = new DummyItem("@drawable/burger",
+                "CSSU Pub Event", "Feeds: 3-5",
+                "40 St George St",
+                "There are lots of cheeseburgers at 2270! Come get them before they run out!");
+
         MyEvents.add(burger);
+        MyEvents.add(burger1);
     }
 }
