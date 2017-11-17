@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.example.tom_h.hungergames.dummy.User;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -46,6 +47,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private TextView mStatusTextView;
     private TextView mDetailTextView;
     public static FirebaseUser firebaseUser;
+
 
     @Bind(R.id.input_email)
     EditText _emailText;
@@ -217,6 +219,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     public void onLoginSuccess() {
         _loginButton.setEnabled(true);
+        User.writeNewUser();
         finish();
     }
 
