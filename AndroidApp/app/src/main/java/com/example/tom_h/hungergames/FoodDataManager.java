@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -17,12 +18,13 @@ public class FoodDataManager extends AppCompatActivity {
     public FirebaseDatabase database;
     public DatabaseReference mDatabase;
     public DatabaseReference eventsRef;
+    private String username;
+    private String email;
     public FoodDataManager(){
 
     }
 
-
-    public void createEvent(Event event){
+    public void createEvent(Event event) {
         Log.d("create Event", "Creating an Event");
         Log.d("create Event", "what is " + event.title);
         database = FirebaseDatabase.getInstance();
@@ -30,11 +32,27 @@ public class FoodDataManager extends AppCompatActivity {
         mDatabase.child("events").child(Integer.toString(event.ID)).setValue(event);
     }
 
+    public FoodDataManager(String username, String email) {
+        this.username = username;
+        this.email = email;
+    }
+
+    public void writeNewUser() {
+        private FirebaseAuth auth;
+        auth = FirebaseAuth.getInstance();
+        FoodDataManager user = new FoodDataManager(auth.getCurrentUser().getDisplayName(), auth.getCurrentUser().getEmail());
+
+        mDatabase.child("users").child(userId).setValue(user);
+    }
+
+
+
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         database = FirebaseDatabase.getInstance();
         mDatabase = database.getReference();
+        writeNewUser();
         //write to database
 //        mDatabase.child("events").child("EventID").setValue(CHILDEVENT);
 //        //YOu update event in the following mannor:
