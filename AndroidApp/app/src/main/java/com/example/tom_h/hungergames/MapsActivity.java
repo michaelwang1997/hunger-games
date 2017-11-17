@@ -2,15 +2,19 @@ package com.example.tom_h.hungergames;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.location.Address;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.widget.Toast;
 
+import android.location.Geocoder;
 import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
 import com.google.android.gms.common.ConnectionResult;
@@ -30,8 +34,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class MapsActivity extends SupportMapFragment
         implements OnMapReadyCallback,
@@ -44,6 +50,7 @@ public class MapsActivity extends SupportMapFragment
     GoogleApiClient mGoogleApiClient;
     public static Location mLastLocation;
     Marker mCurrLocationMarker;
+
 
     private List<Marker> markers = new ArrayList();
 
@@ -247,21 +254,58 @@ public class MapsActivity extends SupportMapFragment
     }
 
     public void createMarker(GoogleMap map){
+        Geocoder geocoder = new Geocoder(this.getContext(), Locale.getDefault() );
+
         for (Event i: FoodDataManager.events){
             String title = i.title;
-            String description = i.description;
-            String room = i.room;
+//            String description = i.description;
+//            String room = i.room;
             String category = i.category;
             String quantity = i.quantity;
             LatLng latLng = new LatLng(i.latitude, i.longitude);
+            List<Address> addresses = null;
+
+
+            try {
+
+                addresses = geocoder.getFromLocation(
+                        i.latitude, i.longitude,
+                        // In this sample, get just a single address.
+                        1);
+            } catch (IOException ioException) {
+
+                // Catch network or other I/O problems.
+//                String errorMessage = getString(R.string.service_not_available);
+//                Log.e(TAG, errorMessage, ioException);
+            } catch (IllegalArgumentException illegalArgumentException) {
+                // Catch invalid latitude or longitude values.
+//                String errorMessage = getString(R.string.invalid_lat_long_used);
+//                Log.e(TAG, errorMessage + ". " +
+//                        "Latitude = " + i.latitude +
+//                        ", Longitude = " +
+//                        i.longitude, illegalArgumentException);
+            }
+
+            // Handle case where no address was found.
+            String address = "";
+            if (addresses == null || addresses.size()  == 0) {
+//                if (errorMessage.isEmpty()) {
+//                    errorMessage = getString(R.string.no_address_found);
+//                    Log.e(TAG, errorMessage);
+//                }
+//                deliverResultToReceiver(Constants.FAILURE_RESULT, errorMessage);
+            }
+
+            else{
+                address = addresses.get(0).getAddressLine(0);
+            }
 
             i.setMarker(map.addMarker(new MarkerOptions()
                     .position(latLng)
                     .title(title)
-                    .snippet("description: " + description +
-                            "\nroom: " + room +
-                            "\ncategory: " + category+
-                            "\nquantity: " + quantity)
+                    .snippet("category: " + category +
+                            "\nquantity: " + quantity +
+                            "\n address: " + address)
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))));
 
 
