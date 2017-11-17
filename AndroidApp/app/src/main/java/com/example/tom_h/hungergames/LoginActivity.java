@@ -45,6 +45,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private GoogleSignInClient mGoogleSignInClient;
     private TextView mStatusTextView;
     private TextView mDetailTextView;
+    public static FirebaseUser firebaseUser;
 
     @Bind(R.id.input_email)
     EditText _emailText;
@@ -149,7 +150,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("FB AUTH", "signInWithCredential:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
+                            firebaseUser = mAuth.getCurrentUser();
 
                             Intent i = new Intent(getApplicationContext(), NavActivity.class);
                             startActivity(i);
