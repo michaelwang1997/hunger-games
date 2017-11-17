@@ -1,6 +1,7 @@
 package com.example.tom_h.hungergames;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+import android.app.AlertDialog;
 
 import com.example.tom_h.hungergames.dummy.DummyContentAllEvents;
 import com.example.tom_h.hungergames.dummy.DummyContentMyEvents;
@@ -91,8 +93,18 @@ public class AllEventListActivity extends Fragment {
                         @Override
                         public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
                             // Remove item from backing list here
-                            Toast.makeText(getContext(), "Closing Event " +  viewHolder.getAdapterPosition(), Toast.LENGTH_SHORT).show();
-                            DummyContentMyEvents.MyEvents.remove(viewHolder.getAdapterPosition());
+                            final RecyclerView.ViewHolder v = viewHolder;
+                            new AlertDialog.Builder(getContext())
+                                    .setTitle("Close your event?")
+                                    .setMessage("Do you really want to close this event? You cannot undo this action.")
+                                    .setIcon(android.R.drawable.ic_dialog_alert)
+                                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int whichButton) {
+                                            Toast.makeText(getContext(), "Closing Event " +  v.getAdapterPosition(), Toast.LENGTH_SHORT).show();
+                                            DummyContentMyEvents.MyEvents.remove(v.getAdapterPosition());
+                                            adapter.notifyDataSetChanged();
+                                        }})
+                                    .setNegativeButton(android.R.string.no, null).show();
                             adapter.notifyDataSetChanged();
                         }
 
