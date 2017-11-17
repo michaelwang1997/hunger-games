@@ -39,7 +39,7 @@ public class MapsActivity extends SupportMapFragment
     GoogleMap mGoogleMap;
     LocationRequest mLocationRequest;
     GoogleApiClient mGoogleApiClient;
-    Location mLastLocation;
+    public static Location mLastLocation;
     Marker mCurrLocationMarker;
 
     @Override
