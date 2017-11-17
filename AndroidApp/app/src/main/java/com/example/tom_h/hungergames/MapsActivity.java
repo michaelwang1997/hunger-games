@@ -87,6 +87,12 @@ public class MapsActivity extends SupportMapFragment
             buildGoogleApiClient();
             mGoogleMap.setMyLocationEnabled(true);
         }
+
+        createMarker(mGoogleMap);
+
+
+
+
     }
 
     protected synchronized void buildGoogleApiClient() {
@@ -232,6 +238,30 @@ public class MapsActivity extends SupportMapFragment
         GeoFire geoFire = new GeoFire(ref);
         geoFire.removeLocation(userId);
 
+    }
+
+    public void createMarker(GoogleMap map){
+        for (Event i: FoodDataManager.events){
+            String title = i.title;
+            String description = i.description;
+            String room = i.room;
+            String category = i.category;
+            String quantity = i.quantity;
+            map.addMarker(new MarkerOptions()
+
+                    .title(title)
+                    .snippet("description: " + description +
+                            "\nroom: " + room +
+                            "\ncategory: " + category+
+                            "\nquantity: " + quantity)
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+
+
+
+
+
+
+        }
     }
 
 
