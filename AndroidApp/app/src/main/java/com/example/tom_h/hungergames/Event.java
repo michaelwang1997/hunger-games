@@ -2,10 +2,6 @@ package com.example.tom_h.hungergames;
 
 import java.sql.Time;
 
-/**
- * Created by Tom-H on 11/13/2017.
- */
-
 public class Event {
 
 

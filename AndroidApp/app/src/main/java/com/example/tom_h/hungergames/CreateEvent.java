@@ -9,7 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import butterknife.Bind;
@@ -19,7 +22,7 @@ import butterknife.Bind;
  *
  */
 
-public class CreateEvent extends Fragment {
+public class CreateEvent extends Fragment implements View.OnClickListener{
 
     private int PICK_IMAGE = 100;
 
@@ -30,8 +33,31 @@ public class CreateEvent extends Fragment {
 
     Button submit;
 
-    @Bind(R.id.picture)
-    ImageView _createPicture;
+//    @Bind(R.id.picture)
+//    ImageView _createPicture;
+
+//    @Bind(R.id.event_location)
+//    Button _loginButton;
+
+    @Bind(R.id.event_name)
+    EditText _eventName;
+
+    @Bind(R.id.event_description)
+    EditText _description;
+
+    @Bind(R.id.location)
+    EditText _room;
+
+    @Bind(R.id.category)
+    Spinner _passwordText;
+
+    @Bind(R.id.quantity)
+    Spinner _quantity;
+
+
+
+    @Bind(R.id.category)
+    Spinner _category;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -66,6 +92,21 @@ public class CreateEvent extends Fragment {
         if (resultCode == Activity.RESULT_OK && requestCode == PICK_IMAGE) {
             Uri imageUri = data.getData();
             image.setImageURI(imageUri);
+        }
+    }
+
+    public void submit(){
+        String title = findViewById(R.id.yourId);;
+
+        //Event event = new Event()
+    }
+
+    @Override
+    public void onClick(View v) {
+        int i = v.getId();
+        if (i == R.id.submit_button) {
+            submit();
+            //Submit the event
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.example.tom_h.hungergames;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -62,33 +63,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.splash_screen_login);
         ButterKnife.bind(this);
 
-//        // Views
-//        mStatusTextView = findViewById(R.id.status);
-//        mDetailTextView = findViewById(R.id.detail);
-//
-//        // Button listeners
-//        findViewById(R.id.sign_in_button).setOnClickListener(this);
-//        findViewById(R.id.sign_out_button).setOnClickListener(this);
-//        findViewById(R.id.disconnect_button).setOnClickListener(this);
-
-//        _loginButton.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//                login();
-//            }
-//        });
-//
-//        _signupLink.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//                // Start the Signup activity
-//                Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
-//                startActivityForResult(intent, REQUEST_SIGNUP);
-//            }
-//        });
-
         //FOr more info on google sign in: https://developers.google.com/identity/sign-in/android/sign-in
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
@@ -106,23 +80,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         //updateUI(account); //Update the UI based on return value of account
         findViewById(R.id.sign_in_button).setOnClickListener(this);
-//        SignInButton signInButton =  findViewById(R.id.sign_in_button);
-//        signInButton.setSize(SignInButton.SIZE_STANDARD);
-//        signInButton.setScopes(gso.getScopeArray());
-//        signInButton.setOnClickListener(this);
 
-//        GoogleSignIn.silentSignIn()
-//                .addOnCompleteListener(this, new OnCompleteListener<GoogleSignInAccount>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<GoogleSignInAccount> task) {
-//                        handleSignInResult(task);
-//                    }
-//                });
-
-        // This task is always completed immediately, there is no need to attach an
-        // asynchronous listener.
-//        Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-//        handleSignInResult(task);
     }
 
     @Override
@@ -130,10 +88,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         int i = v.getId();
         if (i == R.id.sign_in_button) {
             signIn();
-//        } else if (i == R.id.sign_out_button) {
-//            signOut();
-//        } else if (i == R.id.disconnect_button) {
-//            revokeAccess();
         }
     }
 
@@ -173,45 +127,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
                 Log.w("FB AUTH", "Google sign in failed", e);
-                // [START_EXCLUDE]
-//                updateUI(null);
-                // [END_EXCLUDE]
+
             }
         }
     }
-//    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
-//        try {
-//            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-//            String idToken = account.getIdToken();
-//
-//            // send ID Token to server and validate
-//            HttpClient httpClient = new DefaultHttpClient();
-//            HttpPost httpPost = new HttpPost("https://yourbackend.example.com/tokensignin");
-//
-//            try {
-//                List nameValuePairs = new ArrayList(1);
-//                nameValuePairs.add(new BasicNameValuePair("idToken", idToken));
-//                httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-//
-//                HttpResponse response = httpClient.execute(httpPost);
-//                int statusCode = response.getStatusLine().getStatusCode();
-//                final String responseBody = EntityUtils.toString(response.getEntity());
-//                Log.i(TAG, "Signed in as: " + responseBody);
-//            } catch (ClientProtocolException e) {
-//                Log.e(TAG, "Error sending ID token to backend.", e);
-//            } catch (IOException e) {
-//                Log.e(TAG, "Error sending ID token to backend.", e);
-//            }
-//
-//            // Signed in successfully, show authenticated UI.
-//            //updateUI(account);
-//        } catch (ApiException e) {
-//            // The ApiException status code indicates the detailed failure reason.
-//            // Please refer to the GoogleSignInStatusCodes class reference for more information.
-//            Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
-//            //updateUI(null);
-//        }
-//    }
+
 
     // [START auth_with_google]
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
@@ -219,6 +139,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         // [START_EXCLUDE silent]
 //        showProgressDialog();
         // [END_EXCLUDE]
+        final Context mainContext = this;
 
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         mAuth.signInWithCredential(credential)
@@ -229,6 +150,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("FB AUTH", "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+
+                            Intent i = new Intent(getApplicationContext(), NavActivity.class);
+                            startActivity(i);
 //                            updateUI(user); // Successful login
                         } else {
                             // If sign in fails, display a message to the user.
@@ -238,9 +162,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //                            updateUI(null);
                         }
 
-                        // [START_EXCLUDE]
-//                        hideProgressDialog();
-                        // [END_EXCLUDE]
                     }
                 });
     }
@@ -262,8 +183,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         progressDialog.setMessage("Authenticating...");
         progressDialog.show();
 
-        String email = _emailText.getText().toString();
-        String password = _passwordText.getText().toString();
 
         // TODO: Implement your own authentication logic here.
 
@@ -278,18 +197,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }, 3000);
     }
 
-//
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        if (requestCode == REQUEST_SIGNUP) {
-//            if (resultCode == RESULT_OK) {
-//
-//                // TODO: Implement successful signup logic here
-//                // By default we just finish the Activity and log them in automatically
-//                this.finish();
-//            }
-//        }
-//    }
 
     // [START on_start_check_user]
     @Override
@@ -354,22 +261,5 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     }
                 });
     }
-
-//    private void updateUI(FirebaseUser user) {
-//        //hideProgressDialog();
-//        if (user != null) {     //the user has not yet signed in to the app with Google.
-//           // mStatusTextView.setText(getString(R.string.google_status_fmt, user.getEmail()));
-//            //mDetailTextView.setText(getString(R.string.firebase_status_fmt, user.getUid()));
-//
-//            //findViewById(R.id.sign_in_button).setVisibility(View.GONE);
-//            //findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
-//        } else {    //the user has already signed in to the app with Google
-//            //mStatusTextView.setText(R.string.signed_out);
-//            //mDetailTextView.setText(null);
-//
-//            //findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
-//            //findViewById(R.id.sign_out_and_disconnect).setVisibility(View.GONE);
-//        }
-//    }
 
 }
