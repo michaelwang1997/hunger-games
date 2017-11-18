@@ -1,8 +1,13 @@
 package com.example.tom_h.hungergames;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -14,7 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class FoodDataManager extends AppCompatActivity {
+//this shouldn't extend from AppCOmpatACtivity TODO: this comment
+public class FoodDataManager {
 
     public FirebaseDatabase database;
     public DatabaseReference mDatabase;
@@ -30,6 +36,38 @@ public class FoodDataManager extends AppCompatActivity {
 
     }
 
+
+    public void CreateNotification(Event event) {
+
+//Get an instance of NotificationManager//
+        try{
+
+            Notification.Builder mBuilder =
+                    new Notification.Builder(NavActivity.navContext)
+                            .setSmallIcon(R.mipmap.notification_icon)
+                            .setContentTitle(event.title.toString())
+                            .setVibrate(new long[] { 1000, 1000, 1000, 1000, 1000 })
+                            .setContentText(event.description.toString());
+
+
+            // Gets an instance of the NotificationManager service//
+
+            NotificationManager mNotificationManager =
+
+                    (NotificationManager) NavActivity.navContext.getSystemService(NavActivity.navContext.NOTIFICATION_SERVICE);
+
+//When you issue multiple notifications about the same type of event, it’s best practice for your app to try to update an existing notification with this new information, rather than immediately creating a new notification. If you want to update this notification at a later date, you need to assign it an ID. You can then use this ID whenever you issue a subsequent notification. If the previous notification is still visible, the system will update this existing notification, rather than create a new one. In this example, the notification’s ID is 001//
+
+            //NotificationManager.notify().
+
+            mNotificationManager.notify(001, mBuilder.build());
+        }
+        catch(Exception e){
+            Log.d("EXCEPTION e", "Exceptop e : "+ e.toString());
+        }
+
+
+    }
 
     public FoodDataManager(){
         //super.onCreate(savedInstanceState);
@@ -47,7 +85,9 @@ public class FoodDataManager extends AppCompatActivity {
             public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
                 Log.d("DATABASE", "onChildAdded:" + dataSnapshot.getKey());
                 Log.d("DATABASE", "onChildAdded:" + dataSnapshot.getValue());
-                events.add(dataSnapshot.getValue(Event.class));
+                Event event = dataSnapshot.getValue(Event.class);
+                CreateNotification(event);
+                events.add(event);
 
                 // A new comment has been added, add it to the displayed list
                 //Comment comment = dataSnapshot.getValue(Comment.class);
@@ -104,7 +144,7 @@ public class FoodDataManager extends AppCompatActivity {
     }
 //    @Override
 //    public void onCreate(Bundle savedInstanceState){
-//        super.onCreate(savedInstanceState);
+//        //super.onCreate(savedInstanceState);
 //        database = FirebaseDatabase.getInstance();
 //        mDatabase = database.getReference();
 //        //write to database
@@ -113,13 +153,16 @@ public class FoodDataManager extends AppCompatActivity {
 ////        //mDatabase.child("users").child(userId).child("username").setValue(name);
 ////        mDatabase.setValue("Hello, world"); //basic setValue
 ////        // Read from the database
-//        eventsRef = database.getReference();
+//        eventsRef = database.getReference("events");
 //        ChildEventListener childEventListener = new ChildEventListener() {
 //            @Override
 //            public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
 //                Log.d("DATABASE", "onChildAdded:" + dataSnapshot.getKey());
 //                Log.d("DATABASE", "onChildAdded:" + dataSnapshot.getValue());
-//                events.add(dataSnapshot.getValue(Event.class));
+//                Event event = dataSnapshot.getValue(Event.class);
+//                CreateNotification(event);
+//                events.add(event);
+//
 //                // A new comment has been added, add it to the displayed list
 //                //Comment comment = dataSnapshot.getValue(Comment.class);
 //
@@ -150,6 +193,13 @@ public class FoodDataManager extends AppCompatActivity {
 //                // A comment has changed, use the key to determine if we are displaying this
 //                // comment and if so remove it.
 //                //String commentKey = dataSnapshot.getKey();
+//                Event event = dataSnapshot.getValue(Event.class);
+//                for (Event i: events){
+//                    if(i.ID == event.ID){
+//                        i.removeMarker();
+//                    }
+//
+//                }
 //                events.remove(dataSnapshot.getValue(Event.class));
 //                // ...
 //            }
@@ -165,22 +215,6 @@ public class FoodDataManager extends AppCompatActivity {
 //            }
 //        };
 //        eventsRef.addChildEventListener(childEventListener);
-//
-////        mDatabase.addValueEventListener(new ValueEventListener() {
-////            @Override
-////            public void onDataChange(DataSnapshot dataSnapshot) {
-////                // This method is called once with the initial value and again
-////                // whenever data at this location is updated.
-////                String value = dataSnapshot.getValue(String.class);
-////                Log.d("TAG", "Value is: " + value);
-////            }
-////
-////            @Override
-////            public void onCancelled(DatabaseError error) {
-////                // Failed to read value
-////                Log.w("TAG", "Failed to read value.", error.toException());
-////            }
-////        });
 //    }
 
     public void deleteEvent(String eventID) {
