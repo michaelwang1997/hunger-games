@@ -1,5 +1,6 @@
 package com.example.tom_h.hungergames;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -23,11 +24,15 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
     CreateEvent createEvent;
     Fragment allEventListActivity;
     public static FoodDataManager foodDataManager;
+    public static Context navContext;
+    public static String NOTIFICATION_SERVICE;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        navContext = this;
+        NOTIFICATION_SERVICE = navContext.NOTIFICATION_SERVICE;
         setSupportActionBar(toolbar);
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
