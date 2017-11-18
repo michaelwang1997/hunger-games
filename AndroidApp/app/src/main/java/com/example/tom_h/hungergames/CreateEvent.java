@@ -98,8 +98,8 @@ public class CreateEvent extends Fragment implements View.OnClickListener{
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK && requestCode == PICK_IMAGE) {
-            //Uri imageUri = data.getData();
-            //image.setImageURI(imageUri);
+            Uri imageUri = data.getData();
+            image.setImageURI(imageUri);
         }
     }
 
