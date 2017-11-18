@@ -34,7 +34,9 @@
 
 #### Events
 
- * We aim to hold weekly group meetings to share individual updates and synchronize the progress made by the front-end and back-end teams. The meetings will be held in person in the Bahen Centre for Information Technology, where all team members will be expected to show up. In addition, the individual teams will organize more frequent meetings which will consist of coding sessions. These will take place on a consistent basis throughout the weeks leading up to the deadline, subject to the availability of each team member. Online communications will remain on Slack, where trivial discussions, queries and updates will be shared.
+* Weekly in-person group meetings at the Bahen Centre for Information Technology. All members attendance mandatory. To ensure all teams are on the same page and make merging as well as integration easier.
+* Frequent team meetings for back-end and front-end teams which will consist of both in person (based on availability) and online discussions via Slack. These will be take place during coding sessions. While setting coding sessions each respective team will try to accommodate the maximum number of available members.
+* Channel on Slack made for high level updates as well as trivial discussion and queries.
  
 #### Artifacts    
    
@@ -49,7 +51,10 @@
 
 #### Goals and tasks
  
- * The goal for this iteration is to have a functional user interface, as well as interactivity between our application and an external database. We aim to complete the core components of the application by the deadline, which consist of a navigation drawer, map, "Login" page, "Create Event" page, "My Events" page, and "All Events" page. The user should be able to enter data, have it stored in a database, populate the map, and view the entered data on the my events and all events pages. The user should also be able to declare their interest in events within their proximity. In order to achieve these goals, the front-end and back-end teams will work towards a common objective, yet take on distinct roles and coordinate at frequent intervals to ensure the components are compatible. By partitioning the workload this way, we will be able to make steady progress leading up to the deadline. 
+ * The goal for this iteration is to have a functional user interface, as well as interactivity between our application and an external database. We aim to complete the core components of the application by the deadline, which consist of a navigation drawer, map, "Login" page, "Create Event" page, "My Events" page, and "All Events" page. The user should be able to enter data, have it stored in a database, populate the map, and view the entered data on the my events and all events pages. The user should also be able to declare their interest in events within their proximity. In order to achieve these goals, the front-end and back-end teams will work towards a common objective, yet take on distinct roles and coordinate at frequent intervals to ensure the components are compatible. By partitioning the workload this way, we will be able to make steady progress leading up to the deadline.
+* Front-end goals: The aim is to complete the core components of the application which includes of a navigation drawer, map, "Login" page, "Create Event" page, "My Events" page, and "All Events" page. As the layout of these pages does not rely on the back-end implementation this team can work on it separately and integrate it later.
+* Back-end goals: Set up a database, yet undecided which one, to store user information as well as any data such as events. The database will be used to populate the map with event markers as well as allow users to view events they created/all events. Notifications will currently be sent to all users but the plan is to implement targeted notifications by this iteration if possible but that feature will definitely be part of the MVP.
+* The mockup generated from the previous iteration will heavily influence which functions the backend implements as those are the ones users will have access to.
  
 #### Artifacts
    
