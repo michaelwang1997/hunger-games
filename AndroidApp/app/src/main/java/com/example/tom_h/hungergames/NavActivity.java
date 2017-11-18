@@ -154,6 +154,7 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
         } else if (id == R.id.logout) {
             FirebaseAuth mAuth = FirebaseAuth.getInstance();
             mAuth.signOut();
+            System.exit(0);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
