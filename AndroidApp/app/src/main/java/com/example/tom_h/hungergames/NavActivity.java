@@ -13,6 +13,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 
 public class NavActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
         AllEventListActivity.OnListFragmentInteractionListener {
@@ -144,6 +146,9 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
         } else if (id == R.id.settings) {
             // Insert code
 
+        } else if (id == R.id.logout) {
+            FirebaseAuth mAuth = FirebaseAuth.getInstance();
+            mAuth.signOut();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
