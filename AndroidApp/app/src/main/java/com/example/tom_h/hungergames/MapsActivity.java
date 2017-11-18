@@ -304,8 +304,9 @@ public class MapsActivity extends SupportMapFragment
                     .position(latLng)
                     .title(title)
                     .snippet("category: " + category +
-                            "\nquantity: " + quantity +
-                            "\n address: " + address)
+                                    "address: " + address+
+                            "quantity: " + quantity 
+                            )
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))));
 
 
