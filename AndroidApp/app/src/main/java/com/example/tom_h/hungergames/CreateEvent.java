@@ -66,18 +66,9 @@ public class CreateEvent extends Fragment implements View.OnClickListener{
 
         image = view.findViewById(R.id.picture);
         submit = view.findViewById(R.id.submit_button);
-        /*image.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent cameraIntent =
-                        new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(cameraIntent, CAMERA_REQUEST);
-            }
-        });*/
 
         submit.setOnClickListener(this);
         image.setOnClickListener(this);
-       // _submit.setOnClickListener(this);
         return view;
     }
 
