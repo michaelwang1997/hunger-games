@@ -2,6 +2,7 @@ package com.example.tom_h.hungergames;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.location.Address;
 import android.location.Location;
 import android.net.Uri;
@@ -33,34 +34,20 @@ import butterknife.Bind;
 
 public class CreateEvent extends Fragment implements View.OnClickListener{
 
-    private int PICK_IMAGE = 100;
-
-    MapsActivity mapFragment;
-    CreateEvent createEvent;
+    private int CAMERA_REQUEST = 100;
 
     ImageView image;
 
     Button submit;
 
-//    @Bind(R.id.picture)
-//    ImageView _createPicture;
-
-//    @Bind(R.id.event_location)
-//    Button _loginButton;
-
-    //@Bind(R.id.event_name_input)
     EditText _eventName;
 
-    //@Bind(R.id.event_description)
     EditText _description;
 
-    //@Bind(R.id.location)
     EditText _room;
 
-    //@Bind(R.id.category)
     Spinner _category;
 
-    //@Bind(R.id.quantity)
     Spinner _quantity;
 
 
@@ -79,27 +66,26 @@ public class CreateEvent extends Fragment implements View.OnClickListener{
 
         image = view.findViewById(R.id.picture);
         submit = view.findViewById(R.id.submit_button);
-        image.setOnClickListener(new View.OnClickListener() {
+        /*image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent gallery =
-                        new Intent(Intent.ACTION_PICK,
-                                android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-                startActivityForResult(gallery, PICK_IMAGE);
+                Intent cameraIntent =
+                        new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(cameraIntent, CAMERA_REQUEST);
             }
-        });
+        });*/
 
         submit.setOnClickListener(this);
+        image.setOnClickListener(this);
        // _submit.setOnClickListener(this);
         return view;
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK && requestCode == PICK_IMAGE) {
-            //Uri imageUri = data.getData();
-            //image.setImageURI(imageUri);
+        if (resultCode == Activity.RESULT_OK && requestCode == CAMERA_REQUEST) {
+            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            image.setImageBitmap(photo);
         }
     }
 
@@ -110,10 +96,7 @@ public class CreateEvent extends Fragment implements View.OnClickListener{
                 || _quantity.getSelectedItem() == null
                 )
         {
-            //tell the user they forgot to fill in info.
-            //for now we just return nothing
-
-
+            // TODO tell the user they forgot to fill in info. For now we just return nothing
             return;
         }
         String title = _eventName.getText().toString();
@@ -121,10 +104,9 @@ public class CreateEvent extends Fragment implements View.OnClickListener{
         String room = _room.getText().toString();
         String category = _category.getSelectedItem().toString();
         String quantity = _quantity.getSelectedItem().toString();
-//        Intent i = new Intent(this, NavActivity.class);
-//        startActivity(i);
         Location eventLocation = null;
-        if(MapsActivity.mLastLocation != null){
+
+        if (MapsActivity.mLastLocation != null) {
             eventLocation = new Location(MapsActivity.mLastLocation);
         }
 
@@ -136,30 +118,6 @@ public class CreateEvent extends Fragment implements View.OnClickListener{
 
         NavActivity.foodDataManager.createEvent(event);
     }
-    /*
-
-        @Bind(R.id.event_name)
-    EditText _eventName;
-
-    @Bind(R.id.event_description)
-    EditText _description;
-
-    @Bind(R.id.location)
-    EditText _room;
-
-    @Bind(R.id.category)
-    Spinner _passwordText;
-
-    @Bind(R.id.quantity)
-    Spinner _quantity;
-
-import java.util.Calendar
-
-Date currentTime = Calendar.getInstance().getTime();
-
-    @Bind(R.id.category)
-    Spinner _category;
-     */
 
     @Override
     public void onClick(View v) {
@@ -169,6 +127,10 @@ Date currentTime = Calendar.getInstance().getTime();
             Log.d("submit button", "submit button pressed");
             submit();
             //Submit the event
+        } else if (i == R.id.picture) {
+            Intent cameraIntent =
+                    new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(cameraIntent, CAMERA_REQUEST);
         }
     }
 }
