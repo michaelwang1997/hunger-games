@@ -3,6 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 26
     defaultConfig {
+        // This is the id of our app
         applicationId "com.example.tom_h.hungergames"
         minSdkVersion 15
         targetSdkVersion 26
@@ -31,15 +32,17 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:11.6.0'
     // Firebase Authentication
     implementation 'com.google.firebase:firebase-core:11.6.0'
-    implementation 'com.google.firebase:firebase-messaging:11.6.0'
     implementation 'com.google.firebase:firebase-auth:11.6.0'
     implementation 'com.google.firebase:firebase-database:11.6.0'
+    // Firebase Cloud Messaging
+    implementation 'com.google.firebase:firebase-messaging:11.6.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     compile "com.android.support:design:26.1.0"
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.google.android.gms:play-services-location:11.6.0'
+    compile 'com.google.android.gms:play-services-places:11.6.0'
     // Google Sign In SDK (only required for Google Sign In)
     compile 'com.google.android.gms:play-services-auth:11.6.0'
 }

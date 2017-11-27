@@ -4,9 +4,12 @@ package com.example.tom_h.hungergames;
  * Created by spratiman on 17-Nov-17.
  */
 
+import android.util.Log;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 public class User {
     public static FirebaseDatabase database;
@@ -34,6 +37,20 @@ public class User {
         User user = new User(mAuth.getCurrentUser().getDisplayName(), mAuth.getCurrentUser().getEmail());
 
         mDatabase.child("users").child(mAuth.getCurrentUser().getUid().toString()).setValue(user);
+
+        String TAG = "FireBaseIDService";
+        try {
+            String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+            Log.d(TAG, "Refreshed token: " + refreshedToken);
+            if(refreshedToken != null) {
+//              SettingPreferences.setStringValueInPref(this, SettingPreferences.REG_ID, refreshedToken);
+                //If you want to send messages to this application instance or manage this apps subscriptions on the server side, send the Instance ID token to your app server.
+                FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                mDatabase.child("users").child(mAuth.getCurrentUser().getUid().toString()).child("FirebaseInstanceIdToken").setValue(refreshedToken);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     // Call this function to update User details in Preference page
