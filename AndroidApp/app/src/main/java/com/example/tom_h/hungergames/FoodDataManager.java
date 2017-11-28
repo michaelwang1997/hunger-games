@@ -3,18 +3,27 @@ package com.example.tom_h.hungergames;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +31,8 @@ import java.util.List;
 //this shouldn't extend from AppCOmpatACtivity TODO: this comment
 public class FoodDataManager {
 
+    public FirebaseStorage storage;
+    public StorageReference storageRef;
     public FirebaseDatabase database;
     public DatabaseReference mDatabase;
     public DatabaseReference eventsRef;
@@ -69,9 +80,54 @@ public class FoodDataManager {
 
     }
 
+    public void uploadImage(){
+        Uri file = Uri.fromFile(new File("path/to/images/rivers.jpg"));
+        StorageReference riversRef = storageRef.child("images/"+file.getLastPathSegment());
+        UploadTask uploadTask = riversRef.putFile(file);
+
+// Register observers to listen for when the download is done or if it fails
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle unsuccessful uploads
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
+                Uri downloadUrl = taskSnapshot.getDownloadUrl();
+            }
+        });
+    }
+
+    public void downloadImage (){
+        StorageReference islandRef = storageRef.child("images/island.jpg");
+
+        File localFile;
+        try{
+            localFile = File.createTempFile("images", "jpg");
+
+        }catch (Exception e){
+            //TODO ERROR CATCHING
+        }
+
+        islandRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                // Local temp file has been created
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle any errors
+            }
+        });
+    }
+
     public FoodDataManager(){
         //super.onCreate(savedInstanceState);
         database = FirebaseDatabase.getInstance();
+        storage = FirebaseStorage.getInstance();
         mDatabase = database.getReference();
         //write to database
 //        mDatabase.child("events").child("EventID").setValue(CHILDEVENT);
