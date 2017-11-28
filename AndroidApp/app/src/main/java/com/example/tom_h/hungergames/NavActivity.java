@@ -22,6 +22,7 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
 
     MapsActivity mapFragment;
     CreateEvent createEvent;
+    ProfileActivity profileActivity;
     Fragment allEventListActivity;
     public static FoodDataManager foodDataManager;
     public static Context navContext;
@@ -150,6 +151,15 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
             }
         } else if (id == R.id.settings) {
             // Insert code
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            profileActivity = new ProfileActivity();
+            fragmentTransaction.replace(R.id.nav, profileActivity);
+            if(!mapFragment.isVisible()) {
+                fragmentTransaction.remove(mapFragment).commit();
+            } else {
+                fragmentTransaction.commit();
+            }
 
         } else if (id == R.id.logout) {
             FirebaseAuth mAuth = FirebaseAuth.getInstance();
