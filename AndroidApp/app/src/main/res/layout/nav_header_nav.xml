@@ -15,11 +15,22 @@
 
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/user_pic"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:srcCompat="@drawable/user"
+        android:paddingTop="16dp"
+        />
+
+    <TextView
+        android:id="@+id/user_name"
+        android:textColor="white"
+        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:srcCompat="@drawable/logo"
-        android:layout_marginTop="15dp"
-        android:scaleType="centerInside"/>
+        android:paddingTop="16dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:gravity="start">
+    </TextView>
 
 </LinearLayout>
