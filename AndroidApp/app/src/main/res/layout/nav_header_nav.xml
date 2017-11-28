@@ -24,7 +24,7 @@
 
     <TextView
         android:id="@+id/user_name"
-        android:textColor="white"
+        android:textColor="#FFF"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:paddingTop="16dp"
