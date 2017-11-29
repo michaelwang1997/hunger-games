@@ -1,6 +1,7 @@
 package com.example.tom_h.hungergames;
 
 import android.content.Context;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -59,6 +63,25 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+
+        View headerView = navigationView.getHeaderView(0);
+        ImageView userIcon = (ImageView) headerView.findViewById(R.id.user_pic);
+
+        userIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                profileActivity = new ProfileActivity();
+                fragmentTransaction.replace(R.id.nav, profileActivity);
+                if(!mapFragment.isVisible()) {
+                    fragmentTransaction.remove(mapFragment).commit();
+                } else {
+                    fragmentTransaction.commit();
+                }
+            }
+        });
+
         navigationView.setNavigationItemSelectedListener(this);
 
     }
@@ -175,5 +198,17 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
     @Override
     public void onListFragmentInteraction(Event item) {
 
+    }
+
+    public void userPage() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        profileActivity = new ProfileActivity();
+        fragmentTransaction.replace(R.id.nav, profileActivity);
+        if(!mapFragment.isVisible()) {
+            fragmentTransaction.remove(mapFragment).commit();
+        } else {
+            fragmentTransaction.commit();
+        }
     }
 }
