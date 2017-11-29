@@ -37,37 +37,37 @@ public class FoodDataManager {
     }
 
 
-    public void CreateNotification(Event event) {
-
-//Get an instance of NotificationManager//
-        try{
-
-            Notification.Builder mBuilder =
-                    new Notification.Builder(NavActivity.navContext)
-                            .setSmallIcon(R.mipmap.notification_icon)
-                            .setContentTitle(event.title.toString())
-                            .setVibrate(new long[] { 1000, 1000, 1000, 1000, 1000 })
-                            .setContentText(event.description.toString());
-
-
-            // Gets an instance of the NotificationManager service//
-
-            NotificationManager mNotificationManager =
-
-                    (NotificationManager) NavActivity.navContext.getSystemService(NavActivity.navContext.NOTIFICATION_SERVICE);
-
-//When you issue multiple notifications about the same type of event, it’s best practice for your app to try to update an existing notification with this new information, rather than immediately creating a new notification. If you want to update this notification at a later date, you need to assign it an ID. You can then use this ID whenever you issue a subsequent notification. If the previous notification is still visible, the system will update this existing notification, rather than create a new one. In this example, the notification’s ID is 001//
-
-            //NotificationManager.notify().
-
-            mNotificationManager.notify(001, mBuilder.build());
-        }
-        catch(Exception e){
-            Log.d("EXCEPTION e", "Exceptop e : "+ e.toString());
-        }
-
-
-    }
+//    public void CreateNotification(Event event) {
+//
+//        //Get an instance of NotificationManager//
+//        try{
+//
+//            Notification.Builder mBuilder =
+//                    new Notification.Builder(NavActivity.navContext)
+//                            .setSmallIcon(R.mipmap.notification_icon)
+//                            .setContentTitle(event.title.toString())
+//                            .setVibrate(new long[] { 1000, 1000, 1000, 1000, 1000 })
+//                            .setContentText(event.description.toString());
+//
+//
+//            // Gets an instance of the NotificationManager service//
+//
+//            NotificationManager mNotificationManager =
+//
+//                    (NotificationManager) NavActivity.navContext.getSystemService(NavActivity.navContext.NOTIFICATION_SERVICE);
+//
+////When you issue multiple notifications about the same type of event, it’s best practice for your app to try to update an existing notification with this new information, rather than immediately creating a new notification. If you want to update this notification at a later date, you need to assign it an ID. You can then use this ID whenever you issue a subsequent notification. If the previous notification is still visible, the system will update this existing notification, rather than create a new one. In this example, the notification’s ID is 001//
+//
+//            //NotificationManager.notify().
+//
+//            mNotificationManager.notify(001, mBuilder.build());
+//        }
+//        catch(Exception e){
+//            Log.d("EXCEPTION e", "Exceptop e : "+ e.toString());
+//        }
+//
+//
+//    }
 
     public FoodDataManager(){
         //super.onCreate(savedInstanceState);
@@ -86,7 +86,7 @@ public class FoodDataManager {
                 Log.d("DATABASE", "onChildAdded:" + dataSnapshot.getKey());
                 Log.d("DATABASE", "onChildAdded:" + dataSnapshot.getValue());
                 Event event = dataSnapshot.getValue(Event.class);
-                CreateNotification(event);
+                //CreateNotification(event);
                 events.add(event);
 
                 // A new comment has been added, add it to the displayed list
