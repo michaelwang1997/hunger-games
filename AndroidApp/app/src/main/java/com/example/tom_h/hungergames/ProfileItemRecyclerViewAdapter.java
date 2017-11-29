@@ -14,31 +14,27 @@ import com.example.tom_h.hungergames.ProfileActivity.OnListFragmentInteractionLi
 
 import java.util.List;
 
-/**
- * Created by MichaelWang on 2017-11-27.
- */
-
-public class ProfileItemRecylerViewAdapter extends RecyclerView.Adapter<ProfileItemRecylerViewAdapter.ViewHolder> {
+public class ProfileItemRecyclerViewAdapter extends RecyclerView.Adapter<ProfileItemRecyclerViewAdapter.ViewHolder> {
     private final Context cntx;
     private final List<Object> mValues;
     private final OnListFragmentInteractionListener mListener;
     PreferenceActivity preferenceActivity;
 
-    public ProfileItemRecylerViewAdapter(Context context, List<Object> items, OnListFragmentInteractionListener listener) {
+    public ProfileItemRecyclerViewAdapter(Context context, List<Object> items, OnListFragmentInteractionListener listener) {
         cntx = context;
         mValues = items;
         mListener = listener;
     }
 
     @Override
-    public ProfileItemRecylerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ProfileItemRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.profile_item, parent, false);
-        return new ProfileItemRecylerViewAdapter.ViewHolder(view);
+        return new ProfileItemRecyclerViewAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final ProfileItemRecylerViewAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ProfileItemRecyclerViewAdapter.ViewHolder holder, final int position) {
         holder.mItem = mValues.get(position);
         String key = "";
         if(position == 0){

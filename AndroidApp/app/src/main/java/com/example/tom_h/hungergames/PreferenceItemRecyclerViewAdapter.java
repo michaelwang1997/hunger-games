@@ -12,9 +12,6 @@ import android.widget.TextView;
 import com.example.tom_h.hungergames.PreferenceActivity.OnListFragmentInteractionListener;
 
 import java.util.List;
-/**
- * Created by MichaelWang on 2017-11-28.
- */
 
 public class PreferenceItemRecyclerViewAdapter extends RecyclerView.Adapter<PreferenceItemRecyclerViewAdapter.ViewHolder>{
     private final Context cntx;

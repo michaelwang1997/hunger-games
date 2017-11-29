@@ -17,7 +17,7 @@ import com.example.tom_h.hungergames.dummy.DummyUser;
  */
 
 public class ProfileActivity extends Fragment {
-    private ProfileItemRecylerViewAdapter adapter;
+    private ProfileItemRecyclerViewAdapter adapter;
     private OnListFragmentInteractionListener mListener;
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
@@ -55,7 +55,7 @@ public class ProfileActivity extends Fragment {
                 Context context = view.getContext();
                 RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.user_list);
                 recyclerView.setLayoutManager(new GridLayoutManager(recyclerView.getContext(), mColumnCount));
-                adapter = new ProfileItemRecylerViewAdapter(recyclerView.getContext(), DummyUser.user, mListener);
+                adapter = new ProfileItemRecyclerViewAdapter(recyclerView.getContext(), DummyUser.user, mListener);
                 recyclerView.setAdapter(adapter);
 
         return view;

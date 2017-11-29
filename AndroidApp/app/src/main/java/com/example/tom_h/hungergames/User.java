@@ -1,9 +1,5 @@
 package com.example.tom_h.hungergames;
 
-/**
- * Created by spratiman on 17-Nov-17.
- */
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;

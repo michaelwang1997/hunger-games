@@ -15,11 +15,6 @@ import com.example.tom_h.hungergames.dummy.Preferences;
 import java.util.ArrayList;
 import java.util.List;
 
-
-/**
- * Created by MichaelWang on 2017-11-27.
- */
-
 public class PreferenceActivity extends Fragment {
     private PreferenceItemRecyclerViewAdapter adapter;
     private PreferenceActivity.OnListFragmentInteractionListener mListener;
@@ -62,8 +57,6 @@ public class PreferenceActivity extends Fragment {
             List<String> preferences = new ArrayList<>();
             preferences.add("Pizza");
             preferences.add("Burger");
-            preferences.add("Chinese");
-            preferences.add("Thai");
             preferences.add("Noodles");
             adapter = new PreferenceItemRecyclerViewAdapter(this.getContext(), Preferences.preferences, preferences ,mListener);
             recyclerView.setAdapter(adapter);
