@@ -65,4 +65,8 @@ public class ProfileActivity extends Fragment {
         // TODO: Update argument type and name
         void onListFragmentInteraction();
     }
+
+    //TODO: Create a method that generates an arraylist in the format of
+    // {String fullName, String email, ArrayList of preferences, aka, Strings}
+    // See DummyUser file for specific example
 }

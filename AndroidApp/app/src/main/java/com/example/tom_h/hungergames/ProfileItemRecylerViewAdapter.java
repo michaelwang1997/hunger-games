@@ -1,12 +1,14 @@
 package com.example.tom_h.hungergames;
 
 import android.content.Context;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.tom_h.hungergames.ProfileActivity.OnListFragmentInteractionListener;
 
@@ -20,6 +22,7 @@ public class ProfileItemRecylerViewAdapter extends RecyclerView.Adapter<ProfileI
     private final Context cntx;
     private final List<Object> mValues;
     private final OnListFragmentInteractionListener mListener;
+    PreferenceActivity preferenceActivity;
 
     public ProfileItemRecylerViewAdapter(Context context, List<Object> items, OnListFragmentInteractionListener listener) {
         cntx = context;
@@ -69,8 +72,11 @@ public class ProfileItemRecylerViewAdapter extends RecyclerView.Adapter<ProfileI
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               if(holder.profileKey.getText().equals("Preferences")){
-                   Toast.makeText(v.getContext(), "Show My Preferences!", Toast.LENGTH_SHORT).show();
+               if(holder.profileKey.getText().equals("Preferences")) {
+                   FragmentManager fragmentManager = ((FragmentActivity)cntx).getSupportFragmentManager();
+                   FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                   preferenceActivity = PreferenceActivity.newInstance(1);
+                   fragmentTransaction.replace(R.id.nav, preferenceActivity).commit();
                }
             }
         });

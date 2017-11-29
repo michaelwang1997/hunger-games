@@ -10,13 +10,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.tom_h.hungergames.dummy.Preferences;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
 /**
  * Created by MichaelWang on 2017-11-27.
  */
 
 public class PreferenceActivity extends Fragment {
-    private MyItemRecyclerViewAdapter adapter;
-    private ProfileActivity.OnListFragmentInteractionListener mListener;
+    private PreferenceItemRecyclerViewAdapter adapter;
+    private PreferenceActivity.OnListFragmentInteractionListener mListener;
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
     /**
@@ -48,12 +54,18 @@ public class PreferenceActivity extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_item_list, container, false);
+        final View view = inflater.inflate(R.layout.preference_list, container, false);
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
             recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-//                adapter = new MyItemRecyclerViewAdapter(this.getContext(), FoodDataManager.events, mListener, isMyEvents);
+            List<String> preferences = new ArrayList<>();
+            preferences.add("Pizza");
+            preferences.add("Burger");
+            preferences.add("Chinese");
+            preferences.add("Thai");
+            preferences.add("Noodles");
+            adapter = new PreferenceItemRecyclerViewAdapter(this.getContext(), Preferences.preferences, preferences ,mListener);
             recyclerView.setAdapter(adapter);
         }
         return view;
@@ -63,4 +75,6 @@ public class PreferenceActivity extends Fragment {
         // TODO: Update argument type and name
         void onListFragmentInteraction();
     }
+
+    //TODO: Make a method that can generate the user's preferences into a arraylist that is taken from database
 }
