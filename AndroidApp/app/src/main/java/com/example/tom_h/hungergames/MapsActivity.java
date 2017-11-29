@@ -5,13 +5,18 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.location.Address;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import android.location.Geocoder;
@@ -253,7 +258,7 @@ public class MapsActivity extends SupportMapFragment
 
     }
 
-    public void createMarker(GoogleMap map){
+    public void createMarker(final GoogleMap mGoogleMap){
         Geocoder geocoder = new Geocoder(this.getContext(), Locale.getDefault() );
 
         for (Event i: FoodDataManager.events){
@@ -289,6 +294,7 @@ public class MapsActivity extends SupportMapFragment
             // Handle case where no address was found.
             String address = "";
             if (addresses == null || addresses.size()  == 0) {
+//                address = "unsucessful";
 //                if (errorMessage.isEmpty()) {
 //                    errorMessage = getString(R.string.no_address_found);
 //                    Log.e(TAG, errorMessage);
@@ -300,14 +306,46 @@ public class MapsActivity extends SupportMapFragment
                 address = addresses.get(0).getAddressLine(0);
             }
 
-            i.setMarker(map.addMarker(new MarkerOptions()
+            i.setMarker(mGoogleMap.addMarker(new MarkerOptions()
                     .position(latLng)
                     .title(title)
-                    .snippet("category: " + category +
-                                    "address: " + address+
-                            "quantity: " + quantity 
-                            )
+                    .snippet("category: " + category
+                            + "\naddress: " + address+
+                            "\nquantity: " + quantity
+                    )
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))));
+            mGoogleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+
+                @Override
+                public View getInfoWindow(Marker arg0) {
+                    return null;
+                }
+
+                @Override
+                public View getInfoContents(Marker marker) {
+
+                    ; //or getActivity(), YourActivity.this, etc.
+                    Context context = getActivity().getApplicationContext();
+
+                    LinearLayout info = new LinearLayout(context);
+                    info.setOrientation(LinearLayout.VERTICAL);
+
+                    TextView title = new TextView(context);
+                    title.setTextColor(Color.BLACK);
+                    title.setGravity(Gravity.CENTER);
+                    title.setTypeface(null, Typeface.BOLD);
+                    title.setText(marker.getTitle());
+
+                    TextView snippet = new TextView(context);
+                    snippet.setTextColor(Color.GRAY);
+                    snippet.setText(marker.getSnippet());
+
+                    info.addView(title);
+                    info.addView(snippet);
+
+                    return info;
+                }
+            });
 
 
 
