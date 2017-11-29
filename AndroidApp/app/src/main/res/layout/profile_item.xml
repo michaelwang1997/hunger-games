@@ -34,5 +34,15 @@
             android:textSize="20dp"
             android:textStyle="italic"
             tools:text="John Doe" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:id="@+id/separator"
+            android:layout_marginTop="35dp"
+            android:visibility="visible"
+            android:background="@android:color/black"/>
+
+
     </RelativeLayout>
 </LinearLayout>

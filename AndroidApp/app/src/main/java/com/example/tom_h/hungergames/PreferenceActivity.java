@@ -14,7 +14,7 @@ import android.view.ViewGroup;
  * Created by MichaelWang on 2017-11-27.
  */
 
-public class PreferenceAcitivty extends Fragment {
+public class PreferenceActivity extends Fragment {
     private MyItemRecyclerViewAdapter adapter;
     private ProfileActivity.OnListFragmentInteractionListener mListener;
     private static final String ARG_COLUMN_COUNT = "column-count";
@@ -23,14 +23,14 @@ public class PreferenceAcitivty extends Fragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public PreferenceAcitivty() {
+    public PreferenceActivity() {
     }
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static PreferenceAcitivty newInstance(int columnCount) {
-        Log.d("PreferenceAcitivty", "PreferenceAcitivty successful");
-        PreferenceAcitivty fragment = new PreferenceAcitivty();
+    public static PreferenceActivity newInstance(int columnCount) {
+        Log.d("PreferenceActivity", "PreferenceActivity successful");
+        PreferenceActivity fragment = new PreferenceActivity();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
