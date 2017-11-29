@@ -8,6 +8,8 @@ import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +21,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.MapFragment;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.sql.Time;
@@ -87,7 +90,7 @@ public class CreateEvent extends Fragment implements View.OnClickListener{
                 || _quantity.getSelectedItem() == null
                 )
         {
-            // TODO tell the user they forgot to fill in info. For now we just return nothing
+            Toast.makeText(getContext(), "You missed something!", Toast.LENGTH_SHORT).show();
             return;
         }
         String title = _eventName.getText().toString();
@@ -118,6 +121,13 @@ public class CreateEvent extends Fragment implements View.OnClickListener{
             Log.d("submit button", "submit button pressed");
             submit();
             //Submit the event
+
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            /*mapFragment = new MapsActivity();*/
+            fragmentTransaction.replace(R.id.nav, new MapsActivity());
+            fragmentTransaction.commit();
+
         } else if (i == R.id.picture) {
             Intent cameraIntent =
                     new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);

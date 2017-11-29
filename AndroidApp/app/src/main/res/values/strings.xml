@@ -37,6 +37,16 @@
         <item>Category</item>
         <item>Pizza</item>
         <item>Burgers</item>
+        <item>Sandwiches</item>
+        <item>Chinese</item>
+        <item>Noodles</item>
+        <item>Thai</item>
+        <item>Japanese</item>
+        <item>Ice Cream</item>
+        <item>Desserts</item>
+        <item>Sushi</item>
+        <item>Coffee</item>
+        <item>Cookies</item>
         <item>Other</item>
     </string-array>
 
