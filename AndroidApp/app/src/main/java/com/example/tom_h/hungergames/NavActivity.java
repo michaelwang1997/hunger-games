@@ -72,6 +72,8 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
             public void onClick(View v) {
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                drawer.closeDrawer(GravityCompat.START);
                 profileActivity = new ProfileActivity();
                 fragmentTransaction.replace(R.id.nav, profileActivity);
                 if(!mapFragment.isVisible()) {
