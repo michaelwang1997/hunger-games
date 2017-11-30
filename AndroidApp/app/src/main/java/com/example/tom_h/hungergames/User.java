@@ -8,6 +8,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
     public static FirebaseDatabase database;
     public static DatabaseReference mDatabase;
@@ -16,6 +19,7 @@ public class User {
 
     public String username;
     public String email;
+    public List<String> preference; // food preference
 
     public User(){
         //empty for Firebase
@@ -24,6 +28,7 @@ public class User {
     public User(String username, String email) {
         this.username = username;
         this.email = email;
+        this.preference = new ArrayList<String>();
     }
 
     public static void writeNewUser() {
@@ -37,7 +42,7 @@ public class User {
     }
 
     // Call this function to update User details in Preference page
-    public static void updateUser(String name, String email) {
+    public static void updateUser(String name, String email, List<String> preference) {
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference mDatabase = database.getReference();
@@ -50,6 +55,10 @@ public class User {
             mDatabase.child("users").child(mAuth.getCurrentUser().getUid().toString()).child("username").setValue(name);
         } else {
             mDatabase.child("users").child(mAuth.getCurrentUser().getUid().toString()).child("email").setValue(email);
+        }
+
+        if((preference != null)){
+            mDatabase.child("users").child(mAuth.getCurrentUser().getUid().toString()).child("preference").setValue(preference);
         }
     }
 }
