@@ -1,8 +1,6 @@
 package com.example.tom_h.hungergames;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -29,6 +27,7 @@ public class AllEventListActivity extends Fragment {
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     private static final String ARG_BOOL_EVENT_PAGE = "bool-event-page";
+    private static final String ARG_FOODDATAMANAGER = "food-data-manager";
     // TODO: Customize parameters
     private int mColumnCount = 1;
     public boolean isMyEvents;
@@ -37,6 +36,7 @@ public class AllEventListActivity extends Fragment {
     public Context cntx = this.getContext();
     private OnListFragmentInteractionListener mListener;
     private MyItemRecyclerViewAdapter adapter;
+    private FoodDataManager foodDataManager;
 
 
     /**
@@ -48,7 +48,7 @@ public class AllEventListActivity extends Fragment {
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static AllEventListActivity newInstance(int columnCount, boolean isMyEvents) {
+    public static AllEventListActivity newInstance(int columnCount, boolean isMyEvents, FoodDataManager foodDataManager) {
         Log.d(TAG, "AllEventListActivity successful");
         AllEventListActivity fragment = new AllEventListActivity();
         Bundle args = new Bundle();
@@ -76,7 +76,7 @@ public class AllEventListActivity extends Fragment {
         if (getArguments() != null) {
             isMyEvents = getArguments().getBoolean(ARG_BOOL_EVENT_PAGE);
             if (view instanceof RecyclerView) {
-                Context context = view.getContext();
+                final Context context = view.getContext();
                 RecyclerView recyclerView = (RecyclerView) view;
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
 
@@ -92,28 +92,32 @@ public class AllEventListActivity extends Fragment {
                         public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
                             return false;
                         }
+
                         @Override
                         public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
                             // Remove item from backing list here
                             RecyclerView.ViewHolder v = viewHolder;
-                            new AlertDialog.Builder(getContext())
-                                    .setTitle("Close your event?")
-                                    .setMessage("Do you really want to close this event? You cannot undo this action.")
-                                    .setIcon(android.R.drawable.ic_dialog_alert)
-                                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int whichButton) {
-//                                            deleteConfirm = true;
-                                        }})
-                                    .setNegativeButton(android.R.string.no, null).show();
-//                            if(deleteConfirm){
-//                                Log.d(TAG, "Closing Event " +  v.getLayoutPosition());
-//                                Toast.makeText(getContext(), "Closing Event " +  v.getLayoutPosition(), Toast.LENGTH_SHORT).show();
-//                                myEvents.remove(v.getLayoutPosition());
-//                                adapter.notifyDataSetChanged();
-//                            }
-                            Log.d(TAG, "Closing Event " +  v.getAdapterPosition());
-                            myEvents.remove(v.getAdapterPosition());
+                            final int position = v.getAdapterPosition();
+//                            new AlertDialog.Builder(getActivity())
+//                                    .setTitle("Close your event?")
+//                                    .setMessage("Do you really want to close this event? You cannot undo this action.")
+//                                    .setIcon(android.R.drawable.ic_dialog_alert)
+//                                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+//                                        public void onClick(DialogInterface dialog, int whichButton) {
+//
+//                                        }
+//                                    })
+//                                    .setNegativeButton(android.R.string.no, null).create().show();
+                            Event event = myEvents.remove(position);
+                            NavActivity.foodDataManager.deleteEvent(Integer.toString(event.ID));
                             adapter.notifyDataSetChanged();
+                            //TODO: Copy and paste code below into deleteEvent
+//                            for(Event event: events){
+//                                if(Integer.toString(event.ID).equals(eventID)){
+//                                    events.remove(event);
+//                                    break;
+//                                }
+//                            }
                         }
 
                     });
@@ -157,16 +161,15 @@ public class AllEventListActivity extends Fragment {
         void onListFragmentInteraction(Event event);
     }
 
-    public List<Event> getMyEvents(){
+    public List<Event> getMyEvents() {
         List<Event> events = new ArrayList<>();
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         String userID = mAuth.getCurrentUser().getUid().toString();
-        for(Event event: FoodDataManager.events){
-            if( event.userID.equals(userID)){
+        for (Event event : FoodDataManager.events) {
+            if (event.userID.equals(userID)) {
                 events.add(event);
             }
         }
-        Log.d(TAG, "Size: " + events.size() );
         return events;
     }
 }

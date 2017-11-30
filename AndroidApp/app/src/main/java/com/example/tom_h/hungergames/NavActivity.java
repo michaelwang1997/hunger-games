@@ -1,6 +1,10 @@
 package com.example.tom_h.hungergames;
 
 import android.content.Context;
+
+import android.media.Image;
+import android.net.Uri;
+
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -11,10 +15,21 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.net.URI;
 
 
 public class NavActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
@@ -58,6 +73,41 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+
+
+        View headerView = navigationView.getHeaderView(0);
+        ImageView userIcon = (ImageView) headerView.findViewById(R.id.user_pic);
+
+        userIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                drawer.closeDrawer(GravityCompat.START);
+                profileActivity = new ProfileActivity();
+                fragmentTransaction.replace(R.id.nav, profileActivity);
+                if(!mapFragment.isVisible()) {
+                    fragmentTransaction.remove(mapFragment).commit();
+                } else {
+                    fragmentTransaction.commit();
+                }
+            }
+        });
+
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(NavActivity.this);
+
+        if (acct != null) {
+            String personName = acct.getDisplayName();
+            Uri personPhoto = acct.getPhotoUrl();
+
+            userIcon.setImageURI(personPhoto);
+            TextView name = headerView.findViewById(R.id.user_name);
+            name.setText(personName);
+        }
+
+
+
         navigationView.setNavigationItemSelectedListener(this);
 
     }
@@ -148,14 +198,14 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
             } else {
                 fragmentTransaction.commit();
             }
-        } else if (id == R.id.settings) {
+        } /*else if (id == R.id.settings) {
             // Insert code
 
         } else if (id == R.id.logout) {
             FirebaseAuth mAuth = FirebaseAuth.getInstance();
             mAuth.signOut();
             System.exit(0);
-        }
+        }*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

@@ -24,7 +24,7 @@ public class DummyContentMyEvents {
         DummyItem burger1 = new DummyItem("@drawable/burger",
                 "CSSU Pub Event", "Feeds: 3-5",
                 "40 St George St",
-                "There are lots of cheeseburgers at 2270! Come get them before they run out!");
+                "Vegan burgers are being served in Sid Smith now!");
 
         MyEvents.add(burger);
         MyEvents.add(burger1);
