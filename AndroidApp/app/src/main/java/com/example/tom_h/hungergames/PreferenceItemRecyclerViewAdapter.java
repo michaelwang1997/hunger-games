@@ -16,7 +16,7 @@ import java.util.List;
 public class PreferenceItemRecyclerViewAdapter extends RecyclerView.Adapter<PreferenceItemRecyclerViewAdapter.ViewHolder>{
     private final Context cntx;
     private final List<String> mValues;
-    private final List<String> mUserPreferences;
+    private List<String> mUserPreferences;
     private final OnListFragmentInteractionListener mListener;
 
     public PreferenceItemRecyclerViewAdapter(Context context, List<String> items, List<String> user_preferences, OnListFragmentInteractionListener listener) {
@@ -47,6 +47,26 @@ public class PreferenceItemRecyclerViewAdapter extends RecyclerView.Adapter<Pref
             Drawable res = cntx.getResources().getDrawable(id);
             holder.toggle.setImageDrawable(res);
         }
+        holder.mView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int id_filled = cntx.getResources().getIdentifier("@drawable/star_filled", null, cntx.getPackageName());
+                Drawable filled = cntx.getResources().getDrawable(id_filled);
+                int id_unfilled = cntx.getResources().getIdentifier("@drawable/star_unfilled", null, cntx.getPackageName());
+                Drawable unfilled = cntx.getResources().getDrawable(id_unfilled);
+                if(mUserPreferences.contains(holder.preference.getText())) {
+                    holder.toggle.setImageDrawable(unfilled);
+                    mUserPreferences.add((String) holder.preference.getText());
+                    //TODO: REMOVE PREFERENCE FROM FIREBASE AND UPDATE PROFILE PAGE
+                }
+                else{
+                    holder.toggle.setImageDrawable(filled);
+                    mUserPreferences.remove(holder.preference.getText());
+                    //TODO: ADD PREFERENCE FROM FIREBASE AND UPDATE PROFILE PAGE
+
+                }
+            }
+        });
     }
 
     @Override
