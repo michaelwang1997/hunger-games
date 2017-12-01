@@ -1,10 +1,8 @@
 package com.example.tom_h.hungergames;
 
 import android.content.Context;
-
 import android.media.Image;
 import android.net.Uri;
-
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -18,7 +16,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -37,6 +34,7 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
 
     MapsActivity mapFragment;
     CreateEvent createEvent;
+    ProfileActivity profileActivity;
     Fragment allEventListActivity;
     public static FoodDataManager foodDataManager;
     public static Context navContext;
@@ -74,7 +72,6 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 
-
         View headerView = navigationView.getHeaderView(0);
         ImageView userIcon = (ImageView) headerView.findViewById(R.id.user_pic);
 
@@ -105,7 +102,6 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
             TextView name = headerView.findViewById(R.id.user_name);
             name.setText(personName);
         }
-
 
 
         navigationView.setNavigationItemSelectedListener(this);
@@ -181,7 +177,8 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
             // Insert code
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            allEventListActivity = AllEventListActivity.newInstance(1, true);
+            allEventListActivity = AllEventListActivity.newInstance(1, true,
+                    foodDataManager);
             fragmentTransaction.replace(R.id.nav, allEventListActivity);
             if(!mapFragment.isVisible()) {
                 fragmentTransaction.remove(mapFragment).commit();
@@ -191,7 +188,8 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
         } else if (id == R.id.all_events) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            allEventListActivity = AllEventListActivity.newInstance(1, false);
+            allEventListActivity = AllEventListActivity.newInstance(1, false,
+                    foodDataManager);
             fragmentTransaction.replace(R.id.nav, allEventListActivity);
             if(!mapFragment.isVisible()) {
                 fragmentTransaction.remove(mapFragment).commit();
@@ -200,6 +198,15 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
             }
         } /*else if (id == R.id.settings) {
             // Insert code
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            profileActivity = new ProfileActivity();
+            fragmentTransaction.replace(R.id.nav, profileActivity);
+            if(!mapFragment.isVisible()) {
+                fragmentTransaction.remove(mapFragment).commit();
+            } else {
+                fragmentTransaction.commit();
+            }
 
         } else if (id == R.id.logout) {
             FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -215,5 +222,17 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
     @Override
     public void onListFragmentInteraction(Event item) {
 
+    }
+
+    public void userPage() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        profileActivity = new ProfileActivity();
+        fragmentTransaction.replace(R.id.nav, profileActivity);
+        if(!mapFragment.isVisible()) {
+            fragmentTransaction.remove(mapFragment).commit();
+        } else {
+            fragmentTransaction.commit();
+        }
     }
 }

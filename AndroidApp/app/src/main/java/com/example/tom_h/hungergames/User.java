@@ -59,7 +59,6 @@ package com.example.tom_h.hungergames;
       }
   
       // Call this function to update User details in Preference page
-     public static void updateUser(String name, String email) {
      public static void updateUser(String name, String email, List<String> preference) {
   
           FirebaseDatabase database = FirebaseDatabase.getInstance();
