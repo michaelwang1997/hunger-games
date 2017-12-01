@@ -189,10 +189,13 @@ long minutes = TimeUnit.MILLISECONDS.toMinutes(diff);
                 if(minutes > 120){
                     dataSnapshot.getRef().removeValue();
                 }
+                else{
+                    events.add(event);
+                }
 
                         //Date time  = Calendar.getInstance().getTime();
                 //CreateNotification(event);
-                events.add(event);
+
 
                 // A new comment has been added, add it to the displayed list
                 //Comment comment = dataSnapshot.getValue(Comment.class);
