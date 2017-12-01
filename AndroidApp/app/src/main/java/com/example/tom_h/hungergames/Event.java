@@ -38,7 +38,10 @@ public class Event {
     }
 
     public void removeMarker(){
+        if(marker != null){
             marker.remove();
+        }
+
 
 
 

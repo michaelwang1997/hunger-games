@@ -25,7 +25,10 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 
 //this shouldn't extend from AppCOmpatACtivity TODO: this comment
@@ -145,6 +148,31 @@ public class FoodDataManager {
 //        //mDatabase.child("users").child(userId).child("username").setValue(name);
 //        mDatabase.setValue("Hello, world"); //basic setValue
 //        // Read from the database
+
+        /*
+
+
+        long cutoff = new Date().getTime() - TimeUnit.MILLISECONDS.convert(30, TimeUnit.DAYS);
+Query oldItems = ttlRef.orderByChild("timestamp").endAt(cutoff);
+oldItems.addListenerForSingleValueEvent(new ValueEventListener() {
+    @Override
+    public void onDataChange(DataSnapshot snapshot) {
+        for (DataSnapshot itemSnapshot: snapshot.getChildren()) {
+            itemSnapshot.getRef().removeValue();
+        }
+    }
+
+    @Override
+    public void onCancelled(DatabaseError databaseError) {
+        throw databaseError.toException();
+    }
+});
+
+long diff = d2.getTime() - d1.getTime();//as given
+
+long seconds = TimeUnit.MILLISECONDS.toSeconds(diff);
+long minutes = TimeUnit.MILLISECONDS.toMinutes(diff);
+         */
         eventsRef = database.getReference("events");
         ChildEventListener childEventListener = new ChildEventListener() {
             @Override
@@ -152,8 +180,22 @@ public class FoodDataManager {
                 Log.d("DATABASE", "onChildAdded:" + dataSnapshot.getKey());
                 Log.d("DATABASE", "onChildAdded:" + dataSnapshot.getValue());
                 Event event = dataSnapshot.getValue(Event.class);
+                Date curTime = Calendar.getInstance().getTime();
+
+                long diff = curTime.getTime() - event.createTime.getTime();
+
+                long minutes = TimeUnit.MILLISECONDS.toMinutes(diff);
+
+                if(minutes > 120){
+                    dataSnapshot.getRef().removeValue();
+                }
+                else{
+                    events.add(event);
+                }
+
+                        //Date time  = Calendar.getInstance().getTime();
                 //CreateNotification(event);
-                events.add(event);
+
 
                 // A new comment has been added, add it to the displayed list
                 //Comment comment = dataSnapshot.getValue(Comment.class);
