@@ -31,7 +31,7 @@ package com.example.tom_h.hungergames;
       public User(String username, String email) {
           this.username = username;
           this.email = email;
-         this.preference = new ArrayList<String>();
+          this.preference = new ArrayList<>();
       }
   
       public static void writeNewUser() {
