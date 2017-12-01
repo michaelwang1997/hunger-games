@@ -149,12 +149,15 @@ import butterknife.Bind;
              FirebaseDatabase database = FirebaseDatabase.getInstance();
              DatabaseReference mDatabase = database.getReference();
              String tokenID = mDatabase.child("users").child("FirebaseInstanceIdToken").toString();
-             Log.d("User Preference: ", user.preference.toString());
-             for (String pref: user.preference){
-                 if (pref.equals(category)) {
-                     Runnable myRunnable = createRunnable(category, tokenID);
-                     Thread thread = new Thread(myRunnable);
-                     thread.start();
+             if (user.preference != null) {
+                 for (String pref : user.preference) {
+                     Log.d("Pref: ", pref);
+                     if (pref.equals(category)) {
+                         Log.d("category: ", category);
+                         Runnable myRunnable = createRunnable(category, tokenID);
+                         Thread thread = new Thread(myRunnable);
+                         thread.start();
+                     }
                  }
              }
          }
