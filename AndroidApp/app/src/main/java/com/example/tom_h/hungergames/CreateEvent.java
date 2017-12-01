@@ -91,6 +91,8 @@ import butterknife.Bind;
              Uri tempUri = getImageUri(getActivity().getApplicationContext(), photo);
 
              File finalFile = new File(getRealPathFromURI(tempUri));
+
+             Log.d("Pic path", finalFile.getAbsolutePath());
          }
      }
 
@@ -107,7 +109,7 @@ import butterknife.Bind;
          int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
          return cursor.getString(idx);
      }
- 
+
      public void submit(){
  
          if(_eventName.getText() == null || _description.getText() == null
