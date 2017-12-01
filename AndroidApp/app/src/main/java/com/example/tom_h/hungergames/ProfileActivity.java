@@ -1,6 +1,11 @@
 package com.example.tom_h.hungergames;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.Image;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -9,8 +14,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.example.tom_h.hungergames.dummy.DummyUser;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+
+import java.io.InputStream;
+import java.net.URL;
 
 /**
  * Created by MichaelWang on 2017-11-27.
@@ -46,6 +58,17 @@ public class ProfileActivity extends Fragment {
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
+
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getContext());
+
+        if (acct != null) {
+            String personName = acct.getDisplayName();
+
+            Uri personPhoto = acct.getPhotoUrl();
+
+            String imageUrl = personPhoto.toString();
+
+        }
     }
 
     @Override
@@ -69,4 +92,40 @@ public class ProfileActivity extends Fragment {
     //TODO: Create a method that generates an arraylist in the format of
     // {String fullName, String email, ArrayList of preferences, aka, Strings}
     // See DummyUser file for specific example
+
+    private class DownLoadImageTask extends AsyncTask<String,Void,Bitmap> {
+        ImageView imageView;
+
+        DownLoadImageTask(ImageView imageView){
+            this.imageView = imageView;
+        }
+
+        /*
+            doInBackground(Params... params)
+                Override this method to perform a computation on a background thread.
+         */
+        protected Bitmap doInBackground(String...urls){
+            String urlOfImage = urls[0];
+            Bitmap logo = null;
+            try{
+                InputStream is = new URL(urlOfImage).openStream();
+                /*
+                    decodeStream(InputStream is)
+                        Decode an input stream into a bitmap.
+                 */
+                logo = BitmapFactory.decodeStream(is);
+            }catch(Exception e){ // Catch the download exception
+                e.printStackTrace();
+            }
+            return logo;
+        }
+
+        /*
+            onPostExecute(Result result)
+                Runs on the UI thread after doInBackground(Params...).
+         */
+        protected void onPostExecute(Bitmap result){
+            imageView.setImageBitmap(result);
+        }
+    }
 }
