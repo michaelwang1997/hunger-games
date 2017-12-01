@@ -186,7 +186,7 @@ long minutes = TimeUnit.MILLISECONDS.toMinutes(diff);
 
                 long minutes = TimeUnit.MILLISECONDS.toMinutes(diff);
 
-                if(minutes > 1){
+                if(minutes > 120){
                     dataSnapshot.getRef().removeValue();
                 }
 
