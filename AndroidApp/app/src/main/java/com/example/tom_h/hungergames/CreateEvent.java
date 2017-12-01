@@ -59,6 +59,8 @@ import butterknife.Bind;
      Spinner _category;
  
      Spinner _quantity;
+
+     File imageFile = null;
  
  
  
@@ -90,7 +92,7 @@ import butterknife.Bind;
 
              Uri tempUri = getImageUri(getActivity().getApplicationContext(), photo);
 
-             File finalFile = new File(getRealPathFromURI(tempUri));
+             imageFile = new File(getRealPathFromURI(tempUri));
 
              Log.d("Pic path", finalFile.getAbsolutePath());
          }
