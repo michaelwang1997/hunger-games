@@ -80,8 +80,9 @@ public class FoodDataManager {
 //
 //    }
 
-    public void uploadImage(){
+    public String uploadImage(){
         Uri file = Uri.fromFile(new File("path/to/images/rivers.jpg"));
+        String imageID = null;
         StorageReference riversRef = storageRef.child("images/"+file.getLastPathSegment());
         UploadTask uploadTask = riversRef.putFile(file);
 
@@ -98,6 +99,8 @@ public class FoodDataManager {
                 Uri downloadUrl = taskSnapshot.getDownloadUrl();
             }
         });
+
+        return imageID;
     }
 
     public void downloadImage (){
