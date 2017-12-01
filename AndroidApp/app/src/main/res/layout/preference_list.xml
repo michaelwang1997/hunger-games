@@ -3,13 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:orientation="vertical"
-    android:id="@id/preference_list">
+    android:orientation="vertical">
 
     <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/preference_list"
+    android:id="@+id/preference_list_view"
     android:name="com.example.tom_h.hungergames.PreferenceActivity"
     android:layout_marginTop="25dp"
     android:layout_width="match_parent"

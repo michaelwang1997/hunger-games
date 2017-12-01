@@ -66,7 +66,6 @@ import butterknife.Bind;
  
  
  
- 
      @Override
      public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
          View view = inflater.inflate(R.layout.create_event, container, false);
@@ -150,12 +149,27 @@ import butterknife.Bind;
              FirebaseDatabase database = FirebaseDatabase.getInstance();
              DatabaseReference mDatabase = database.getReference();
              String tokenID = mDatabase.child("users").child("FirebaseInstanceIdToken").toString();
+             Log.d("User Preference: ", user.preference.toString());
              for (String pref: user.preference){
-                 if (pref.equals(category)){
-                     FirebaseCloudMessagingService.createNotificationRequest("New food event!", category, tokenID);
+                 if (pref.equals(category)) {
+                     Runnable myRunnable = createRunnable(category, tokenID);
+                     Thread thread = new Thread(myRunnable);
+                     thread.start();
                  }
              }
          }
+     }
+
+     private Runnable createRunnable( final String categori, final String tokenIDe){
+
+         Runnable aRunnable = new Runnable() {
+             @Override
+             public void run() {
+                 FirebaseCloudMessagingService.createNotificationRequest("New food event!", categori, tokenIDe);
+             }
+         };
+
+         return aRunnable;
      }
  
      @Override
