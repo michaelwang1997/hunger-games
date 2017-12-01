@@ -160,6 +160,12 @@ import butterknife.Bind;
                      }
                  }
              }
+
+             else{
+                 Runnable myRunnable = createRunnable(category, tokenID);
+                 Thread thread = new Thread(myRunnable);
+                 thread.start();
+             }
          }
      }
 
