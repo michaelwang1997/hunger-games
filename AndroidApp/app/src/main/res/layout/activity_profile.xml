@@ -40,11 +40,11 @@
         android:id="@+id/user_list"
         android:name="com.example.tom_h.hungergames.ProfileActivity"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="175dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="25dp"
+        android:layout_marginBottom="5dp"
         app:layoutManager="LinearLayoutManager"
         tools:context="com.example.tom_h.hungergames.ProfileActivity"
         tools:listitem="@layout/profile_item" />
@@ -54,7 +54,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_margin="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:background="@color/colorPrimary"
         android:padding="12dp"
         android:text="Edit Preferences" />
@@ -67,6 +68,7 @@
         android:layout_marginRight="20dp"
         android:layout_centerInParent="true"
         android:background="@color/colorPrimary"
+        android:layout_marginTop="15dp"
         android:padding="12dp"
         android:text="Log Out" />
 
