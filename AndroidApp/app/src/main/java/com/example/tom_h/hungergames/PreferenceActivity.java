@@ -3,23 +3,27 @@ package com.example.tom_h.hungergames;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.tom_h.hungergames.dummy.Preferences;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PreferenceActivity extends Fragment {
+public class PreferenceActivity extends Fragment implements View.OnClickListener{
     private PreferenceItemRecyclerViewAdapter adapter;
     private PreferenceActivity.OnListFragmentInteractionListener mListener;
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
+    ProfileActivity profileActivity;
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -47,20 +51,28 @@ public class PreferenceActivity extends Fragment {
     }
 
     @Override
+    public void onClick(View view) {
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        profileActivity = ProfileActivity.newInstance(1);
+        fragmentTransaction.replace(R.id.nav, profileActivity).commit();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.preference_list, container, false);
-        if (view instanceof RecyclerView) {
             Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
+            RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.preference_list_view);
+            recyclerView.setLayoutManager(new GridLayoutManager(recyclerView.getContext(), mColumnCount));
             List<String> preferences = new ArrayList<>();
             preferences.add("Pizza");
             preferences.add("Burger");
             preferences.add("Noodles");
-            adapter = new PreferenceItemRecyclerViewAdapter(this.getContext(), Preferences.preferences, preferences ,mListener);
+            adapter = new PreferenceItemRecyclerViewAdapter(recyclerView.getContext(), Preferences.preferences, preferences ,mListener);
             recyclerView.setAdapter(adapter);
-        }
+        Button done = view.findViewById(R.id.btn_done);
+        done.setOnClickListener(this);
         return view;
     }
 

@@ -1,36 +1,32 @@
 package com.example.tom_h.hungergames;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.DownloadListener;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.tom_h.hungergames.dummy.DummyUser;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.auth.FirebaseAuth;
 
-import org.w3c.dom.Text;
-
 import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by MichaelWang on 2017-11-27.
@@ -41,6 +37,8 @@ public class ProfileActivity extends Fragment implements View.OnClickListener {
     private OnListFragmentInteractionListener mListener;
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
+    PreferenceActivity preferenceActivity;
+
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -79,7 +77,7 @@ public class ProfileActivity extends Fragment implements View.OnClickListener {
                 Context context = view.getContext();
                 RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.user_list);
                 recyclerView.setLayoutManager(new GridLayoutManager(recyclerView.getContext(), mColumnCount));
-                adapter = new ProfileItemRecyclerViewAdapter(recyclerView.getContext(), DummyUser.user, mListener);
+                adapter = new ProfileItemRecyclerViewAdapter(recyclerView.getContext(), getUserData(), mListener);
                 recyclerView.setAdapter(adapter);
 
 
@@ -105,6 +103,10 @@ public class ProfileActivity extends Fragment implements View.OnClickListener {
         Button logout = view.findViewById(R.id.btn_logout);
 
         logout.setOnClickListener(this);
+
+        Button preferences = view.findViewById(R.id.btn_preferences);
+
+        preferences.setOnClickListener(this);
 
         return view;
     }
@@ -162,5 +164,27 @@ public class ProfileActivity extends Fragment implements View.OnClickListener {
             mAuth.signOut();
             System.exit(0);
         }
+        else if (i == R.id.btn_preferences) {
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            preferenceActivity = PreferenceActivity.newInstance(1);
+            fragmentTransaction.replace(R.id.nav, preferenceActivity).commit();
+        }
+    }
+
+    public List<Object> getUserData(){
+        List<Object> userData = new ArrayList<>();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        String userID = mAuth.getCurrentUser().getUid().toString();
+        for(User user: UserDataManager.users){
+            if(user.uid.equals(userID)){
+                userData.add(user.username);
+                userData.add(user.email);
+                Log.d("GET USER DATA", user.preference + "");
+                userData.add(user.preference);
+                break;
+            }
+        }
+        return userData;
     }
 }

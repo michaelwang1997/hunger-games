@@ -1,9 +1,6 @@
 package com.example.tom_h.hungergames;
 
 import android.content.Context;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +15,6 @@ public class ProfileItemRecyclerViewAdapter extends RecyclerView.Adapter<Profile
     private final Context cntx;
     private final List<Object> mValues;
     private final OnListFragmentInteractionListener mListener;
-    PreferenceActivity preferenceActivity;
 
     public ProfileItemRecyclerViewAdapter(Context context, List<Object> items, OnListFragmentInteractionListener listener) {
         cntx = context;
@@ -51,12 +47,16 @@ public class ProfileItemRecyclerViewAdapter extends RecyclerView.Adapter<Profile
             List<String> lst = (List<String>) mValues.get(position);
             String string = "";
             for(int i = 0; i < lst.size(); i++){
-                if(i != lst.size() - 1) {
+                if(i == 2 && i != lst.size() - 1){
+                    string = string + lst.get(i) + "...";
+                    break;
+                }
+                else if(i == 2 && i == lst.size() - 1 || i == lst.size() - 1){
+                    string = string + lst.get(i);
+                }
+                else if(i != lst.size() - 1) {
                     String str = lst.get(i) + ", ";
                     string = string + str;
-                }
-                else{
-                    string = string + lst.get(i);
                 }
             }
             holder.profileValue.setText(string);
@@ -65,17 +65,6 @@ public class ProfileItemRecyclerViewAdapter extends RecyclerView.Adapter<Profile
         else{
             holder.profileValue.setText((String) mValues.get(position));
         }
-        holder.mView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               if(holder.profileKey.getText().equals("Preferences")) {
-                   FragmentManager fragmentManager = ((FragmentActivity)cntx).getSupportFragmentManager();
-                   FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                   preferenceActivity = PreferenceActivity.newInstance(1);
-                   fragmentTransaction.replace(R.id.nav, preferenceActivity).commit();
-               }
-            }
-        });
     }
 
     @Override
