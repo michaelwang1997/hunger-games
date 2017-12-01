@@ -86,11 +86,15 @@ public class FirebaseCloudMessagingService extends FirebaseMessagingService {
             jsonObjectInnerNotification.put("text", body);
             JSONObject jsonObjectNotification = new JSONObject();
             jsonObjectNotification.put("notification", jsonObjectInnerNotification);
+//            String usertoken = "to_id("+userFCMIId+")";
             jsonObjectNotification.put("to", userFCMIId);
+
+            Log.d("notification object:", jsonObjectNotification.toString());
 
             DataOutputStream wr = new DataOutputStream(httpURLConnection.getOutputStream());
             wr.writeBytes(jsonObjectNotification.toString());
             wr.flush();
+            Log.d("httpURLConnectionheader", httpURLConnection.getHeaderField(1));
             wr.close();
         } catch (MalformedURLException e) {
             e.printStackTrace();

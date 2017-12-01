@@ -149,7 +149,8 @@ import butterknife.Bind;
              FirebaseDatabase database = FirebaseDatabase.getInstance();
              DatabaseReference mDatabase = database.getReference();
              //String tokenID = mDatabase.child("users").child(userID).child("FirebaseInstanceIdToken").toString();
-             String tokenID = "eTX_nsXGT24:APA91bHc4CR_67CfkudJ5vKqM0Q1yPENTOcrVN49szqdf1Hv71Iwv5xzNwKkOBBDQouiP0aM0MBAZ-ucNGeVRK0XQOjljnXcJwmlAhVpxm9heOEXgx6Y0d4B-Thr_m0YBpBSvJQzNAJO";
+             //String tokenID = "eTX_nsXGT24:APA91bHc4CR_67CfkudJ5vKqM0Q1yPENTOcrVN49szqdf1Hv71Iwv5xzNwKkOBBDQouiP0aM0MBAZ-ucNGeVRK0XQOjljnXcJwmlAhVpxm9heOEXgx6Y0d4B-Thr_m0YBpBSvJQzNAJO";
+             String tokenID = "esRiv8iNxNs:APA91bHujlX4ikquYZ5xFsQ_u7dPTHhILRE5g7K3Yh5UYvgkNwTexOb__CziIEcnm0e5nly5IfQjesdHrNu-o47O4rJNUwtH0iIgiN8J0wf9gZRHY5BGcKQMGYqd0YL-9m_lR5u0rc1V";
              if (user.preference != null) {
                  for (String pref : user.preference) {
                      Log.d("Pref: ", pref);
@@ -160,12 +161,6 @@ import butterknife.Bind;
                          thread.start();
                      }
                  }
-             }
-
-             else{
-                 Runnable myRunnable = createRunnable(category, tokenID);
-                 Thread thread = new Thread(myRunnable);
-                 thread.start();
              }
          }
      }
