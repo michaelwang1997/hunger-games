@@ -22,6 +22,7 @@ public class Event {
     public String category;
     public String quantity;
     public String userID;
+    public String imageID;
 
     public Date createTime;
 
@@ -63,7 +64,7 @@ public class Event {
         //firebase needs an empty constructor
     }
 
-    public Event(Location location,String category,String quantity ,String title, String description,String room, Date createTime, String userID){
+    public Event(Location location,String category,String imageID,String quantity ,String title, String description,String room, Date createTime, String userID){
 
        // this.location = location;
         this.title = title;
@@ -74,6 +75,7 @@ public class Event {
         this.quantity = quantity;
         //this.owner = LoginActivity.firebaseUser;
         this.userID = userID;
+        this.imageID = imageID;
         longitude = location.getLongitude();
         latitude = location.getLatitude();
     }
