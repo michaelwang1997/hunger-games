@@ -1,11 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
- <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-     xmlns:app="http://schemas.android.com/apk/res-auto"
-     xmlns:tools="http://schemas.android.com/tools"
-     android:id="@+id/preference_list"
-     android:name="com.example.tom_h.hungergames.PreferenceActivity"
-     android:layout_width="match_parent"
-     android:layout_height="match_parent"
-     app:layoutManager="LinearLayoutManager"
-     tools:context="com.example.tom_h.hungergames.PreferenceActivity"
-     tools:listitem="@layout/preference_item_list" />
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:id="@id/preference_list">
+
+    <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/preference_list"
+    android:name="com.example.tom_h.hungergames.PreferenceActivity"
+    android:layout_marginTop="25dp"
+    android:layout_width="match_parent"
+    android:layout_height="450dp"
+    app:layoutManager="LinearLayoutManager"
+    tools:context="com.example.tom_h.hungergames.PreferenceActivity"
+    tools:listitem="@layout/preference_item_list" />
+
+    <Button
+        android:id="@+id/btn_done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_centerInParent="true"
+        android:background="@color/colorPrimary"
+        android:text="Done"
+        />
+
+
+
+
+</LinearLayout>

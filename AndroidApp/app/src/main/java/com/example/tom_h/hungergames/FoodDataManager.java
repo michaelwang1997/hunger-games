@@ -328,6 +328,13 @@ long minutes = TimeUnit.MILLISECONDS.toMinutes(diff);
     public void deleteEvent(String eventID) {
         DatabaseReference db_node = FirebaseDatabase.getInstance().getReference().getRoot().child("events");
         db_node.child(eventID).setValue(null);
+
+        for (Event event: events) {
+            if(Integer.toString(event.ID).equals(eventID)){
+                events.remove(event);
+                break;
+            }
+        }
     }
 
 }
