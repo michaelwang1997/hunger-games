@@ -42,6 +42,7 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
     ProfileActivity profileActivity;
     Fragment allEventListActivity;
     public static FoodDataManager foodDataManager;
+    public static UserDataManager userDataManager;
     public static Context navContext;
     public static String NOTIFICATION_SERVICE;
     @Override
@@ -58,6 +59,7 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
         fragmentTransaction.replace(R.id.nav, mapFragment);
         fragmentTransaction.commit();
         foodDataManager = new FoodDataManager();
+        userDataManager = new UserDataManager();
 
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
