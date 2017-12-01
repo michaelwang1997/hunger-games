@@ -153,6 +153,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //                            mDatabase.child("users").child("Asd").setValue("TTT");
                             UserDataManager.writeNewUser();
                             firebaseUser = mAuth.getCurrentUser();
+                            Log.d("Hi", "Helloo");
 
                             Intent i = new Intent(getApplicationContext(), NavActivity.class);
                             startActivity(i);

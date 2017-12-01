@@ -4,20 +4,11 @@ package com.example.tom_h.hungergames;
   * Created by spratiman on 17-Nov-17.
   */
  
- import android.util.Log;
-
  import com.google.android.gms.maps.model.Marker;
- import com.google.firebase.auth.FirebaseAuth;
- import com.google.firebase.database.ChildEventListener;
- import com.google.firebase.database.DataSnapshot;
- import com.google.firebase.database.DatabaseError;
- import com.google.firebase.database.DatabaseReference;
-  import com.google.firebase.database.FirebaseDatabase;
-  import com.google.firebase.iid.FirebaseInstanceId;
- import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.auth.FirebaseAuth;
 
- import java.util.ArrayList;
- import java.util.List;
+import java.util.ArrayList;
+import java.util.List;
  
   public class User {
 
@@ -38,10 +29,15 @@ package com.example.tom_h.hungergames;
           //empty for Firebase
      }
  
-      public User(String username, String email, String uid) {
+      public User(String username, String email, String uid, List<String> preferece) {
           this.username = username;
           this.email = email;
-          this.preference = new ArrayList<>();
+          if(preferece != null){
+              this.preference = preferece;
+          }
+          else{
+              this.preference = new ArrayList<>();
+          }
           this.uid = uid;
 
       }
