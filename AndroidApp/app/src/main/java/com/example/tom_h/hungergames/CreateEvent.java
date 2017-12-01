@@ -28,6 +28,8 @@ import com.example.tom_h.hungergames.NavActivity;
 import com.example.tom_h.hungergames.R;
 import com.google.android.gms.maps.MapFragment;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -143,6 +145,17 @@ import butterknife.Bind;
          Event event = new Event(eventLocation,category,imageID,quantity,title,description,room,time,userID);
  
          NavActivity.foodDataManager.createEvent(event);
+         for(User user: UserDataManager.users){
+
+             FirebaseDatabase database = FirebaseDatabase.getInstance();
+             DatabaseReference mDatabase = database.getReference();
+             String tokenID = mDatabase.child("users").child("FirebaseInstanceIdToken").toString();
+             for (String pref: user.preference){
+                 if (pref.equals(category)){
+                     FirebaseCloudMessagingService.createNotificationRequest("New food event!", category, tokenID);
+                 }
+             }
+         }
      }
  
      @Override
