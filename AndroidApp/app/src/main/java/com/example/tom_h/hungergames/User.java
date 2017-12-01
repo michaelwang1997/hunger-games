@@ -7,16 +7,23 @@ package com.example.tom_h.hungergames;
  import android.util.Log;
  
  import com.google.firebase.auth.FirebaseAuth;
+ import com.google.firebase.database.ChildEventListener;
+ import com.google.firebase.database.DataSnapshot;
+ import com.google.firebase.database.DatabaseError;
  import com.google.firebase.database.DatabaseReference;
   import com.google.firebase.database.FirebaseDatabase;
   import com.google.firebase.iid.FirebaseInstanceId;
-  
+ import com.google.firebase.storage.FirebaseStorage;
+
  import java.util.ArrayList;
  import java.util.List;
  
   public class User {
       public static FirebaseDatabase database;
       public static DatabaseReference mDatabase;
+      public FirebaseStorage storage;
+      public DatabaseReference usersRef;
+      public static List<Event> users = new ArrayList();
  
      private static FirebaseAuth mAuth;
   
@@ -32,6 +39,73 @@ package com.example.tom_h.hungergames;
           this.username = username;
           this.email = email;
           this.preference = new ArrayList<>();
+
+          database = FirebaseDatabase.getInstance();
+          storage = FirebaseStorage.getInstance();
+          mDatabase = database.getReference();
+
+          usersRef = database.getReference("users");
+          ChildEventListener childEventListener = new ChildEventListener() {
+              @Override
+              public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
+                  Log.d("DATABASE", "onChildAdded:" + dataSnapshot.getKey());
+                  Log.d("DATABASE", "onChildAdded:" + dataSnapshot.getValue());
+                  Event event = dataSnapshot.getValue(Event.class);
+                  //CreateNotification(event);
+                  users.add(event);
+
+                  // A new comment has been added, add it to the displayed list
+                  //Comment comment = dataSnapshot.getValue(Comment.class);
+
+                  // ...
+              }
+
+              @Override
+              public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+              }
+
+//            @Override
+//            public void onChildChanged(DataSnapshot dataSnapshot, String previousChildName) {
+//                Log.d("DATABASE", "onChildChanged:" + dataSnapshot.getKey());
+//
+//                // A comment has changed, use the key to determine if we are displaying this
+//                // comment and if so displayed the changed comment.
+//                //Comment newComment = dataSnapshot.getValue(Comment.class);
+//               // String commentKey = dataSnapshot.getKey();
+//
+//                // ...
+//            }
+
+              @Override
+              public void onChildRemoved(DataSnapshot dataSnapshot) {
+                  Log.d("DATABASE", "onChildRemoved:" + dataSnapshot.getKey());
+
+                  // A comment has changed, use the key to determine if we are displaying this
+                  // comment and if so remove it.
+                  //String commentKey = dataSnapshot.getKey();
+                  Event event = dataSnapshot.getValue(Event.class);
+                  for (Event i: users){
+                      if(i.ID == event.ID){
+                          i.removeMarker();
+                      }
+
+                  }
+                  users.remove(dataSnapshot.getValue(Event.class));
+                  // ...
+              }
+
+              @Override
+              public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+              }
+
+              @Override
+              public void onCancelled(DatabaseError databaseError) {
+
+              }
+          };
+          usersRef.addChildEventListener(childEventListener);
       }
   
       public static void writeNewUser() {
