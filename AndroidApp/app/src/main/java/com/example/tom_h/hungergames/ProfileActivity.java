@@ -1,5 +1,6 @@
 package com.example.tom_h.hungergames;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,12 +15,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.DownloadListener;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.tom_h.hungergames.dummy.DummyUser;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.firebase.auth.FirebaseAuth;
+
+import org.w3c.dom.Text;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -28,7 +36,7 @@ import java.net.URL;
  * Created by MichaelWang on 2017-11-27.
  */
 
-public class ProfileActivity extends Fragment {
+public class ProfileActivity extends Fragment implements View.OnClickListener {
     private ProfileItemRecyclerViewAdapter adapter;
     private OnListFragmentInteractionListener mListener;
     private static final String ARG_COLUMN_COUNT = "column-count";
@@ -59,16 +67,9 @@ public class ProfileActivity extends Fragment {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
 
-        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getContext());
+//        ImageView picture = getActivity().findViewById(R.id.profile)
 
-        if (acct != null) {
-            String personName = acct.getDisplayName();
 
-            Uri personPhoto = acct.getPhotoUrl();
-
-            String imageUrl = personPhoto.toString();
-
-        }
     }
 
     @Override
@@ -80,6 +81,30 @@ public class ProfileActivity extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(recyclerView.getContext(), mColumnCount));
                 adapter = new ProfileItemRecyclerViewAdapter(recyclerView.getContext(), DummyUser.user, mListener);
                 recyclerView.setAdapter(adapter);
+
+
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getContext());
+
+        TextView name = view.findViewById(R.id.profile_name);
+
+        ImageView image = view.findViewById(R.id.profile_picture);
+
+        if (acct != null) {
+            String personName = acct.getDisplayName();
+
+            Uri personPhoto = acct.getPhotoUrl();
+
+            String imageUrl = personPhoto.toString();
+
+            name.setText(personName);
+
+            new DownLoadImageTask(image).execute(imageUrl);
+
+        }
+
+        Button logout = view.findViewById(R.id.btn_logout);
+
+        logout.setOnClickListener(this);
 
         return view;
     }
@@ -126,6 +151,16 @@ public class ProfileActivity extends Fragment {
          */
         protected void onPostExecute(Bitmap result){
             imageView.setImageBitmap(result);
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        int i = view.getId();
+        if (i == R.id.btn_logout) {
+            FirebaseAuth mAuth = FirebaseAuth.getInstance();
+            mAuth.signOut();
+            System.exit(0);
         }
     }
 }
