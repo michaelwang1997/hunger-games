@@ -151,7 +151,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //                            DatabaseReference mDatabase = database.getReference();
 //
 //                            mDatabase.child("users").child("Asd").setValue("TTT");
-                            User.writeNewUser();
+                            UserDataManager.writeNewUser();
                             firebaseUser = mAuth.getCurrentUser();
 
                             Intent i = new Intent(getApplicationContext(), NavActivity.class);
