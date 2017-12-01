@@ -48,7 +48,7 @@
 #### Artifacts    
    
  * The primary artifact we have produced in order to organize our team is Github Projects, which is Github's integrated version of Trello boards. Team members will be assigned the appropriate tasks by the product manager on an ongoing basis, meaning the front-end and back-end team will have seperate responsibilities.  In order to keep track of what has been completed, the tasks will be closed upon completion. The prioritization of the tasks is determined by the individual teams within our group, depending on several factors such as the time remaining, the progress of other teams, as well as dependencies. Responsibilities delegated to product owner. 
-
+ * Any urgent matters such as git merge confict resolution is delegated in real time via Slack.
 #### Git / GitHub workflow
  
  * In order to minimize conflicts, we will make use of multiple branches. The front-end team will push changes to the front-end branch, and only merge with master when the database is set up. As a result, the front-end team can perform tests on "dummy data" until the back-end team finalizes the database. Along the way, we may be required to create additional branches to test certain features in isolation, such as notifications. These changes will also be merged with master upon successful completion. In the rare case of a conflict, the front-end and back-end teams will communicate with one another to resolve it. Although we will create a custom gitignore file, an emphasis will be made to only push files that have been modified to avoid conflicts that arise from auto generated files. 
@@ -59,7 +59,7 @@
 #### Goals and tasks
  
 * Front-end goals: Finalize the remaining pages to be included in the product. Specifically a "User Profile and Preferences" page. Make quality of life changes such as a user being directed to the map after submitting an event. Needs to integrate the preferences page with the backend database.
-* Back-end goals: Use the FireBase database to incorporate targeted notifications, i.e allow users to choose which types of food they wish to be notified of. A user should be able to declare their interest in an event, and be notified about its status. Proximity based notifications, only users within a certain radius will be notifified as they are the most likely to be able to access the free food.
+* Back-end goals: Use the FireBase database to incorporate targeted notifications, i.e allow users to choose which types of food they wish to be notified of. A user should be able to declare their interest in an event, and be notified about its status. Proximity based notifications, only users within a certain radius will be notifified as they are the most likely to be able to access the free food. Allow database to store images uploaded by users when creating events.
 
  
 #### Artifacts
