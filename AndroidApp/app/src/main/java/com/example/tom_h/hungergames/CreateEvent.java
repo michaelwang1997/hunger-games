@@ -148,7 +148,8 @@ import butterknife.Bind;
 
              FirebaseDatabase database = FirebaseDatabase.getInstance();
              DatabaseReference mDatabase = database.getReference();
-             String tokenID = mDatabase.child("users").child("FirebaseInstanceIdToken").toString();
+             //String tokenID = mDatabase.child("users").child(userID).child("FirebaseInstanceIdToken").toString();
+             String tokenID = "eTX_nsXGT24:APA91bHc4CR_67CfkudJ5vKqM0Q1yPENTOcrVN49szqdf1Hv71Iwv5xzNwKkOBBDQouiP0aM0MBAZ-ucNGeVRK0XQOjljnXcJwmlAhVpxm9heOEXgx6Y0d4B-Thr_m0YBpBSvJQzNAJO";
              if (user.preference != null) {
                  for (String pref : user.preference) {
                      Log.d("Pref: ", pref);
@@ -164,6 +165,8 @@ import butterknife.Bind;
      }
 
      private Runnable createRunnable( final String categori, final String tokenIDe){
+
+         Log.d("createRunnable:tokenIDe", tokenIDe);
 
          Runnable aRunnable = new Runnable() {
              @Override
