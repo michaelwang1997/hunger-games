@@ -5,77 +5,44 @@ package com.example.tom_h.hungergames;
   */
  
  import android.util.Log;
- 
+
+ import com.google.android.gms.maps.model.Marker;
  import com.google.firebase.auth.FirebaseAuth;
+ import com.google.firebase.database.ChildEventListener;
+ import com.google.firebase.database.DataSnapshot;
+ import com.google.firebase.database.DatabaseError;
  import com.google.firebase.database.DatabaseReference;
   import com.google.firebase.database.FirebaseDatabase;
   import com.google.firebase.iid.FirebaseInstanceId;
-  
+ import com.google.firebase.storage.FirebaseStorage;
+
  import java.util.ArrayList;
  import java.util.List;
  
   public class User {
-      public static FirebaseDatabase database;
-      public static DatabaseReference mDatabase;
+
+      private Marker marker = null;
+
+      public void removeMarker(){
+          marker.remove();
+      }
  
      private static FirebaseAuth mAuth;
   
       public String username;
       public String email;
      public List<String> preference; // food preference
+      public String uid;
   
       public User(){
           //empty for Firebase
      }
  
-      public User(String username, String email) {
+      public User(String username, String email, String uid) {
           this.username = username;
           this.email = email;
           this.preference = new ArrayList<>();
-      }
-  
-      public static void writeNewUser() {
- 
-         FirebaseDatabase database = FirebaseDatabase.getInstance();
-         DatabaseReference mDatabase = database.getReference();
-         mAuth = FirebaseAuth.getInstance();
-         User user = new User(mAuth.getCurrentUser().getDisplayName(), mAuth.getCurrentUser().getEmail());
- 
-         mDatabase.child("users").child(mAuth.getCurrentUser().getUid().toString()).setValue(user);
- 
-         String TAG = "FireBaseIDService";
-         try {
-             String refreshedToken = FirebaseInstanceId.getInstance().getToken();
-             Log.d(TAG, "Refreshed token: " + refreshedToken);
-             if(refreshedToken != null) {
- //              SettingPreferences.setStringValueInPref(this, SettingPreferences.REG_ID, refreshedToken);
-                 //If you want to send messages to this application instance or manage this apps subscriptions on the server side, send the Instance ID token to your app server.
-                 FirebaseAuth mAuth = FirebaseAuth.getInstance();
-                 mDatabase.child("users").child(mAuth.getCurrentUser().getUid().toString()).child("FirebaseInstanceIdToken").setValue(refreshedToken);
-             }
-         } catch (Exception e) {
-             e.printStackTrace();
-         }
-      }
-  
-      // Call this function to update User details in Preference page
-     public static void updateUser(String name, String email, List<String> preference) {
-  
-          FirebaseDatabase database = FirebaseDatabase.getInstance();
-          DatabaseReference mDatabase = database.getReference();
-         mAuth = FirebaseAuth.getInstance();
- 
-         if((name != null && !name.trim().isEmpty()) && (email != null && !email.trim().isEmpty())) {
-             mDatabase.child("users").child(mAuth.getCurrentUser().getUid().toString()).child("username").setValue(name);
-             mDatabase.child("users").child(mAuth.getCurrentUser().getUid().toString()).child("email").setValue(email);
-         } else if ((name != null && !name.trim().isEmpty()) && (email == null && email.isEmpty())) {
-             mDatabase.child("users").child(mAuth.getCurrentUser().getUid().toString()).child("username").setValue(name);
-          } else {
-              mDatabase.child("users").child(mAuth.getCurrentUser().getUid().toString()).child("email").setValue(email);
-          }
- 
-         if((preference != null)){
-             mDatabase.child("users").child(mAuth.getCurrentUser().getUid().toString()).child("preference").setValue(preference);
-         }
+          this.uid = uid;
+
       }
   }

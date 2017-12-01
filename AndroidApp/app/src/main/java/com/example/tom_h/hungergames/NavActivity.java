@@ -1,8 +1,11 @@
 package com.example.tom_h.hungergames;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -26,7 +29,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.io.InputStream;
 import java.net.URI;
+import java.net.URL;
 
 
 public class NavActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
@@ -37,6 +42,7 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
     ProfileActivity profileActivity;
     Fragment allEventListActivity;
     public static FoodDataManager foodDataManager;
+    public static UserDataManager userDataManager;
     public static Context navContext;
     public static String NOTIFICATION_SERVICE;
     @Override
@@ -53,6 +59,7 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
         fragmentTransaction.replace(R.id.nav, mapFragment);
         fragmentTransaction.commit();
         foodDataManager = new FoodDataManager();
+        userDataManager = new UserDataManager();
 
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -96,9 +103,16 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
 
         if (acct != null) {
             String personName = acct.getDisplayName();
+
             Uri personPhoto = acct.getPhotoUrl();
 
-            userIcon.setImageURI(personPhoto);
+            String imageUrl = personPhoto.toString();
+
+            new DownLoadImageTask(userIcon).execute(imageUrl);
+
+            /*Log.d("Uri", personPhoto.toString());
+            userIcon.setImageURI(personPhoto);*/
+
             TextView name = headerView.findViewById(R.id.user_name);
             name.setText(personName);
         }
@@ -125,7 +139,7 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+
         }
     }
 
@@ -233,6 +247,43 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
             fragmentTransaction.remove(mapFragment).commit();
         } else {
             fragmentTransaction.commit();
+        }
+    }
+
+
+    private class DownLoadImageTask extends AsyncTask<String,Void,Bitmap> {
+        ImageView imageView;
+
+        DownLoadImageTask(ImageView imageView){
+            this.imageView = imageView;
+        }
+
+        /*
+            doInBackground(Params... params)
+                Override this method to perform a computation on a background thread.
+         */
+        protected Bitmap doInBackground(String...urls){
+            String urlOfImage = urls[0];
+            Bitmap logo = null;
+            try{
+                InputStream is = new URL(urlOfImage).openStream();
+                /*
+                    decodeStream(InputStream is)
+                        Decode an input stream into a bitmap.
+                 */
+                logo = BitmapFactory.decodeStream(is);
+            }catch(Exception e){ // Catch the download exception
+                e.printStackTrace();
+            }
+            return logo;
+        }
+
+        /*
+            onPostExecute(Result result)
+                Runs on the UI thread after doInBackground(Params...).
+         */
+        protected void onPostExecute(Bitmap result){
+            imageView.setImageBitmap(result);
         }
     }
 }

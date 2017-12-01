@@ -68,7 +68,6 @@ import butterknife.Bind;
      @Override
      public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
          View view = inflater.inflate(R.layout.create_event, container, false);
-         Log.d("submit button", "WATWAT");
          _eventName = view.findViewById(R.id.event_name_input);
          _description = view.findViewById(R.id.event_description);
          _room = view.findViewById(R.id.room);
