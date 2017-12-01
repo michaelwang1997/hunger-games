@@ -94,7 +94,7 @@ import butterknife.Bind;
 
              imageFile = new File(getRealPathFromURI(tempUri));
 
-             Log.d("Pic path", finalFile.getAbsolutePath());
+             Log.d("Pic path", imageFile.getAbsolutePath());
          }
      }
 
@@ -129,7 +129,6 @@ import butterknife.Bind;
          String category = _category.getSelectedItem().toString();
          String quantity = _quantity.getSelectedItem().toString();
          Location eventLocation = null;
-         String imageID = null; //SET ME! TODO: ASDASD
  
          if (MapsActivity.mLastLocation != null) {
              eventLocation = new Location(MapsActivity.mLastLocation);
@@ -139,6 +138,9 @@ import butterknife.Bind;
          Date time  = Calendar.getInstance().getTime();
          FirebaseAuth mAuth = FirebaseAuth.getInstance();
          String userID = mAuth.getCurrentUser().getUid().toString();
+         String imageID = NavActivity.foodDataManager.uploadImage(imageFile);
+         Log.d("imageID", "What is imageID::" + imageID);
+
          Event event = new Event(eventLocation,category,imageID,quantity,title,description,room,time,userID);
  
          NavActivity.foodDataManager.createEvent(event);

@@ -6,6 +6,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.IgnoreExtraProperties;
 
+import java.io.File;
 import java.sql.Time;
 import java.util.Date;
 import java.util.Random;
@@ -64,7 +65,7 @@ public class Event {
         //firebase needs an empty constructor
     }
 
-    public Event(Location location,String category,String imageID,String quantity ,String title, String description,String room, Date createTime, String userID){
+    public Event(Location location, String category, String imageID, String quantity , String title, String description, String room, Date createTime, String userID){
 
        // this.location = location;
         this.title = title;

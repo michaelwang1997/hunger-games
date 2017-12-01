@@ -80,36 +80,41 @@ public class FoodDataManager {
 //
 //    }
 
-    public String uploadImage(){
-        Uri file = Uri.fromFile(new File("path/to/images/rivers.jpg"));
-        String imageID = null;
-        StorageReference riversRef = storageRef.child("images/"+file.getLastPathSegment());
-        UploadTask uploadTask = riversRef.putFile(file);
+    public String uploadImage(File imageFile){
+        Uri file = Uri.fromFile(imageFile);
+        storageRef = storage.getReference();
+        String imageID = file.getLastPathSegment();
+        StorageReference imagesRef = storageRef.child("images/"+file.getLastPathSegment());
+        UploadTask uploadTask = imagesRef.putFile(file);
 
 // Register observers to listen for when the download is done or if it fails
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
                 // Handle unsuccessful uploads
+                Log.d("URI", "Download Failed");
+
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
                 Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                Log.d("URI", "What is URI:" + downloadUrl.toString());
             }
         });
 
         return imageID;
     }
 
-    public void downloadImage (){
-        StorageReference islandRef = storageRef.child("images/island.jpg");
+    public File downloadImage (String imageID){
+        storageRef = storage.getReference();
+        StorageReference imageRef = storageRef.child("images/"+imageID);
 
-        File localFile;
+        File localFile = null;
         try{
             localFile = File.createTempFile("images", "jpg");
-            islandRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+            imageRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
                     // Local temp file has been created
@@ -125,6 +130,7 @@ public class FoodDataManager {
             //TODO ERROR CATCHING
         }
 
+        return localFile;
 
     }
 
