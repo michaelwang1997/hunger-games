@@ -22,7 +22,7 @@
  * Faced unexpected delays during filming of video even though we left what we thought was adequate time to solve any such issues. Changes made to existing classes to accomodate new features caused some previous features to not work as intended. Fixing these errors cost the team valuable time.
  * Example the realtime database we were using ie FireBase was down while we were testing the code and caused delays due to intermittent down time. Downtime linked below. We looked for errors in our code and turned out it was the database itself.
  
- [FireBase Downtime] (https://i.imgur.com/YEYutL0.png)
+ [FireBase Downtime](https://i.imgur.com/YEYutL0.png)
  
 #### Planned changes
 
