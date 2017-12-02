@@ -13,7 +13,7 @@
  * Changing the frequency of communications allowed more work to be done remotely. Taking into account that every member could not meet due to varying schedules we moved a majority of work online and it turned out quite well with regular commits being made. By the time we met for our meetings we already had a majority of the coding work done and merged.
  * The decision to start earlier has allowed us a buffer to polish the product. A majority of the coding was completed before the review meeting and only the task of integrating the two ends was left. This left us with more time to focus on the presentation and the video deliverable.
 
-  [Demo](https://www.youtube.com/watch?v=lb8lrXGUbyQ)
+  [DEMO](https://www.youtube.com/watch?v=VQfSyuYBtvQ)
   
 #### Decisions that did not turn out as well as we hoped
 
