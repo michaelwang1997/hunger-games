@@ -13,11 +13,17 @@
  * Changing the frequency of communications allowed more work to be done remotely. Taking into account that every member could not meet due to varying schedules we moved a majority of work online and it turned out quite well with regular commits being made. By the time we met for our meetings we already had a majority of the coding work done and merged.
  * The decision to start earlier has allowed us a buffer to polish the product. A majority of the coding was completed before the review meeting and only the task of integrating the two ends was left. This left us with more time to focus on the presentation and the video deliverable.
 
+  [Demo](https://www.youtube.com/watch?v=lb8lrXGUbyQ)
+  
 #### Decisions that did not turn out as well as we hoped
 
  * Assigning available team members to merge branches into master caused a few issues. Especially when merging while a branch was both ahead and behind the master at the same time. Frequent updates were made and posted however merges were not being properly handled.
  * Improved time management did not pan out as well as one might hope. Nearing the end of term increased workloads and final assignment difficulties put more time constraints on each member. Setting up the final meeting time was difficult as all seven members were not available.
-
+ * Faced unexpected delays during filming of video even though we left what we thought was adequate time to solve any such issues. Changes made to existing classes to accomodate new features caused some previous features to not work as intended. Fixing these errors cost the team valuable time.
+ * Example the realtime database we were using ie FireBase was down while we were testing the code and caused delays due to intermittent down time. Downtime linked below. We looked for errors in our code and turned out it was the database itself.
+ 
+ [FireBase Downtime] (https://i.imgur.com/YEYutL0.png)
+ 
 #### Planned changes
 
  * We are moving from agile to waterfall methodology due to the current state of the app. It is no longer feasible to work on different features of the app simultaneously. Agile was the right way to go initially as team members were coming up with new features frequently but now that the baseline has been set the requirements for the project are not at a high risk of change.
