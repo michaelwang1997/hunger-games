@@ -25,7 +25,7 @@ These instructions will get you a copy of the project up and running on your loc
 ```
 - Allow storage permissions for Hunger Games in your Android Studio
 - Allow location services for Hunger Games when asked
-`
+```
 
 ## Deployment
 
