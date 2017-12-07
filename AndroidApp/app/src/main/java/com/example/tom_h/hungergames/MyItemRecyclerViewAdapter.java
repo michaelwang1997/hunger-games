@@ -5,7 +5,6 @@ import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,13 +56,27 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
             List<Address> address = geocoder.getFromLocation(mValues.get(position).latitude, mValues.get(position).longitude, 1);
             String[] addressSplit = address.get(0).getAddressLine(0).split("\\s+");
             String addressNum = addressSplit[0];
-            String finalAddress = addressNum + " " + address.get(0).getThoroughfare();
+            String finalAddress;
+            if(addressNum != null && addressNum.matches("[-+]?\\d*\\.?\\d+")){
+                finalAddress = addressNum + " " + address.get(0).getThoroughfare() + ", " + address.get(0).getPostalCode() + ", Room: " + mValues.get(position).room;
+            }
+            else{
+                finalAddress =address.get(0).getThoroughfare() +  ", " + address.get(0).getPostalCode() + ", Room: " + mValues.get(position).room;
+            }
             holder.mEventLocationView.setText(finalAddress);
         }
         catch (IOException e) {
             e.printStackTrace();
         }
-        holder.mEventDescriptionView.setText(mValues.get(position).description);
+        String shortenedDescriptions = "";
+        for(int i = 0; i < mValues.get(position).description.length(); i++){
+            if(i == 65){
+                shortenedDescriptions = shortenedDescriptions + "...";
+                break;
+            }
+            shortenedDescriptions = shortenedDescriptions + mValues.get(position).description.charAt(i);
+        }
+        holder.mEventDescriptionView.setText(shortenedDescriptions);
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
