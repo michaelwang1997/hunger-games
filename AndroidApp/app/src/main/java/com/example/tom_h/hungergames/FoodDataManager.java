@@ -218,6 +218,9 @@ long minutes = TimeUnit.MILLISECONDS.toMinutes(diff);
                         break;
                     }
                 }
+                if(userID == event.userID){
+                    notify=false;
+                }
                         //Date time  = Calendar.getInstance().getTime();
                 events.add(event);
                 if(notify){

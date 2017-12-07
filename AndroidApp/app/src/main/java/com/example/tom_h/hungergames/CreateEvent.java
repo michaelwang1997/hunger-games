@@ -138,7 +138,10 @@ import butterknife.Bind;
          Date time  = Calendar.getInstance().getTime();
          FirebaseAuth mAuth = FirebaseAuth.getInstance();
          String userID = mAuth.getCurrentUser().getUid().toString();
-         String imageID = NavActivity.foodDataManager.uploadImage(imageFile);
+         String imageID = null;
+         if(imageFile != null){
+             imageID = NavActivity.foodDataManager.uploadImage(imageFile);
+         }
          Log.d("imageID", "What is imageID::" + imageID);
 
          Event event = new Event(eventLocation,category,imageID,quantity,title,description,room,time,userID);
