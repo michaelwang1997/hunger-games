@@ -4,7 +4,11 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +18,10 @@ import android.widget.Toast;
 
 import com.example.tom_h.hungergames.AllEventListActivity.OnListFragmentInteractionListener;
 import com.example.tom_h.hungergames.dummy.DummyItem;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.io.IOException;
 import java.util.List;
@@ -28,6 +36,8 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
     private final List<Event> mValues;
     private final OnListFragmentInteractionListener mListener;
     private boolean isMyEventsBool;
+    MapsActivity mapFragment;
+
 
     public MyItemRecyclerViewAdapter(Context context, List<Event> items, OnListFragmentInteractionListener listener, boolean isMyEvents) {
         cntx = context;
@@ -85,11 +95,42 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
                     // fragment is attached to one) that an item has been selected.
                     mListener.onListFragmentInteraction(holder.mItem);
                     if(isMyEventsBool) { //My events page
-                        Toast.makeText(v.getContext(), "Take me to a page of the event " + position, Toast.LENGTH_SHORT).show();
+                        FragmentManager fragmentManager = ((FragmentActivity)cntx).getSupportFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        mapFragment = new MapsActivity();
+                        fragmentTransaction.replace(R.id.nav, mapFragment);
+                        fragmentTransaction.commit();
+                        Log.d("MAPS ACTIVITY", mapFragment + "");
+                        Log.d("MAPS ACTIVITY", mapFragment.mGoogleMap + "");
+                        mapFragment.fromEvent = false;
+                        mapFragment.getMapAsync(new OnMapReadyCallback() {
+                            @Override
+                            public void onMapReady(GoogleMap googleMap) {
+                                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
+                                        new LatLng(mValues.get(position).latitude, mValues.get(position).longitude), 17.0f));
+                                googleMap.setOnCameraChangeListener(null);
+                            }
+                        });
                     }
                     else { //All Events page
-                        Toast.makeText(v.getContext(), "Take me to the event on the map " + position, Toast.LENGTH_SHORT).show();
-                    }                }
+                        FragmentManager fragmentManager = ((FragmentActivity)cntx).getSupportFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        mapFragment = new MapsActivity();
+                        fragmentTransaction.replace(R.id.nav, mapFragment);
+                        fragmentTransaction.commit();
+                        Log.d("MAPS ACTIVITY", mapFragment + "");
+                        Log.d("MAPS ACTIVITY", mapFragment.mGoogleMap + "");
+                        mapFragment.fromEvent = false;
+                        mapFragment.getMapAsync(new OnMapReadyCallback() {
+                            @Override
+                            public void onMapReady(GoogleMap googleMap) {
+                                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
+                                        new LatLng(mValues.get(position).latitude, mValues.get(position).longitude), 17.0f));
+                                googleMap.setOnCameraChangeListener(null);
+                            }
+                        });
+                    }
+                }
             }
         });
 

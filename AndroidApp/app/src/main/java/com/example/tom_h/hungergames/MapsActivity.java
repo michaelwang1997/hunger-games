@@ -55,6 +55,8 @@ public class MapsActivity extends SupportMapFragment
     GoogleApiClient mGoogleApiClient;
     public static Location mLastLocation;
     Marker mCurrLocationMarker;
+    public boolean fromEvent = true;
+
 
 
     private List<Marker> markers = new ArrayList();
@@ -158,8 +160,10 @@ public class MapsActivity extends SupportMapFragment
         mCurrLocationMarker = mGoogleMap.addMarker(markerOptions);
 
         //move map camera
-        mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
-                new LatLng(location.getLatitude(), location.getLongitude()), 17.0f));
+        if(fromEvent) {
+            mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
+                    new LatLng(location.getLatitude(), location.getLongitude()), 17.0f));
+        }
 
         //get current user location
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
