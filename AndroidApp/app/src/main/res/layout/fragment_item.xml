@@ -10,7 +10,7 @@
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
         android:layout_marginLeft="15dp"
         android:contentDescription="@string/content_description"
         tools:src="@drawable/burger" />
@@ -18,9 +18,9 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="15dp">
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp">
 
         <TextView
             android:id="@+id/event_name"
@@ -35,28 +35,15 @@
             android:id="@+id/food_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/event_name"
             android:layout_alignParentRight="true"
-            android:textAlignment="textEnd"
             android:layout_gravity="end"
+            android:layout_toRightOf="@id/event_name"
+            android:textAlignment="textEnd"
             android:textAppearance="?attr/textAppearanceListItem"
             android:textSize="14dp"
             android:textStyle="italic"
             tools:text="Feeds: 5-10" />
 
-        <TextView
-            android:id="@+id/event_interest"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/event_name"
-            android:layout_below="@id/food_amount"
-            android:layout_alignParentRight="true"
-            android:textAlignment="textEnd"
-            android:layout_gravity="end"
-            android:textAppearance="?attr/textAppearanceListItem"
-            android:textSize="14dp"
-            android:textStyle="italic"
-            tools:text="Interested: 8" />
 
         <TextView
             android:id="@+id/event_location"
@@ -73,18 +60,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/event_location"
-            android:layout_marginTop="10dp"
             android:textAppearance="?attr/textAppearanceListItem"
             android:textSize="14dp"
             android:textStyle="italic"
             tools:text="There are lots of cheeseburgers at 2270! Come get them before they run out!" />
 
         <View
+            android:id="@+id/separator_preference"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:id="@+id/separator_preference"
-            android:visibility="visible"
-            android:background="@android:color/black"/>
+            android:background="@android:color/black"
+            android:visibility="visible" />
 
     </RelativeLayout>
 
