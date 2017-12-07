@@ -4,13 +4,14 @@ This Android application allows users to upload images and descriptions of lefto
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 ### Prerequisites
 
-Install Android Studio 3.0
 ```
-Give examples
+- Install Android Studio 3.0
+- Enable dubugging mode on your Android phone
+- Create a Firebase Console Account
 ```
 
 ### Installing
@@ -19,56 +20,34 @@ Give examples
 - Let Gradle build the dependencies
 - Resolve any build conflicts
 - Ensure the build is successful before making any modifications
+- Switch on Firebase Authenticaion in your Android Studio
 
 ```
-Example
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
+- Allow storage permissions for Hunger Games in your Android Studio
+- Allow location services for Hunger Games when asked
+`
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+Run from Android Studio and select the Android device or Emulator with APK version 22.
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [AndroidStudio](https://developer.android.com/studio/index.html) - The IDE used
+* [Gradle](https://gradle.org/) - Dependency Management
+* [Firebase](https://console.firebase.google.com/) - Used to store the database and manage notifications
 
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Pratiman Shahi** - *Product Owner, Back-end Team* - [spratiman](https://github.com/spratiman)
+* **Thomas Horga** - *Lead Developer* - [TomND](https://github.com/TomND)
+* **Usama Zaki** - *Front-end Team* - [zusama](https://github.com/zusama)
+* **Farzan Haq** - *Product Coordinator, Front-end Team* - [farzanhaq](https://github.com/farzanhaq)
+* **Awsaf Arefin Sakif** - *Deployment Coordinator* - [pinicman](https://github.com/pinicman)
+* **Michael Wang** - *Front-end Team* - [wangmi60](https://github.com/wangmi60)
+* **Calvin Sanghera** - *Back-end Team* - [cs40](https://github.com/cs40)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
 ## License
 
@@ -77,5 +56,3 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 ## Acknowledgments
 
 * Hat tip to anyone who's code was used
-* Inspiration
-* etc
