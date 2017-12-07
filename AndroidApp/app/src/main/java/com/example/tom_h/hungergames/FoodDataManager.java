@@ -3,6 +3,8 @@ package com.example.tom_h.hungergames;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,6 +13,7 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -113,16 +116,21 @@ public class FoodDataManager {
         return imageID;
     }
 
-    public File downloadImage (String imageID){
+    public File downloadImage (String imageID, final ImageView view){
         storageRef = storage.getReference();
         StorageReference imageRef = storageRef.child("images/"+imageID);
 
-        File localFile = null;
+        //File localFile = null;
         try{
-            localFile = File.createTempFile("images", "jpg");
+            final File localFile = File.createTempFile("123135135192312", "jpg");
             imageRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+
                 @Override
                 public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                    String filePath = localFile.getPath();
+                    Bitmap bitmap = BitmapFactory.decodeFile(filePath);
+                    view.setImageBitmap(bitmap);
+                    view.setRotation(90);
                     // Local temp file has been created
                 }
             }).addOnFailureListener(new OnFailureListener() {
@@ -136,7 +144,7 @@ public class FoodDataManager {
             //TODO ERROR CATCHING
         }
 
-        return localFile;
+        return null;
 
     }
 

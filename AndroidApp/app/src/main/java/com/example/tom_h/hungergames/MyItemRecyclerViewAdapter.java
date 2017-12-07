@@ -1,6 +1,8 @@
 package com.example.tom_h.hungergames;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
@@ -15,6 +17,7 @@ import android.widget.Toast;
 import com.example.tom_h.hungergames.AllEventListActivity.OnListFragmentInteractionListener;
 import com.example.tom_h.hungergames.dummy.DummyItem;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -47,8 +50,22 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.mItem = mValues.get(position);
         int id = cntx.getResources().getIdentifier("@drawable/fastfood", null, cntx.getPackageName());
-        Drawable res = cntx.getResources().getDrawable(id);
-        holder.mPictureView.setImageDrawable(res);
+        String imageID = mValues.get(position).imageID;
+        File file = NavActivity.foodDataManager.downloadImage(imageID,holder.mPictureView);
+
+//        Drawable res = cntx.getResources().getDrawable(id);
+//        holder.mPictureView.setImageDrawable(res);
+        if(file == null){
+            Drawable res = cntx.getResources().getDrawable(id);
+            holder.mPictureView.setImageDrawable(res);
+        }
+        else{
+//            String filePath = file.getPath();
+//            Bitmap bitmap = BitmapFactory.decodeFile(filePath);
+//            holder.mPictureView.setImageBitmap(bitmap);
+        }
+
+
         holder.mEventNameView.setText(mValues.get(position).title);
         holder.mFoodAmountView.setText(mValues.get(position).quantity);
         Geocoder geocoder = new Geocoder(cntx);
