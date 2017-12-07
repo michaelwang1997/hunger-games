@@ -55,9 +55,10 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
         Geocoder geocoder = new Geocoder(cntx);
         try {
             List<Address> address = geocoder.getFromLocation(mValues.get(position).latitude, mValues.get(position).longitude, 1);
-            Log.d("ADDRESS", address.get(0).getThoroughfare());
-
-            holder.mEventLocationView.setText(address.get(0).getAddressLine(0));
+            String[] addressSplit = address.get(0).getAddressLine(0).split("\\s+");
+            String addressNum = addressSplit[0];
+            String finalAddress = addressNum + " " + address.get(0).getThoroughfare();
+            holder.mEventLocationView.setText(finalAddress);
         }
         catch (IOException e) {
             e.printStackTrace();
