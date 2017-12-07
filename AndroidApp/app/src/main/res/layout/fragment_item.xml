@@ -20,7 +20,7 @@
         android:layout_height="match_parent"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="20dp">
 
         <TextView
             android:id="@+id/event_name"
@@ -40,7 +40,7 @@
             android:layout_toRightOf="@id/event_name"
             android:textAlignment="textEnd"
             android:textAppearance="?attr/textAppearanceListItem"
-            android:textSize="14dp"
+            android:textSize="12dp"
             android:textStyle="italic"
             tools:text="Feeds: 5-10" />
 
@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/event_name"
             android:textAppearance="?attr/textAppearanceListItem"
-            android:textSize="14dp"
+            android:textSize="9dp"
             android:textStyle="italic"
             tools:text="40 St George St" />
 
@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/event_location"
             android:textAppearance="?attr/textAppearanceListItem"
-            android:textSize="14dp"
+            android:textSize="12dp"
             android:textStyle="italic"
             tools:text="There are lots of cheeseburgers at 2270! Come get them before they run out!" />
 
