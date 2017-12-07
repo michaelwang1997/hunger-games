@@ -3,6 +3,7 @@ package com.example.tom_h.hungergames;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,6 +14,7 @@ import android.view.View;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -51,37 +53,38 @@ public class FoodDataManager {
     }
 
 
-//    public void CreateNotification(Event event) {
-//
-//        //Get an instance of NotificationManager//
-//        try{
-//
-//            Notification.Builder mBuilder =
-//                    new Notification.Builder(NavActivity.navContext)
-//                            .setSmallIcon(R.mipmap.notification_icon)
-//                            .setContentTitle(event.title.toString())
-//                            .setVibrate(new long[] { 1000, 1000, 1000, 1000, 1000 })
-//                            .setContentText(event.description.toString());
-//
-//
-//            // Gets an instance of the NotificationManager service//
-//
-//            NotificationManager mNotificationManager =
-//
-//                    (NotificationManager) NavActivity.navContext.getSystemService(NavActivity.navContext.NOTIFICATION_SERVICE);
-//
-////When you issue multiple notifications about the same type of event, it’s best practice for your app to try to update an existing notification with this new information, rather than immediately creating a new notification. If you want to update this notification at a later date, you need to assign it an ID. You can then use this ID whenever you issue a subsequent notification. If the previous notification is still visible, the system will update this existing notification, rather than create a new one. In this example, the notification’s ID is 001//
-//
-//            //NotificationManager.notify().
-//
-//            mNotificationManager.notify(001, mBuilder.build());
-//        }
-//        catch(Exception e){
-//            Log.d("EXCEPTION e", "Exceptop e : "+ e.toString());
-//        }
-//
-//
-//    }
+    public void CreateNotification(Event event) {
+
+        //Get an instance of NotificationManager//
+        try{
+            Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            Notification.Builder mBuilder =
+                    new Notification.Builder(NavActivity.navContext)
+                            .setSmallIcon(R.mipmap.notification_icon)
+                            .setContentTitle(event.title.toString())
+                            .setVibrate(new long[] { 1000, 1000, 1000, 1000, 1000 })
+                            .setSound(alarmSound)
+                            .setContentText(event.description.toString());
+
+
+            // Gets an instance of the NotificationManager service//
+
+            NotificationManager mNotificationManager =
+
+                    (NotificationManager) NavActivity.navContext.getSystemService(NavActivity.navContext.NOTIFICATION_SERVICE);
+
+//When you issue multiple notifications about the same type of event, it’s best practice for your app to try to update an existing notification with this new information, rather than immediately creating a new notification. If you want to update this notification at a later date, you need to assign it an ID. You can then use this ID whenever you issue a subsequent notification. If the previous notification is still visible, the system will update this existing notification, rather than create a new one. In this example, the notification’s ID is 001//
+
+            //NotificationManager.notify().
+
+            mNotificationManager.notify(001, mBuilder.build());
+        }
+        catch(Exception e){
+            Log.d("EXCEPTION e", "Exceptop e : "+ e.toString());
+        }
+
+
+    }
 
     public String uploadImage(File imageFile){
         Uri file = Uri.fromFile(imageFile);
@@ -172,6 +175,16 @@ long diff = d2.getTime() - d1.getTime();//as given
 
 long seconds = TimeUnit.MILLISECONDS.toSeconds(diff);
 long minutes = TimeUnit.MILLISECONDS.toMinutes(diff);
+
+        String userID = mAuth.getCurrentUser().getUid().toString();
+        for(User user: UserDataManager.users){
+            if(user.uid.equals(userID)) {
+                if (user.preference != null) {
+                    return user.preference.contains(preference);
+                }
+                break;
+            }
+        }
          */
         eventsRef = database.getReference("events");
         ChildEventListener childEventListener = new ChildEventListener() {
@@ -188,14 +201,28 @@ long minutes = TimeUnit.MILLISECONDS.toMinutes(diff);
 
                 if(minutes > 120){
                     dataSnapshot.getRef().removeValue();
+                    return;
                 }
-                else{
-                    events.add(event);
-                }
+                Boolean notify = false;
 
+                FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                String userID = mAuth.getCurrentUser().getUid().toString();
+                for(User user: UserDataManager.users){
+                    if(user.uid.equals(userID)) {
+                        if (user.preference != null) {
+                            notify = user.preference.contains(event.category);
+                        }
+                        else if(event.category == "other" || event.category == "Other"){
+                            notify = true;
+                        }
+                        break;
+                    }
+                }
                         //Date time  = Calendar.getInstance().getTime();
-                //CreateNotification(event);
-
+                events.add(event);
+                if(notify){
+                    CreateNotification(event);
+                }
 
                 // A new comment has been added, add it to the displayed list
                 //Comment comment = dataSnapshot.getValue(Comment.class);
