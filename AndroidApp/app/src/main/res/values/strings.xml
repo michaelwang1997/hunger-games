@@ -5,6 +5,26 @@
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_nav">NavActivity</string>
 
+    <string name="title_activity_welcome">Home Screen</string>
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+
+    <string name="slide_1_title">Hello Student!</string>
+    <string name="slide_1_desc">The easiest way to distribute left-over food and get free food on campus!</string>
+
+    <string name="slide_2_title">Hunger Warning</string>
+    <string name="slide_2_desc">Hunger Games is not liable for the quality of the food presented by the event organizers!</string>
+
+    <string name="slide_3_title">Attention Hungry Students</string>
+    <string name="slide_3_desc">Hunger Games is not responsible for the reliability of the event posted</string>
+
+    <string name="slide_4_title">Great Convenience</string>
+    <string name="slide_4_desc">Find your way to the nearest free food location!</string>
+
+    <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
+    <string name="play_again">Play Again</string>
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
@@ -56,7 +76,8 @@
     <string name="description">Description</string>
     <string name="submit">Submit</string>
     <string name="question_desc">Information about close event option</string>
-    <string name="str_rb_normal">Normal</string>
+        
+    <string name="str_rb_normal">Normal</string>
 
 
 </resources>
