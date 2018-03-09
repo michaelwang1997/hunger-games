@@ -2,6 +2,8 @@
 
 This Android application allows users to upload images and descriptions of leftover food, with the objective of notifying other users within a predetermined radius about the type (eg. pizza or doughnuts) and proximity of the food (eg. showing users where the event is posted from on a map) in an attempt to tackle the problem of food waste and at the same time giving users the opportunity to enjoy free food.
 
+[DEMO](https://www.youtube.com/watch?v=VQfSyuYBtvQ)
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
